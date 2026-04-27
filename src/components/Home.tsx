@@ -154,6 +154,30 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
         <button 
           onClick={() => {
             const activePlayers = players.filter(p => p.isActive !== false);
+            if (activePlayers.length < 3) {
+              setError(t('err-not-enough'));
+              return;
+            }
+            onSelectGame('killer');
+          }}
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-red-900 hover:bg-slate-50 group transition-all shadow-sm"
+        >
+          <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-red-100">💀</div>
+          <div className="flex-1">
+            <div className="flex justify-between items-center">
+              <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('killer-title')}</h3>
+              <span className="text-[8px] font-bold text-[#0a9396] uppercase tracking-wider bg-[#0a9396]/5 px-1.5 py-0.5 rounded">
+                {t('min-players').replace('{0}', '3')}
+              </span>
+            </div>
+            <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('killer-desc')}</p>
+          </div>
+          <div className="text-slate-300 group-hover:text-red-900 transition-colors">›</div>
+        </button>
+
+        <button 
+          onClick={() => {
+            const activePlayers = players.filter(p => p.isActive !== false);
             if (activePlayers.length < 2) {
               setError(t('err-not-enough-2'));
               return;
@@ -187,37 +211,30 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
           <div className="text-slate-300 group-hover:text-slate-900 transition-colors">›</div>
         </button>
 
+
         <button 
           onClick={() => {
             const activePlayers = players.filter(p => p.isActive !== false);
-            if (activePlayers.length < 3) {
-              setError(t('err-not-enough'));
+            if (activePlayers.length < 2) {
+              setError(t('err-not-enough-2'));
               return;
             }
-            onSelectGame('killer');
-          }}
-          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-red-900 hover:bg-slate-50 group transition-all shadow-sm"
+            onSelectGame('never-have-i-ever');
+          }} 
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-purple-500 hover:bg-slate-50 group transition-all shadow-sm"
         >
-          <div className="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-red-100">💀</div>
+          <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-purple-100">🍸</div>
           <div className="flex-1">
             <div className="flex justify-between items-center">
-              <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('killer-title')}</h3>
-              <span className="text-[8px] font-bold text-red-500 uppercase tracking-wider bg-red-50 px-1.5 py-0.5 rounded">
-                {t('min-players').replace('{0}', '3')}
+              <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('nhie-title')}</h3>
+              <span className="text-[8px] font-bold text-purple-500 uppercase tracking-wider bg-purple-50 px-1.5 py-0.5 rounded">
+                {t('min-players').replace('{0}', '2')}
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('killer-desc')}</p>
+            <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('nhie-desc')}</p>
           </div>
-          <div className="text-slate-300 group-hover:text-red-900 transition-colors">›</div>
+          <div className="text-slate-300 group-hover:text-purple-500 transition-colors">›</div>
         </button>
-
-        <div className="w-full text-left flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-xl opacity-40 cursor-not-allowed">
-            <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-2xl border border-slate-100 grayscale">🃏</div>
-            <div className="flex-1">
-              <h3 className="text-sm font-bold text-slate-400 tracking-tight flex items-center gap-2">{t('new-game-title')} <span className="text-[8px] bg-slate-200 text-slate-600 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">{t('coming-soon')}</span></h3>
-              <p className="text-[10px] text-slate-300 leading-tight font-medium mt-0.5">{t('coming-soon-desc')}</p>
-            </div>
-        </div>
       </div>
     </div>
   );

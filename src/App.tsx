@@ -6,6 +6,7 @@ import { Undercover } from './components/Undercover';
 import { MostLikelyTo } from './components/MostLikelyTo';
 import { Game421 } from './components/Game421';
 import { Killer } from './components/Killer';
+import { NeverHaveIEver } from './components/NeverHaveIEver';
 
 function MainApp() {
   const [activeGame, setActiveGame] = React.useState<string | null>(null);
@@ -32,6 +33,11 @@ function MainApp() {
         {activeGame === 'killer' && (
           <Killer onBack={() => setActiveGame(null)} />
         )}
+
+        {activeGame === 'never-have-i-ever' && (
+          <NeverHaveIEver onBack={() => setActiveGame(null)} />
+        )}
+
       </div>
     </div>
   );
