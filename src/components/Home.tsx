@@ -23,7 +23,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
   const getInitials = (name: string) => name.trim().slice(0, 2).toUpperCase();
 
   return (
-    <div className="flex flex-col h-full overflow-y-auto scrollbar-hide px-5 py-5 pb-8">
+    <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-5 pb-8">
       <div className="text-center mb-6">
         <svg viewBox="0 0 60 40" width="60" className="mx-auto mb-2">
           <rect width="60" height="40" fill="#e0f4f8" rx="8"/>

@@ -8,8 +8,8 @@ function MainApp() {
   const [activeGame, setActiveGame] = React.useState<string | null>(null);
 
   return (
-    <div className="relative z-10 w-full h-full flex items-center justify-center p-4 max-md:p-0">
-      <div className="bg-white/95 backdrop-blur-md md:rounded-2xl overflow-hidden relative flex flex-col w-full max-w-4xl h-full shadow-2xl max-md:rounded-none shadow-slate-200/50 md:h-[min(90vh,900px)]">
+    <div className="relative z-10 w-full min-h-screen">
+      <div className="bg-white/90 backdrop-blur-md min-h-screen relative flex flex-col w-full max-w-5xl mx-auto shadow-2xl shadow-slate-200/50">
         {activeGame === null && (
           <Home onSelectGame={(id) => setActiveGame(id)} />
         )}
