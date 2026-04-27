@@ -25,6 +25,7 @@ type Screen =
   | "reveal"
   | "game"
   | "recheck"
+  | "undercover-win-guess"
   | "end";
 type Role = "civilian" | "undercover" | "mrwhite";
 
@@ -63,6 +64,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   const [undercoverBonusId, setUndercoverBonusId] = useState<string | null>(null);
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [editPlayersMode, setEditPlayersMode] = useState(false);
+  const [undercoverFinalGuessSuccess, setUndercoverFinalGuessSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
     if (players.length > 5) setUndercovers(2);
@@ -90,15 +92,24 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     setCustomWord2(word2);
   };
 
-  const updateScores = (winningRole: Role | "civilians") => {
-    setPlayers(allPlayers.map(p => {
+  const updateScores = (winningRole: Role | "civilians", mrWhiteGuessed = false, undercoverGuessed = false) => {
+    setPlayers(prev => prev.map(p => {
       let extra = 0;
-      // If player was playing this game
       const gp = gamePlayers.find(g => g.id === p.id);
+      
       if (gp) {
-        if (winningRole === "civilians" && gp.role === "civilian") extra = 1;
-        if (winningRole === "undercover" && gp.role === "undercover") extra = 1;
-        if (winningRole === "mrwhite" && gp.role === "mrwhite") extra = 3;
+        if (winningRole === "civilians" && gp.role === "civilian") {
+          extra = 1;
+        } else if (winningRole === "undercover") {
+          if (gp.role === "undercover") {
+            extra = undercoverGuessed ? 2 : 1;
+          }
+          if (gp.role === "mrwhite" && !gp.isEliminated) {
+            extra = 2; // Mr White survives
+          }
+        } else if (winningRole === "mrwhite" && mrWhiteGuessed && gp.role === "mrwhite") {
+          extra = 3;
+        }
       }
       return { ...p, score: (p.score || 0) + extra };
     }));
@@ -183,14 +194,12 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     const C = active.filter((p) => p.role === "civilian");
     const MW = active.filter((p) => p.role === "mrwhite");
 
-    let res: Role | "civilians" | null = null;
-    if (U.length === 0 && MW.length === 0) res = "civilians";
-    else if (C.length === 0) res = "undercover";
-    else if (U.length === 1 && C.length === 1 && MW.length === 0) res = "undercover";
-
-    if (res) {
-      setWinner(res);
-      updateScores(res);
+    if (U.length === 0 && MW.length === 0) {
+        setWinner("civilians");
+        updateScores("civilians");
+        setScreen("end");
+    } else if (C.length === 0 || (U.length === 1 && C.length === 1 && MW.length === 0)) {
+        setScreen("undercover-win-guess");
     }
   };
 
@@ -232,7 +241,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     const id = mrWhiteGuessingId!;
     if (correct) {
       setWinner("mrwhite");
-      updateScores("mrwhite");
+      updateScores("mrwhite", true);
+      setScreen("end");
     } else {
       const newPlayers = gamePlayers.map((p) =>
         p.id === id
@@ -244,6 +254,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       checkWinner(newPlayers);
     }
     setMrWhiteGuessingId(null);
+  };
+
+  const handleUndercoverFinalGuess = (correct: boolean) => {
+    setUndercoverFinalGuessSuccess(correct);
+    setWinner("undercover");
+    updateScores("undercover", false, correct);
+    setScreen("end");
   };
 
   const handleRecheck = (id: string) => {
@@ -326,9 +343,17 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                     <span className="text-xs font-bold text-[#0077b6]">
                         {allPlayers.find(ap => ap.id === p.id)?.score || 0} {t("score-pts")}
                     </span>
-                    {(winner === p.role || (winner === 'civilians' && p.role === 'civilian')) && (
+                    { (winner === p.role || (winner === 'civilians' && p.role === 'civilian')) && (
                         <span className="text-[8px] font-bold text-green-500 uppercase tracking-tighter">
-                            {t("winner-pts").replace("{0}", p.role === 'mrwhite' ? '3' : '1')}
+                            {t("winner-pts").replace("{0}", 
+                                p.role === 'mrwhite' ? '3' : 
+                                (p.role === 'undercover' && undercoverFinalGuessSuccess ? '2' : '1')
+                            )}
+                        </span>
+                    )}
+                    { p.role === 'mrwhite' && !p.isEliminated && winner === 'undercover' && (
+                        <span className="text-[8px] font-bold text-[#0077b6] uppercase tracking-tighter">
+                            {t("winner-pts").replace("{0}", "2")} (Survival)
                         </span>
                     )}
                 </div>
@@ -370,7 +395,33 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
-        {screen === "intro" && (
+      {screen === "undercover-win-guess" && (
+        <div key="undercover-win-guess" className="flex-1 flex flex-col overflow-y-auto px-5 py-8 text-center bg-red-50/30">
+          <div className="w-20 h-20 bg-red-100 rounded-3xl flex items-center justify-center text-red-500 mx-auto mb-6 shadow-sm">
+            <User size={40} />
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">{t("undercover-win-guess-title")}</h2>
+          <p className="text-sm text-slate-500 mb-10 leading-relaxed max-w-xs mx-auto">
+            {t("undercover-win-guess-desc")}
+          </p>
+          <div className="grid grid-cols-1 gap-4 mt-auto">
+            <button
+               onClick={() => handleUndercoverFinalGuess(true)}
+               className="w-full py-4 bg-red-500 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-red-600 transition-all shadow-xl shadow-red-500/20"
+            >
+                {t("undercover-guess-success")}
+            </button>
+            <button
+               onClick={() => handleUndercoverFinalGuess(false)}
+               className="w-full py-4 bg-slate-200 text-slate-600 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-300 transition-all"
+            >
+                {t("undercover-guess-fail")}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {screen === "intro" && (
         <div
           key="intro"
           initial={{ opacity: 0 }}
