@@ -15,16 +15,13 @@ export const BackgroundCanvas: React.FC = () => {
       const w = canvas.width;
       const h = canvas.height;
 
-      ctx.fillStyle = '#e8e4d8';
+      ctx.fillStyle = '#e0f4f8';
       ctx.fillRect(0, 0, w, h);
 
       const circles = [
-        { x: 0.80, y: 0.05, r: 0.30, a: 0.05, c: '99,102,241' },
-        { x: 0.10, y: 0.15, r: 0.22, a: 0.04, c: '59,130,246' },
-        { x: 0.60, y: 0.70, r: 0.28, a: 0.03, c: '99,102,241' },
-        { x: 0.05, y: 0.75, r: 0.18, a: 0.04, c: '59,130,246' },
-        { x: 0.90, y: 0.55, r: 0.20, a: 0.03, c: '148,163,184' },
-        { x: 0.40, y: 0.90, r: 0.22, a: 0.04, c: '99,102,241' },
+        { x: 0.85, y: 0.15, r: 0.15, a: 0.1, c: '238,108,77' }, // Sun reflection
+        { x: 0.15, y: 0.25, r: 0.35, a: 0.05, c: '238,108,77' },
+        { x: 0.60, y: 0.05, r: 0.25, a: 0.04, c: '238,108,77' },
       ];
 
       circles.forEach(c => {
@@ -34,23 +31,35 @@ export const BackgroundCanvas: React.FC = () => {
         ctx.fill();
       });
 
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < 8; i++) {
-        const baseY = h * (0.55 + i * 0.06);
-        ctx.strokeStyle = `rgba(148,163,184,${0.04 - i * 0.005})`;
+      // Sea waves at the bottom half
+      ctx.fillStyle = 'rgba(10, 147, 150, 0.15)';
+      ctx.beginPath();
+      for(let x = 0; x <= w; x += 10) {
+        ctx.lineTo(x, h * 0.65 + Math.sin(x * 0.005) * 30);
+      }
+      ctx.lineTo(w, h);
+      ctx.lineTo(0, h);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(0, 119, 182, 0.1)';
+      ctx.beginPath();
+      for(let x = 0; x <= w; x += 10) {
+        ctx.lineTo(x, h * 0.75 + Math.sin(x * 0.008 + 2) * 20);
+      }
+      ctx.lineTo(w, h);
+      ctx.lineTo(0, h);
+      ctx.fill();
+
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 4; i++) {
+        const baseY = h * (0.6 + i * 0.08);
+        ctx.strokeStyle = `rgba(0,119,182,${0.1 - i * 0.02})`;
         ctx.beginPath();
-        for (let x = 0; x < w; x += 4) {
-          const y = baseY + Math.sin(x * 0.018 + i) * 14 + Math.sin(x * 0.05 + i) * 6;
+        for (let x = 0; x < w; x += 10) {
+          const y = baseY + Math.sin(x * 0.01 + i) * 15 + Math.sin(x * 0.03 + i) * 5;
           x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
         }
         ctx.stroke();
-      }
-
-      ctx.fillStyle = 'rgba(180,160,120,0.08)';
-      for (let i = 0; i < 120; i++) {
-        ctx.beginPath();
-        ctx.arc(Math.random() * w, Math.random() * h, 1 + Math.random() * 2, 0, Math.PI * 2);
-        ctx.fill();
       }
     };
 

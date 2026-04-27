@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { Plus, X, GripVertical } from 'lucide-react';
-import { motion, Reorder } from 'motion/react';
+import { Reorder } from 'motion/react';
 
 interface HomeProps {
   onSelectGame: (gameId: string) => void;
@@ -50,17 +50,17 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
           {t('players-label')}
         </label>
         <div className="flex gap-2 mb-3">
-          <input value={playerName} onChange={e => setPlayerName(e.target.value)} onKeyDown={e => e.key === 'Enter' && addPlayer()} placeholder={t('player-input-placeholder')} className="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-indigo-500 focus:bg-white transition-all shadow-sm" />
-          <button onClick={addPlayer} className="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"><Plus size={18} /></button>
+          <input value={playerName} onChange={e => setPlayerName(e.target.value)} onKeyDown={e => e.key === 'Enter' && addPlayer()} placeholder={t('player-input-placeholder')} className="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-[#0a9396] focus:bg-white transition-all shadow-sm" />
+          <button onClick={addPlayer} className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#ee6c4d] text-white hover:bg-[#d65e41] transition-colors"><Plus size={18} /></button>
         </div>
         {error && <div className="text-red-500 text-[10px] font-bold mb-2 px-1 uppercase tracking-wider">{error}</div>}
         <Reorder.Group axis="y" values={players} onReorder={setPlayers} className="space-y-1">
           {players.map(p => (
             <Reorder.Item key={p.id} value={p} className={`flex items-center gap-2 p-2 bg-white border border-slate-200 rounded-lg shadow-sm transition-opacity ${p.isActive === false ? 'opacity-50' : 'opacity-100'}`}>
-              <div className="cursor-grab text-slate-300 hover:text-slate-500 transition-colors"><GripVertical size={16} /></div>
+              <div className="cursor-grab text-slate-300 hover:text-[#0077b6] transition-colors"><GripVertical size={16} /></div>
               <button 
                 onClick={() => setPlayers(players.map(x => x.id === p.id ? { ...x, isActive: x.isActive === false ? true : false } : x))}
-                className={`w-6 h-6 rounded flex items-center justify-center font-mono text-[9px] font-bold transition-colors ${p.isActive === false ? 'bg-slate-100 text-slate-400' : 'bg-indigo-100 text-indigo-600'}`}
+                className={`w-6 h-6 rounded flex items-center justify-center font-mono text-[9px] font-bold transition-colors ${p.isActive === false ? 'bg-slate-100 text-slate-400' : 'bg-[#0a9396]/20 text-[#0a9396]'}`}
               >
                 {getInitials(p.name)}
               </button>
@@ -83,14 +83,14 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
             }
             onSelectGame('undercover');
           }} 
-          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 hover:bg-slate-50 group transition-all shadow-sm"
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-[#0a9396] hover:bg-slate-50 group transition-all shadow-sm"
         >
-          <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-indigo-100">🕵️</div>
+          <div className="w-12 h-12 rounded-xl bg-[#0a9396]/10 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-[#0a9396]/20">🕵️</div>
           <div className="flex-1">
             <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('uc-title')}</h3>
             <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('uc-desc')}</p>
           </div>
-          <div className="text-slate-300 group-hover:text-indigo-500 transition-colors">›</div>
+          <div className="text-slate-300 group-hover:text-[#ee6c4d] transition-colors">›</div>
         </button>
 
         <div className="w-full text-left flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-xl opacity-40 cursor-not-allowed">

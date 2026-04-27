@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
 import { WORD_GROUPS } from '../constants';
-import { motion, AnimatePresence } from 'motion/react';
+
 import { ChevronLeft, Info, Settings, Play, Check, X, ShieldAlert, User, MessageSquare } from 'lucide-react';
 
 interface UndercoverProps {
@@ -183,7 +183,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       return (
           <div className="flex flex-col h-full overflow-y-auto scrollbar-hide px-5 py-8">
               <div className="text-center mb-10">
-                <div className="w-20 h-20 rounded-2xl bg-indigo-600 shadow-xl shadow-indigo-600/30 flex items-center justify-center mx-auto mb-6 border-4 border-white/10 text-4xl">🏆</div>
+                <div className="w-20 h-20 rounded-2xl bg-[#0077b6] shadow-xl shadow-[#0077b6]/30 flex items-center justify-center mx-auto mb-6 border-4 border-white/10 text-4xl">🏆</div>
                 <h2 className="text-2xl font-bold text-slate-900 tracking-tight leading-tight mb-2">{winner === 'civilians' ? t('civilians-win') : winner === 'mrwhite' ? t('mrwhite-wins') : t('undercover-wins')}</h2>
                 <div className="text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">{t('end-title')}</div>
               </div>
@@ -191,14 +191,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                   <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-2 px-1">{t('roles-recap')}</div>
                   {gamePlayers.sort((a,b) => (a.eliminatedAtRound || 99) - (b.eliminatedAtRound || 99)).map(p => (
                       <div key={p.id} className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-sm">
-                          <span className={`text-[9px] font-bold tracking-widest px-2 py-0.5 rounded uppercase ${p.role==='civilian'?'bg-indigo-50 text-indigo-600':p.role==='undercover'?'bg-red-50 text-red-500':'bg-slate-100 text-slate-600'}`}>{t('role-'+p.role)}</span>
+                          <span className={`text-[9px] font-bold tracking-widest px-2 py-0.5 rounded uppercase ${p.role==='civilian'?'bg-[#e0f4f8] text-[#0077b6]':p.role==='undercover'?'bg-red-50 text-red-500':'bg-slate-100 text-slate-600'}`}>{t('role-'+p.role)}</span>
                           <span className="flex-1 font-bold text-sm text-slate-700">{p.name}</span>
                           <span className="text-xs font-mono font-medium text-slate-400">{p.word || '—'}</span>
                       </div>
                   ))}
               </div>
               <div className="mt-auto pt-8 space-y-3">
-                  <button onClick={resetGame} className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">{t('play-again')}</button>
+                  <button onClick={resetGame} className="w-full py-4 bg-[#0077b6] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#023e8a] transition-all shadow-lg shadow-[#0077b6]/20">{t('play-again')}</button>
                   <button onClick={onBack} className="w-full py-3 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-800 transition-all">{t('exit-to-home')}</button>
               </div>
           </div>
@@ -207,9 +207,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
 
   return (
     <div className="flex flex-col h-full relative overflow-hidden">
-      <AnimatePresence mode="wait">
         {screen === 'intro' && (
-          <motion.div key="intro" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="flex flex-col h-full scrollbar-hide px-5 py-6">
+          <div key="intro" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="flex flex-col h-full scrollbar-hide px-5 py-6">
             <button onClick={onBack} className="self-start text-[10px] font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-md mb-6 uppercase tracking-wider transition-colors">{t('back')}</button>
             <div className="text-center mb-8">
                 <div className="font-sans text-3xl font-bold text-slate-900 mb-1 tracking-tight">Undercover</div>
@@ -217,7 +216,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
             </div>
             <div className="space-y-3 mb-8 overflow-y-auto pr-1">
                 <div className="p-4 bg-white border border-slate-200 rounded-xl flex gap-3 shadow-sm">
-                    <div className="w-10 h-10 rounded-lg bg-indigo-50 flex-shrink-0 flex items-center justify-center text-indigo-600 border border-indigo-100"><User size={18}/></div>
+                    <div className="w-10 h-10 rounded-lg bg-[#e0f4f8] flex-shrink-0 flex items-center justify-center text-[#0077b6] border border-[#0077b6]/20"><User size={18}/></div>
                     <div><div className="font-bold text-sm text-slate-900">{t('role-civilian')}</div><p className="text-[11px] text-slate-500 leading-tight mt-0.5">{t('role-civilian-desc')}</p></div>
                 </div>
                 <div className="p-4 bg-white border border-slate-200 rounded-xl flex gap-3 shadow-sm">
@@ -230,11 +229,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 </div>
             </div>
             <div className="mt-auto"><button onClick={() => setScreen('config')} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10">{t('next')}</button></div>
-          </motion.div>
+          </div>
         )}
 
         {screen === 'config' && (
-          <motion.div key="config" initial={{x:20}} animate={{x:0}} exit={{x:-20}} className="flex flex-col h-full scrollbar-hide px-5 py-6 overflow-y-auto">
+          <div className="flex flex-col h-full scrollbar-hide px-5 py-6 overflow-y-auto">
             <h2 className="text-xl font-bold text-slate-900 mb-1 tracking-tight">{t('game-settings')}</h2>
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">{t('customise-match')}</p>
             
@@ -242,22 +241,22 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
               <div>
                 <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-3 text-center">{t('undercovers')}</label>
                 <div className="flex items-center gap-6 bg-slate-50 p-2 rounded-xl border border-slate-100 shadow-sm">
-                    <button onClick={() => setUndercovers(Math.max(1, undercovers - 1))} className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-600 hover:border-indigo-500 transition-colors shadow-sm">−</button>
+                    <button onClick={() => setUndercovers(Math.max(1, undercovers - 1))} className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-600 hover:border-[#0a9396] transition-colors shadow-sm">−</button>
                     <span className="flex-1 text-center font-mono text-3xl font-bold text-slate-900">{undercovers}</span>
-                    <button onClick={() => setUndercovers(Math.min(players.length - 2, undercovers + 1))} className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-600 hover:border-indigo-500 transition-colors shadow-sm">+</button>
+                    <button onClick={() => setUndercovers(Math.min(players.length - 2, undercovers + 1))} className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-600 hover:border-[#0077b6] transition-colors shadow-sm">+</button>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 px-1">
                     <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600">{t('mr-white')}</span>
-                    <button onClick={() => setMrWhiteOn(!mrWhiteOn)} className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? 'bg-indigo-500' : 'bg-slate-200'}`}>
+                    <button onClick={() => setMrWhiteOn(!mrWhiteOn)} className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? 'bg-[#0077b6]' : 'bg-slate-200'}`}>
                     <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${mrWhiteOn ? 'left-6' : 'left-1'}`} />
                     </button>
                 </div>
                 <div className="flex justify-between items-center py-3 border-t border-slate-100 px-1">
                     <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600">{t('hide-words')}</span>
-                    <button onClick={() => setWordsHidden(!wordsHidden)} className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? 'bg-indigo-500' : 'bg-slate-200'}`}>
+                    <button onClick={() => setWordsHidden(!wordsHidden)} className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? 'bg-[#0077b6]' : 'bg-slate-200'}`}>
                     <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${wordsHidden ? 'left-6' : 'left-1'}`} />
                     </button>
                 </div>
@@ -275,9 +274,9 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 <div>
                   <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-3 text-center">{t('word-pair')}</label>
                   <div className="space-y-3">
-                      <input value={customWord1} onChange={e => setCustomWord1(e.target.value)} placeholder={t('civilian-word')} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-indigo-500 focus:bg-white transition-all shadow-sm font-medium" />
-                      <input value={customWord2} onChange={e => setCustomWord2(e.target.value)} placeholder={t('undercover-word')} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-indigo-500 focus:bg-white transition-all shadow-sm font-medium" />
-                      <button onClick={suggestWords} className="text-[10px] text-indigo-600 font-bold uppercase tracking-widest px-1 hover:text-indigo-500 transition-colors w-full">{t('suggest-words')}</button>
+                      <input value={customWord1} onChange={e => setCustomWord1(e.target.value)} placeholder={t('civilian-word')} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-[#0077b6] focus:bg-white transition-all shadow-sm font-medium" />
+                      <input value={customWord2} onChange={e => setCustomWord2(e.target.value)} placeholder={t('undercover-word')} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-[#0077b6] focus:bg-white transition-all shadow-sm font-medium" />
+                      <button onClick={suggestWords} className="text-[10px] text-[#0077b6] font-bold uppercase tracking-widest px-1 hover:text-[#0077b6] transition-colors w-full">{t('suggest-words')}</button>
                   </div>
                 </div>
               )}
@@ -292,11 +291,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 <button onClick={() => setScreen('intro')} className="flex-1 py-4 border border-slate-200 bg-white text-slate-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-50 transition-all">{t('back')}</button>
                 <button onClick={startGame} className="flex-[2] py-4 bg-slate-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10">{t('start-game')}</button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {screen === 'pass' && (
-          <motion.div key="pass" initial={{scale:0.98}} animate={{scale:1}} className="flex flex-col h-full px-5 py-8 items-center text-center">
+          <div className="flex flex-col h-full px-5 py-8 items-center text-center">
             <div className="flex-1 flex flex-col items-center justify-center w-full">
                 <div className="w-24 h-24 rounded-2xl bg-slate-900 shadow-xl shadow-slate-900/20 flex items-center justify-center font-mono text-3xl font-bold text-white mb-8 border-4 border-white/10 ring-1 ring-slate-900">
                     {gamePlayers[passOrder[passIndex]]?.name.slice(0, 2).toUpperCase()}
@@ -307,28 +306,28 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
             <button onClick={() => setScreen('reveal')} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10">
                 {t('reveal-word')}
             </button>
-          </motion.div>
+          </div>
         )}
 
         {screen === 'reveal' && (
-           <motion.div key="reveal" initial={{opacity:0, scale:1.05}} animate={{opacity:1, scale:1}} className="flex flex-col h-full px-5 py-8 items-center text-center">
+           <div className="flex flex-col h-full px-5 py-8 items-center text-center">
              <div className="flex-1 flex flex-col items-center justify-center w-full">
                 <div className="w-full bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-indigo-500 opacity-20"></div>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-[#0077b6] opacity-20"></div>
                     <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 mb-8 pb-4 border-b border-slate-100">Your secret word is</div>
                     <div className="text-4xl font-bold text-slate-900 mb-2 tracking-tight">{gamePlayers[passOrder[passIndex]]?.word || '? ? ?'}</div>
                     {gamePlayers[passOrder[passIndex]]?.role === 'mrwhite' && <div className="text-red-500 text-xs uppercase tracking-widest font-bold mt-4">You have no word!</div>}
                 </div>
                 <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400 mt-10">Keep it secret • Stay alert</p>
              </div>
-             <button onClick={nextReveal} className="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">
+             <button onClick={nextReveal} className="w-full py-4 bg-[#0077b6] text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-[#0077b6] transition-all shadow-lg shadow-[#0077b6]/20">
                  {t('hide-word')}
              </button>
-           </motion.div>
+           </div>
         )}
 
         {screen === 'game' && (
-            <motion.div key="game" initial={{opacity:0}} animate={{opacity:1}} className="flex flex-col h-full px-5 py-6">
+            <div className="flex flex-col h-full px-5 py-6">
                 <div className="flex justify-between items-start mb-8 pb-6 border-b border-slate-100">
                     <div>
                         <div className="font-mono text-5xl font-bold text-slate-900 leading-none tracking-tighter">{round}</div>
@@ -343,7 +342,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                     {passOrder.map(idx => {
                         const p = gamePlayers[idx];
                         return (
-                            <div key={p.id} className={`flex items-center gap-3 p-2.5 bg-white border border-slate-200 rounded-xl transition-all shadow-sm ${p.isEliminated ? 'opacity-30 grayscale' : 'hover:border-indigo-500'}`}>
+                            <div key={p.id} className={`flex items-center gap-3 p-2.5 bg-white border border-slate-200 rounded-xl transition-all shadow-sm ${p.isEliminated ? 'opacity-30 grayscale' : 'hover:border-[#0077b6]'}`}>
                                 <button 
                                     onClick={() => !p.isEliminated && handleRecheck(p.id)}
                                     className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center font-mono text-[10px] font-bold text-slate-600 border border-slate-200 hover:bg-slate-200 transition-colors"
@@ -366,11 +365,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                     </button>
                     <div className="p-4 bg-slate-900 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-center text-slate-400 leading-relaxed shadow-xl shadow-slate-900/10">{t('give-clue-vote')}</div>
                 </div>
-            </motion.div>
+            </div>
         )}
 
         {screen === 'recheck' && (
-            <motion.div key="recheck" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="flex flex-col h-full px-5 py-6">
+            <div className="flex flex-col h-full px-5 py-6">
                 <div className="flex items-center justify-between mb-8">
                     <h2 className="text-xl font-bold text-slate-900 tracking-tight">{t('word-check-title')}</h2>
                     <button onClick={() => setScreen('game')} className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 text-slate-400"><X size={18}/></button>
@@ -381,7 +380,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                         <button 
                             key={p.id} 
                             onClick={() => handleRecheck(p.id)}
-                            className="w-full flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-2xl hover:border-indigo-500 transition-all shadow-sm"
+                            className="w-full flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-2xl hover:border-[#0077b6] transition-all shadow-sm"
                         >
                             <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center font-mono font-bold text-slate-600">{p.name.slice(0,2).toUpperCase()}</div>
                             <div className="flex-1 text-left">
@@ -391,34 +390,31 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                         </button>
                     ))}
                 </div>
-            </motion.div>
+            </div>
         )}
-      </AnimatePresence>
 
-      <AnimatePresence>
           {recheckPlayerId && (
-              <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-8">
-                  <motion.div initial={{scale:0.9}} animate={{scale:1}} className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+              <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-8">
+                  <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
                       <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 mb-6 pb-4 border-b border-slate-100">{t('secret-word-for').replace('{0}', gamePlayers.find(p=>p.id===recheckPlayerId)?.name || '')}</div>
                       <div className="text-3xl font-bold text-slate-900 mb-8">{gamePlayers.find(p=>p.id===recheckPlayerId)?.word || 'NO WORD'}</div>
                       <button onClick={() => setRecheckPlayerId(null)} className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest">{t('done-btn')}</button>
-                  </motion.div>
-              </motion.div>
+                  </div>
+              </div>
           )}
 
           {mrWhiteGuessingId && (
-              <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className="fixed inset-0 z-50 bg-indigo-600/90 backdrop-blur-sm flex items-center justify-center p-8">
-                  <motion.div initial={{scale:0.9, y:20}} animate={{scale:1, y:0}} className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+              <div className="fixed inset-0 z-50 bg-[#0077b6]/90 backdrop-blur-sm flex items-center justify-center p-8">
+                  <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
                       <div className="text-xl font-bold text-slate-900 mb-2">{t('mrwhite-elimination')}</div>
                       <p className="text-xs text-slate-500 mb-8 leading-relaxed">{t('mrwhite-guess-desc')}</p>
                       <div className="grid grid-cols-1 gap-3">
-                          <button onClick={() => mrWhiteAction(true)} className="py-4 bg-indigo-600 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo-600/20">{t('mrwhite-guess-btn')}</button>
+                          <button onClick={() => mrWhiteAction(true)} className="py-4 bg-[#0077b6] text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-[#0077b6]/20">{t('mrwhite-guess-btn')}</button>
                           <button onClick={() => mrWhiteAction(false)} className="py-4 bg-slate-100 text-slate-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-200">{t('mrwhite-dont-know-btn')}</button>
                       </div>
-                  </motion.div>
-              </motion.div>
+                  </div>
+              </div>
           )}
-      </AnimatePresence>
     </div>
   );
 };
