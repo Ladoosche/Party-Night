@@ -45,13 +45,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   const { players: allPlayers, setPlayers, language, t } = useAppContext();
   const players = allPlayers.filter((p) => p.isActive !== false);
 
-  if (players.length < 3) {
+  if (players.length < 2) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
         <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-500 mb-6">
             <X size={32} />
         </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough")}</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough-2")}</h2>
         <button 
           onClick={onBack}
           className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest"
@@ -117,6 +117,16 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   useEffect(() => {
     if (players.length > 5) setUndercovers(2);
     if (players.length > 9) setUndercovers(3);
+    
+    // Force hidden words if 3 players or fewer (to have at least 3 playing if possible, or 2)
+    if (players.length <= 3) {
+      setWordsHidden(true);
+      setGameMasterId(null);
+    }
+    
+    if (players.length <= 2) {
+      setMrWhiteOn(false);
+    }
   }, [players.length]);
 
   useEffect(() => {
@@ -139,6 +149,10 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     setCustomWord1(word1);
     setCustomWord2(word2);
   };
+
+  const activePlayersToAssign = players.filter(p => !p.isActive === false && (wordsHidden || p.id !== gameMasterId));
+  const minRequiredCount = mrWhiteOn ? 3 : 2;
+  const isStartDisabled = (!wordsHidden && !gameMasterId) || activePlayersToAssign.length < minRequiredCount;
 
   const updateScores = (winningRole: Role | "civilians", mrWhiteGuessed = false, undercoverGuessed = false) => {
     setPlayers(prev => prev.map(p => {
@@ -164,6 +178,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   };
 
   const startGame = () => {
+    if (isStartDisabled) return;
+
     let w1 = customWord1,
       w2 = customWord2;
     if (wordsHidden || !w1 || !w2) {
@@ -177,16 +193,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       w2 = words[idx2];
     }
 
-    // Players who are actually playing (excluding Game Master)
-    const activePlayers = players.filter(p => wordsHidden || p.id !== gameMasterId);
-
     let rolesPool: Role[] = [];
     for (let i = 0; i < undercovers; i++) rolesPool.push("undercover");
     if (mrWhiteOn) rolesPool.push("mrwhite");
-    while (rolesPool.length < activePlayers.length) rolesPool.push("civilian");
+    while (rolesPool.length < activePlayersToAssign.length) rolesPool.push("civilian");
     rolesPool.sort(() => Math.random() - 0.5);
 
-    const gp: GamePlayer[] = activePlayers.map((p, i) => ({
+    const gp: GamePlayer[] = activePlayersToAssign.map((p, i) => ({
       ...p,
       role: rolesPool[i],
       word:
@@ -577,6 +590,31 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
           </p>
 
           <div className="space-y-6">
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 shadow-sm">
+                <div className="flex justify-between items-center mb-3">
+                    <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+                        {t("players-label")} ({players.length})
+                    </label>
+                    <button 
+                        onClick={() => setEditPlayersMode(true)}
+                        className="text-[9px] font-bold text-[#0077b6] flex items-center gap-1 uppercase tracking-widest"
+                    >
+                        <Plus size={12} /> {t("add-player-btn") || "Ajouter"}
+                    </button>
+                </div>
+                <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto pr-1">
+                    {allPlayers.map((p) => (
+                        <button
+                            key={p.id}
+                            onClick={() => togglePlayerActive(p.id)}
+                            className={`px-3 py-1.5 rounded-lg border text-[10px] font-bold transition-all ${p.isActive !== false ? "bg-white border-[#0077b6] text-[#0077b6] shadow-sm" : "bg-slate-100 border-transparent text-slate-400 opacity-60"}`}
+                        >
+                            {p.name}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             <div>
               <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-3 text-center">
                 {t("undercovers")}{" "}
@@ -623,8 +661,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                   {t("mr-white")}
                 </span>
                 <button
-                  onClick={() => setMrWhiteOn(!mrWhiteOn)}
-                  className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? "bg-[#0077b6]" : "bg-slate-200"}`}
+                  onClick={() => {
+                    if (players.length > 2) {
+                       setMrWhiteOn(!mrWhiteOn);
+                    }
+                  }}
+                  disabled={players.length <= 2}
+                  className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? "bg-[#0077b6]" : "bg-slate-200"} ${players.length <= 2 ? "opacity-30 cursor-not-allowed" : ""}`}
                 >
                   <div
                     className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${mrWhiteOn ? "left-6" : "left-1"}`}
@@ -637,13 +680,17 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 </span>
                 <button
                   onClick={() => {
-                    const nextVal = !wordsHidden;
-                    setWordsHidden(nextVal);
-                    if (!nextVal && !gameMasterId && players.length > 0) {
-                        setGameMasterId(players[0].id);
+                    if (players.length > 3) {
+                        const nextVal = !wordsHidden;
+                        setWordsHidden(nextVal);
+                        // Reset MJ when words are shown to force a conscious choice
+                        if (!nextVal) {
+                            setGameMasterId(null);
+                        }
                     }
                   }}
-                  className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? "bg-[#0077b6]" : "bg-slate-200"}`}
+                  disabled={players.length <= 3}
+                  className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? "bg-[#0077b6]" : "bg-slate-200"} ${players.length <= 3 ? "opacity-30 cursor-not-allowed" : ""}`}
                 >
                   <div
                     className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${wordsHidden ? "left-6" : "left-1"}`}
@@ -737,11 +784,22 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
             </button>
             <button
               onClick={startGame}
-              className="flex-[2] py-4 bg-slate-900 text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/10"
+              disabled={isStartDisabled}
+              className={`flex-[2] py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg ${isStartDisabled ? "bg-slate-300 text-slate-500 cursor-not-allowed shadow-none" : "bg-slate-900 text-white hover:bg-slate-800 shadow-slate-900/10"}`}
             >
               {t("start-game")}
             </button>
           </div>
+          {isStartDisabled && (
+            <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest text-center mt-3 animate-pulse">
+                {!wordsHidden && !gameMasterId 
+                  ? t("mj-required-error") 
+                  : activePlayersToAssign.length < minRequiredCount 
+                    ? (mrWhiteOn ? t("err-not-enough-mrwhite") : t("err-not-enough-2"))
+                    : ""
+                }
+            </p>
+          )}
         </div>
       )}
 
