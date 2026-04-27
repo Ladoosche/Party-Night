@@ -290,7 +290,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="flex-1 flex flex-col scrollbar-hide px-5 py-6"
+          className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-6"
         >
           <button
             onClick={onBack}
@@ -359,7 +359,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {screen === "config" && (
-        <div className="flex-1 flex flex-col scrollbar-hide px-5 py-6 overflow-y-auto">
+        <div className="flex-1 flex flex-col scrollbar-hide px-5 py-6 pb-12 md:pb-6 overflow-y-auto">
           <h2 className="text-xl font-bold text-slate-900 mb-1 tracking-tight">
             {t("game-settings")}
           </h2>
@@ -509,7 +509,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {screen === "pass" && (
-        <div className="flex-1 flex flex-col px-5 py-8 items-center text-center">
+        <div className="flex-1 flex flex-col overflow-y-auto px-5 py-8 items-center text-center">
           <div className="flex-1 flex flex-col items-center justify-center w-full">
             <div className="w-24 h-24 rounded-2xl bg-slate-900 shadow-xl shadow-slate-900/20 flex items-center justify-center font-mono text-3xl font-bold text-white mb-8 border-4 border-white/10 ring-1 ring-slate-900">
               {gamePlayers[passOrder[passIndex]]?.name
@@ -533,7 +533,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {screen === "reveal" && (
-        <div className="flex-1 flex flex-col px-5 py-8 items-center text-center">
+        <div className="flex-1 flex flex-col overflow-y-auto px-5 py-8 items-center text-center">
           <div className="flex-1 flex flex-col items-center justify-center w-full">
             <div className="w-full bg-slate-50 border border-slate-200 rounded-3xl p-10 shadow-sm relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-[#0077b6] opacity-20"></div>
@@ -563,7 +563,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {screen === "game" && (
-        <div className="flex-1 flex flex-col px-5 py-6">
+        <div className="flex-1 flex flex-col overflow-y-auto px-5 py-6 pb-12 md:pb-6">
           <div className="flex justify-between items-start mb-8 pb-6 border-b border-slate-100">
             <div>
               <div className="font-mono text-5xl font-bold text-slate-900 leading-none tracking-tighter">
@@ -636,7 +636,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {screen === "recheck" && (
-        <div className="flex-1 flex flex-col px-5 py-6">
+        <div className="flex-1 flex flex-col overflow-y-auto px-5 py-6 pb-12 md:pb-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl font-bold text-slate-900 tracking-tight">
               {t("word-check-title")}
