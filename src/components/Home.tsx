@@ -11,6 +11,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
   const { language, setLanguage, players, setPlayers, t } = useAppContext();
   const [playerName, setPlayerName] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   const addPlayer = () => {
     const name = playerName.trim();
@@ -20,10 +21,45 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
     setPlayerName('');
   };
 
+  const resetScores = () => {
+    setPlayers(players.map(p => ({ ...p, score: 0 })));
+    setShowResetConfirm(false);
+  };
+
   const getInitials = (name: string) => name.trim().slice(0, 2).toUpperCase();
 
   return (
-    <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-5 pb-12 md:pb-8">
+    <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-5 pb-12 md:pb-8 relative">
+      {showResetConfirm && (
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-8"
+          onClick={() => setShowResetConfirm(false)}
+        >
+          <div 
+            className="bg-white rounded-3xl w-full max-w-xs p-8 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{t('confirm-reset')}</h3>
+            <p className="text-xs text-slate-500 mb-8 leading-relaxed">
+              {t('confirm-reset-desc')}
+            </p>
+            <div className="flex flex-col gap-3">
+              <button 
+                onClick={resetScores}
+                className="w-full py-4 bg-red-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-red-500/20"
+              >
+                {t('reset')}
+              </button>
+              <button 
+                onClick={() => setShowResetConfirm(false)}
+                className="w-full py-4 bg-slate-100 text-slate-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-200"
+              >
+                {t('cancel')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="text-center mb-6">
         <svg viewBox="0 0 60 40" width="60" className="mx-auto mb-2">
           <rect width="60" height="40" fill="#e0f4f8" rx="8"/>
@@ -52,7 +88,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
           </label>
           {players.some(p => (p.score || 0) > 0) && (
             <button 
-              onClick={() => setPlayers(players.map(p => ({ ...p, score: 0 })))}
+              onClick={() => setShowResetConfirm(true)}
               className="text-[9px] font-bold text-red-500 uppercase tracking-wider hover:bg-red-50 px-2 py-0.5 rounded transition-colors"
             >
               {t('reset-scores')}
@@ -106,6 +142,25 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
           <div className="flex-1">
             <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('uc-title')}</h3>
             <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('uc-desc')}</p>
+          </div>
+          <div className="text-slate-300 group-hover:text-[#ee6c4d] transition-colors">›</div>
+        </button>
+
+        <button 
+          onClick={() => {
+            const activePlayers = players.filter(p => p.isActive !== false);
+            if (activePlayers.length < 3) {
+              setError(t('err-not-enough'));
+              return;
+            }
+            onSelectGame('most-likely-to');
+          }} 
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-[#ee6c4d] hover:bg-slate-50 group transition-all shadow-sm"
+        >
+          <div className="w-12 h-12 rounded-xl bg-[#ee6c4d]/10 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-[#ee6c4d]/20">👇</div>
+          <div className="flex-1">
+            <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('mlt-title')}</h3>
+            <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('mlt-desc')}</p>
           </div>
           <div className="text-slate-300 group-hover:text-[#ee6c4d] transition-colors">›</div>
         </button>

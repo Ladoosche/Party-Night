@@ -874,8 +874,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {recheckPlayerId && (
-        <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-8">
-          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-8"
+          onClick={() => setRecheckPlayerId(null)}
+        >
+          <div 
+            className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 mb-6 pb-4 border-b border-slate-100">
               {t("secret-word-for").replace(
                 "{0}",
@@ -897,8 +903,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {mrWhiteGuessingId && (
-        <div className="fixed inset-0 z-50 bg-[#0077b6]/90 backdrop-blur-sm flex items-center justify-center p-8">
-          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+        <div 
+          className="fixed inset-0 z-50 bg-[#0077b6]/90 backdrop-blur-sm flex items-center justify-center p-8"
+          onClick={() => setMrWhiteGuessingId(null)}
+        >
+          <div 
+            className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="text-xl font-bold text-slate-900 mb-2">
               {t("mrwhite-elimination")}
             </div>
@@ -924,8 +936,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {undercoverBonusId && (
-        <div className="fixed inset-0 z-50 bg-red-900/90 backdrop-blur-sm flex items-center justify-center p-8">
-          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+        <div 
+          className="fixed inset-0 z-50 bg-red-900/90 backdrop-blur-sm flex items-center justify-center p-8"
+          onClick={() => setUndercoverBonusId(null)}
+        >
+          <div 
+            className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="text-xl font-bold text-slate-900 mb-2">
               {t("undercover-guess-title")}
             </div>
@@ -951,8 +969,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {quitConfirm && (
-        <div className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-8">
-          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-8"
+          onClick={() => setQuitConfirm(false)}
+        >
+          <div 
+            className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="text-xl font-bold text-slate-900 mb-2">
               {t("confirm-quit")}
             </div>
@@ -981,8 +1005,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       )}
 
       {editPlayersMode && (
-        <div className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex flex-col p-6">
-           <div className="bg-white rounded-3xl flex-1 flex flex-col overflow-hidden max-w-md mx-auto w-full shadow-2xl">
+        <div 
+          className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex flex-col p-6"
+          onClick={() => setEditPlayersMode(false)}
+        >
+           <div 
+             className="bg-white rounded-3xl flex-1 flex flex-col overflow-hidden max-w-md mx-auto w-full shadow-2xl"
+             onClick={(e) => e.stopPropagation()}
+           >
               <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                   <h3 className="font-bold text-slate-900 text-sm">{t("edit-players")}</h3>
                   <button onClick={() => setEditPlayersMode(false)} className="bg-slate-200 text-slate-500 rounded-full p-1 hover:bg-slate-300 transition-colors">
