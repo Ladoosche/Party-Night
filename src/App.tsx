@@ -5,6 +5,7 @@ import { Home } from './components/Home';
 import { Undercover } from './components/Undercover';
 import { MostLikelyTo } from './components/MostLikelyTo';
 import { Game421 } from './components/Game421';
+import { Killer } from './components/Killer';
 
 function MainApp() {
   const [activeGame, setActiveGame] = React.useState<string | null>(null);
@@ -26,6 +27,10 @@ function MainApp() {
 
         {activeGame === 'game-421' && (
           <Game421 onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'killer' && (
+          <Killer onBack={() => setActiveGame(null)} />
         )}
       </div>
     </div>

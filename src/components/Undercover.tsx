@@ -45,13 +45,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   const { players: allPlayers, setPlayers, language, t } = useAppContext();
   const players = allPlayers.filter((p) => p.isActive !== false);
 
-  if (players.length < 2) {
+  if (players.length < 3) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-white">
         <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-500 mb-6">
             <X size={32} />
         </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough-2")}</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough")}</h2>
         <button 
           onClick={onBack}
           className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest"
@@ -151,7 +151,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   };
 
   const activePlayersToAssign = players.filter(p => !p.isActive === false && (wordsHidden || p.id !== gameMasterId));
-  const minRequiredCount = mrWhiteOn ? 3 : 2;
+  const minRequiredCount = 3;
   const isStartDisabled = (!wordsHidden && !gameMasterId) || activePlayersToAssign.length < minRequiredCount;
 
   const updateScores = (winningRole: Role | "civilians", mrWhiteGuessed = false, undercoverGuessed = false) => {
@@ -795,7 +795,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 {!wordsHidden && !gameMasterId 
                   ? t("mj-required-error") 
                   : activePlayersToAssign.length < minRequiredCount 
-                    ? (mrWhiteOn ? t("err-not-enough-mrwhite") : t("err-not-enough-2"))
+                    ? t("err-not-enough")
                     : ""
                 }
             </p>

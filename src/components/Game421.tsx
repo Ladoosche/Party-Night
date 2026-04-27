@@ -16,11 +16,34 @@ type DiceValue = 1 | 2 | 3 | 4 | 5 | 6 | null;
 
 export const Game421: React.FC<Game421Props> = ({ onBack }) => {
   const { t } = useAppContext();
-  const [dices, setDices] = useState<DiceValue[]>([null, null, null]);
+  const getRandomDiceValue = () => (Math.floor(Math.random() * 6) + 1) as DiceValue;
+
+  const faceRotations = {
+    1: { x: 0, y: 0 },
+    2: { x: 0, y: -90 },
+    3: { x: -90, y: 0 },
+    4: { x: 90, y: 0 },
+    5: { x: 0, y: 90 },
+    6: { x: 0, y: 180 }
+  };
+
+  const getRotationForValue = (val: DiceValue) => {
+    return val ? faceRotations[val as keyof typeof faceRotations] : { x: 0, y: 0 };
+  };
+
+  const [dices, setDices] = useState<DiceValue[]>(() => [
+    getRandomDiceValue(),
+    getRandomDiceValue(),
+    getRandomDiceValue()
+  ]);
+  const [rotations, setRotations] = useState<{ x: number, y: number }[]>(() => [
+    getRotationForValue(dices[0]),
+    getRotationForValue(dices[1]),
+    getRotationForValue(dices[2])
+  ]);
   const [rollsLeft, setRollsLeft] = useState(3);
   const [gameState, setGameState] = useState<"idle" | "playing" | "won" | "lost">("idle");
   const [rolling, setRolling] = useState(false);
-  const [rotations, setRotations] = useState<{ x: number, y: number }[]>([{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }]);
 
   const rollDice = async () => {
     if (rollsLeft === 0 || gameState === "won" || rolling) return;
@@ -31,18 +54,8 @@ export const Game421: React.FC<Game421Props> = ({ onBack }) => {
     // Generate final values strictly once per roll for each non-fixed dice
     const nextFinalValues = dices.map((d, i) => {
       if (isFixed(dices, i)) return d;
-      return (Math.floor(Math.random() * 6) + 1) as DiceValue;
+      return getRandomDiceValue();
     });
-
-    // Face mapping to degrees
-    const faceRotations = {
-      1: { x: 0, y: 0 },
-      2: { x: 0, y: -90 },
-      3: { x: -90, y: 0 },
-      4: { x: 90, y: 0 },
-      5: { x: 0, y: 90 },
-      6: { x: 0, y: 180 }
-    };
 
     // Calculate final rotations: target face + multiple full spins
     const targetRotations = rotations.map((r, i) => {
@@ -60,9 +73,6 @@ export const Game421: React.FC<Game421Props> = ({ onBack }) => {
 
     setRotations(targetRotations);
 
-    // No need to randomize dices state during roll as faces are static and rotation handles the visual
-    // But we keep the rolling state to show visual feedback
-    
     setTimeout(() => {
         setRolling(false);
         setDices(nextFinalValues);
@@ -73,37 +83,35 @@ export const Game421: React.FC<Game421Props> = ({ onBack }) => {
         // Target numbers for 421
         const targetNums = [4, 2, 1];
         const uniqueTargetsFound = new Set(nextFinalValues.filter(v => v !== null && targetNums.includes(v as number)));
+        const anyTargetFound = uniqueTargetsFound.size > 0;
+
+        const isFirstRollLoss = rollsLeft === 3 && !anyTargetFound;
+        const isOutOfRollsLoss = (rollsLeft === 1) && !isWin;
+        const isLoss = isFirstRollLoss || isOutOfRollsLoss;
 
         if (isWin) {
             setGameState("won");
-        } else if (rollsLeft <= 1) {
+        } else if (isLoss) {
             setGameState("lost");
         }
 
         setRollsLeft(prev => {
-            // Rule: If 1st throw (prev === 3) and 2 target numbers found, limit to 2 total rolls (1 left)
+            if (isLoss) return prev; 
             if (prev === 3 && uniqueTargetsFound.size === 2) {
                 return 1;
             }
-            return prev - 1;
+            return Math.max(0, prev - 1);
         });
-    }, 1800); // Slower duration
+    }, 1800); 
   };
 
   const isFixed = (currentDices: DiceValue[], index: number) => {
-    if (currentDices[index] === null) return false;
+    if (gameState === "idle" || currentDices[index] === null) return false;
     
     const values = currentDices.filter(d => d !== null) as number[];
-    const targetValues = [4, 2, 1];
     
-    // Check if current dice is one of the targets that hasn't been "claimed" yet
-    // This is simple logic: if we have a 4, a 2, or a 1, we keep it.
     const val = currentDices[index];
     if (val === 4 || val === 2 || val === 1) {
-        // Count how many of this value we have vs what we need
-        const countInHand = values.filter(v => v === val).length;
-        // In 421 we only need ONE of each.
-        // If we have multiple 1s, only the first one is "fixed"
         const firstIndex = currentDices.findIndex(d => d === val);
         return firstIndex === index;
     }
@@ -112,10 +120,17 @@ export const Game421: React.FC<Game421Props> = ({ onBack }) => {
   };
 
   const resetGame = () => {
-    setDices([null, null, null]);
+    const d1 = getRandomDiceValue();
+    const d2 = getRandomDiceValue();
+    const d3 = getRandomDiceValue();
+    setDices([d1, d2, d3]);
     setRollsLeft(3);
     setGameState("idle");
-    setRotations([{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }]);
+    setRotations([
+        getRotationForValue(d1),
+        getRotationForValue(d2),
+        getRotationForValue(d3)
+    ]);
   };
 
   return (
