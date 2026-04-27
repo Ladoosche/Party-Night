@@ -65,3 +65,62 @@
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
 }
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+.dice-viewport {
+  perspective: 1000px;
+}
+
+.dice-cube {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  transform-style: preserve-3d;
+  transition: transform 1.8s cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+.dice-face {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: white;
+  border: 4px solid #f1f5f9;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+/* Face positions */
+.face-1 { transform: rotateY(0deg) translateZ(40px); }
+.face-2 { transform: rotateY(90deg) translateZ(40px); }
+.face-3 { transform: rotateX(90deg) translateZ(40px); }
+.face-4 { transform: rotateX(-90deg) translateZ(40px); }
+.face-5 { transform: rotateY(-90deg) translateZ(40px); }
+.face-6 { transform: rotateY(180deg) translateZ(40px); }
+
+/* Rotation mapping for values */
+.dice-val-1 { transform: rotateX(0deg) rotateY(0deg); }
+.dice-val-2 { transform: rotateX(0deg) rotateY(-90deg); }
+.dice-val-3 { transform: rotateX(-90deg) rotateY(0deg); }
+.dice-val-4 { transform: rotateX(90deg) rotateY(0deg); }
+.dice-val-5 { transform: rotateX(0deg) rotateY(90deg); }
+.dice-val-6 { transform: rotateX(0deg) rotateY(180deg); }
+
+.dice-is-fixed .dice-face {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: white;
+}

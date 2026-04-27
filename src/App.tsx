@@ -4,6 +4,7 @@ import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { Home } from './components/Home';
 import { Undercover } from './components/Undercover';
 import { MostLikelyTo } from './components/MostLikelyTo';
+import { Game421 } from './components/Game421';
 
 function MainApp() {
   const [activeGame, setActiveGame] = React.useState<string | null>(null);
@@ -21,6 +22,10 @@ function MainApp() {
 
         {activeGame === 'most-likely-to' && (
           <MostLikelyTo onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'game-421' && (
+          <Game421 onBack={() => setActiveGame(null)} />
         )}
       </div>
     </div>

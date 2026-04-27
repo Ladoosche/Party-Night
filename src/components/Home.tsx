@@ -140,7 +140,12 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
         >
           <div className="w-12 h-12 rounded-xl bg-[#0a9396]/10 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-[#0a9396]/20">🕵️</div>
           <div className="flex-1">
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('uc-title')}</h3>
+            <div className="flex justify-between items-center">
+              <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('uc-title')}</h3>
+              <span className="text-[8px] font-bold text-[#0a9396] uppercase tracking-wider bg-[#0a9396]/5 px-1.5 py-0.5 rounded">
+                {t('min-players').replace('{0}', '3')}
+              </span>
+            </div>
             <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('uc-desc')}</p>
           </div>
           <div className="text-slate-300 group-hover:text-[#ee6c4d] transition-colors">›</div>
@@ -149,8 +154,8 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
         <button 
           onClick={() => {
             const activePlayers = players.filter(p => p.isActive !== false);
-            if (activePlayers.length < 3) {
-              setError(t('err-not-enough'));
+            if (activePlayers.length < 2) {
+              setError(t('err-not-enough-2'));
               return;
             }
             onSelectGame('most-likely-to');
@@ -159,10 +164,27 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
         >
           <div className="w-12 h-12 rounded-xl bg-[#ee6c4d]/10 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-[#ee6c4d]/20">👇</div>
           <div className="flex-1">
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('mlt-title')}</h3>
+            <div className="flex justify-between items-center">
+              <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('mlt-title')}</h3>
+              <span className="text-[8px] font-bold text-[#ee6c4d] uppercase tracking-wider bg-[#ee6c4d]/5 px-1.5 py-0.5 rounded">
+                {t('min-players').replace('{0}', '2')}
+              </span>
+            </div>
             <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('mlt-desc')}</p>
           </div>
           <div className="text-slate-300 group-hover:text-[#ee6c4d] transition-colors">›</div>
+        </button>
+
+        <button 
+          onClick={() => onSelectGame('game-421')}
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-slate-900 hover:bg-slate-50 group transition-all shadow-sm"
+        >
+          <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-slate-200">🎲</div>
+          <div className="flex-1">
+            <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('game-421-title')}</h3>
+            <p className="text-[10px] text-slate-400 leading-tight font-medium mt-0.5">{t('game-421-desc')}</p>
+          </div>
+          <div className="text-slate-300 group-hover:text-slate-900 transition-colors">›</div>
         </button>
 
         <div className="w-full text-left flex items-center gap-4 p-4 bg-white/50 border border-slate-100 rounded-xl opacity-40 cursor-not-allowed">

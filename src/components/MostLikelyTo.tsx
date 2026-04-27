@@ -129,7 +129,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack }) => {
         <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center text-red-500 mb-6">
             <X size={32} />
         </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough")}</h2>
+        <h2 className="text-xl font-bold text-slate-800 mb-2">{t("err-not-enough-2")}</h2>
         <button 
           onClick={onBack}
           className="mt-4 px-6 py-2 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest"
@@ -296,7 +296,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack }) => {
                     className="space-y-6"
                 >
                     <div className="text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-                         {language === 'fr' ? 'Qui pourrait le plus...' : 'Who is most likely to...'}
+                         {language === 'fr' ? 'Qui pourrait...' : 'Who would...'}
                     </div>
                     <h2 className="text-3xl font-bold text-slate-900 leading-tight tracking-tight max-w-sm mx-auto">
                         {language === 'fr' ? currentQuestion.fr : currentQuestion.en}
