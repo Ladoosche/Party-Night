@@ -6,6 +6,7 @@ export interface Player {
   id: string;
   name: string;
   isActive?: boolean;
+  score?: number;
 }
 
 interface AppContextType {
@@ -83,6 +84,26 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'role-undercover-desc': 'Have a different word. Try to blend in and guess the civilian word!',
     'role-mrwhite-desc': 'Has no word at all! Listen carefully to clues and try to steal the win by guessing the secret word.',
     'suggested-count': 'Suggested: {0}',
+    'score-label': 'Score',
+    'score-pts': 'pts',
+    'game-master': 'Game Master',
+    'none': 'None',
+    'is-mj': 'MJ',
+    'select-mj': 'Select Game Master',
+    'mj-desc': 'The MJ knows everything and doesn\'t play. They hide words from others.',
+    'change-mj': 'Change MJ?',
+    'undercover-guess-title': 'Bonus: Guess word!',
+    'undercover-guess-desc': 'You were eliminated, but can win 1 bonus pt by guessing the civilian word.',
+    'guess-bonus-win': 'Bonus pt earned!',
+    'guess-bonus-fail': 'Wrong guess.',
+    'confirm-quit': 'Quit game?',
+    'confirm-quit-desc': 'Are you sure you want to quit? Progress will be lost.',
+    'continue-playing': 'Continue',
+    'mj-no-points': 'MJ (No pts)',
+    'edit-players': 'Edit Players',
+    'bonus-point': 'Bonus',
+    'winner-pts': '+{0} pts',
+    'reset-scores': 'Reset Scores',
   },
   fr: {
     'app-title': 'Soirée Jeux',
@@ -148,6 +169,26 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'role-undercover-desc': 'Ayez un mot différent. Essayez de vous fondre dans la masse et de deviner le mot civil !',
     'role-mrwhite-desc': 'N\'a aucun mot ! Écoutez attentivement les indices et essayez de voler la victoire en devinant le mot secret.',
     'suggested-count': 'Suggéré : {0}',
+    'score-label': 'Score',
+    'score-pts': 'pts',
+    'game-master': 'Maître du Jeu',
+    'none': 'Aucun',
+    'is-mj': 'MJ',
+    'select-mj': 'Choisir le MJ',
+    'mj-desc': 'Le MJ sait tout et ne joue pas. Il cache les mots aux autres.',
+    'change-mj': 'Changer de MJ ?',
+    'undercover-guess-title': 'Bonus : Devinez le mot !',
+    'undercover-guess-desc': 'Éliminé, mais gagnez 1pt bonus en devinant le mot civil.',
+    'guess-bonus-win': 'Point bonus gagné !',
+    'guess-bonus-fail': 'Échec du bonus.',
+    'confirm-quit': 'Quitter ?',
+    'confirm-quit-desc': 'Voulez-vous vraiment quitter ? La progression sera perdue.',
+    'continue-playing': 'Continuer',
+    'mj-no-points': 'MJ (Pas de pts)',
+    'edit-players': 'Gérer les joueurs',
+    'bonus-point': 'Bonus',
+    'winner-pts': '+{0} pts',
+    'reset-scores': 'Réinitialiser scores',
   }
 };
 

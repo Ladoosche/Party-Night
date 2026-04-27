@@ -46,9 +46,19 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
       </div>
 
       <div className="mb-6">
-        <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-2 px-1">
-          {t('players-label')}
-        </label>
+        <div className="flex justify-between items-center mb-2 px-1">
+          <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block">
+            {t('players-label')}
+          </label>
+          {players.some(p => (p.score || 0) > 0) && (
+            <button 
+              onClick={() => setPlayers(players.map(p => ({ ...p, score: 0 })))}
+              className="text-[9px] font-bold text-red-500 uppercase tracking-wider hover:bg-red-50 px-2 py-0.5 rounded transition-colors"
+            >
+              {t('reset-scores')}
+            </button>
+          )}
+        </div>
         <div className="flex gap-2 mb-3">
           <input value={playerName} onChange={e => setPlayerName(e.target.value)} onKeyDown={e => e.key === 'Enter' && addPlayer()} placeholder={t('player-input-placeholder')} className="flex-1 px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-900 text-sm outline-none focus:border-[#0a9396] focus:bg-white transition-all shadow-sm" />
           <button onClick={addPlayer} className="w-10 h-10 flex items-center justify-center rounded-lg bg-[#ee6c4d] text-white hover:bg-[#d65e41] transition-colors"><Plus size={18} /></button>
@@ -64,7 +74,14 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
               >
                 {getInitials(p.name)}
               </button>
-              <span className={`flex-1 text-sm font-medium truncate transition-colors ${p.isActive === false ? 'text-slate-400' : 'text-slate-700'}`}>{p.name}</span>
+              <span className={`flex-1 text-sm font-medium truncate transition-colors ${p.isActive === false ? 'text-slate-400' : 'text-slate-700'}`}>
+                {p.name}
+              </span>
+              { (p.score || 0) > 0 && (
+                <span className="text-[10px] font-bold text-[#0077b6] bg-[#e0f4f8] px-1.5 py-0.5 rounded leading-none">
+                  {p.score}
+                </span>
+              )}
               <button onClick={() => setPlayers(players.filter(x => x.id !== p.id))} className="text-slate-300 hover:text-red-400 transition-colors"><X size={16} /></button>
             </Reorder.Item>
           ))}

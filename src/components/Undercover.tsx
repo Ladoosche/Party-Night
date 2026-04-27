@@ -39,12 +39,13 @@ interface GamePlayer {
 }
 
 export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
-  const { players: allPlayers, language, t } = useAppContext();
+  const { players: allPlayers, setPlayers, language, t } = useAppContext();
   const players = allPlayers.filter((p) => p.isActive !== false);
   const [screen, setScreen] = useState<Screen>("intro");
   const [undercovers, setUndercovers] = useState(1);
   const [mrWhiteOn, setMrWhiteOn] = useState(false);
   const [wordsHidden, setWordsHidden] = useState(false);
+  const [gameMasterId, setGameMasterId] = useState<string | null>(null);
   const [wordLang, setWordLang] = useState<"EN" | "FR">(
     language.toUpperCase() as "EN" | "FR",
   );
@@ -59,6 +60,9 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
   const [mrWhiteGuessingId, setMrWhiteGuessingId] = useState<string | null>(
     null,
   );
+  const [undercoverBonusId, setUndercoverBonusId] = useState<string | null>(null);
+  const [quitConfirm, setQuitConfirm] = useState(false);
+  const [editPlayersMode, setEditPlayersMode] = useState(false);
 
   useEffect(() => {
     if (players.length > 5) setUndercovers(2);
@@ -86,6 +90,20 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     setCustomWord2(word2);
   };
 
+  const updateScores = (winningRole: Role | "civilians") => {
+    setPlayers(allPlayers.map(p => {
+      let extra = 0;
+      // If player was playing this game
+      const gp = gamePlayers.find(g => g.id === p.id);
+      if (gp) {
+        if (winningRole === "civilians" && gp.role === "civilian") extra = 1;
+        if (winningRole === "undercover" && gp.role === "undercover") extra = 1;
+        if (winningRole === "mrwhite" && gp.role === "mrwhite") extra = 3;
+      }
+      return { ...p, score: (p.score || 0) + extra };
+    }));
+  };
+
   const startGame = () => {
     let w1 = customWord1,
       w2 = customWord2;
@@ -100,13 +118,16 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       w2 = words[idx2];
     }
 
+    // Players who are actually playing (excluding Game Master)
+    const activePlayers = players.filter(p => wordsHidden || p.id !== gameMasterId);
+
     let rolesPool: Role[] = [];
     for (let i = 0; i < undercovers; i++) rolesPool.push("undercover");
     if (mrWhiteOn) rolesPool.push("mrwhite");
-    while (rolesPool.length < players.length) rolesPool.push("civilian");
+    while (rolesPool.length < activePlayers.length) rolesPool.push("civilian");
     rolesPool.sort(() => Math.random() - 0.5);
 
-    const gp: GamePlayer[] = players.map((p, i) => ({
+    const gp: GamePlayer[] = activePlayers.map((p, i) => ({
       ...p,
       role: rolesPool[i],
       word:
@@ -162,16 +183,26 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     const C = active.filter((p) => p.role === "civilian");
     const MW = active.filter((p) => p.role === "mrwhite");
 
-    if (U.length === 0 && MW.length === 0) setWinner("civilians");
-    else if (C.length === 0) setWinner("undercover");
-    else if (U.length === 1 && C.length === 1 && MW.length === 0)
-      setWinner("undercover");
+    let res: Role | "civilians" | null = null;
+    if (U.length === 0 && MW.length === 0) res = "civilians";
+    else if (C.length === 0) res = "undercover";
+    else if (U.length === 1 && C.length === 1 && MW.length === 0) res = "undercover";
+
+    if (res) {
+      setWinner(res);
+      updateScores(res);
+    }
   };
 
   const eliminate = (id: string) => {
     const player = gamePlayers.find((p) => p.id === id);
     if (player?.role === "mrwhite") {
       setMrWhiteGuessingId(id);
+      return;
+    }
+    
+    if (player?.role === "undercover") {
+      setUndercoverBonusId(id);
       return;
     }
 
@@ -183,10 +214,25 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     checkWinner(newPlayers);
   };
 
+  const undercoverBonusAction = (correct: boolean) => {
+    const id = undercoverBonusId!;
+    if (correct) {
+      setPlayers(allPlayers.map(p => p.id === id ? { ...p, score: (p.score || 0) + 1 } : p));
+    }
+    const newPlayers = gamePlayers.map((p) =>
+      p.id === id ? { ...p, isEliminated: true, eliminatedAtRound: round } : p,
+    );
+    setGamePlayers(newPlayers);
+    setRound(round + 1);
+    setUndercoverBonusId(null);
+    checkWinner(newPlayers);
+  };
+
   const mrWhiteAction = (correct: boolean) => {
     const id = mrWhiteGuessingId!;
     if (correct) {
       setWinner("mrwhite");
+      updateScores("mrwhite");
     } else {
       const newPlayers = gamePlayers.map((p) =>
         p.id === id
@@ -218,6 +264,18 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
     setScreen("config");
   };
 
+  const handleQuit = () => {
+    if (screen === "intro" || screen === "config") {
+      onBack();
+    } else {
+      setQuitConfirm(true);
+    }
+  };
+
+  const togglePlayerActive = (id: string) => {
+    setPlayers(allPlayers.map(p => p.id === id ? { ...p, isActive: !p.isActive } : p));
+  };
+
   if (winner) {
     return (
       <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-8">
@@ -236,7 +294,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
             {t("end-title")}
           </div>
         </div>
-        <div className="space-y-3">
+
+        <div className="space-y-3 mb-8">
           <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mb-2 px-1">
             {t("roles-recap")}
           </div>
@@ -250,20 +309,47 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 key={p.id}
                 className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl shadow-sm"
               >
-                <span
-                  className={`text-[9px] font-bold tracking-widest px-2 py-0.5 rounded uppercase ${p.role === "civilian" ? "bg-[#e0f4f8] text-[#0077b6]" : p.role === "undercover" ? "bg-red-50 text-red-500" : "bg-slate-100 text-slate-600"}`}
-                >
-                  {t("role-" + p.role)}
-                </span>
+                <div className="flex flex-col gap-1 items-start">
+                  <span
+                    className={`text-[9px] font-bold tracking-widest px-2 py-0.5 rounded uppercase ${p.role === "civilian" ? "bg-[#e0f4f8] text-[#0077b6]" : p.role === "undercover" ? "bg-red-50 text-red-500" : "bg-slate-100 text-slate-600"}`}
+                  >
+                    {t("role-" + p.role)}
+                  </span>
+                  <span className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter">
+                    {p.word || "—"}
+                  </span>
+                </div>
                 <span className="flex-1 font-bold text-sm text-slate-700">
                   {p.name}
                 </span>
-                <span className="text-xs font-mono font-medium text-slate-400">
-                  {p.word || "—"}
-                </span>
+                <div className="flex flex-col items-end">
+                    <span className="text-xs font-bold text-[#0077b6]">
+                        {allPlayers.find(ap => ap.id === p.id)?.score || 0} {t("score-pts")}
+                    </span>
+                    {(winner === p.role || (winner === 'civilians' && p.role === 'civilian')) && (
+                        <span className="text-[8px] font-bold text-green-500 uppercase tracking-tighter">
+                            {t("winner-pts").replace("{0}", p.role === 'mrwhite' ? '3' : '1')}
+                        </span>
+                    )}
+                </div>
               </div>
             ))}
+            
+            {!wordsHidden && gameMasterId && (
+                <div className="flex items-center gap-3 p-3 bg-slate-50 border border-slate-200 border-dashed rounded-xl opacity-80">
+                    <span className="text-[9px] font-bold tracking-widest px-2 py-0.5 rounded uppercase bg-slate-200 text-slate-600">
+                      {t("is-mj")}
+                    </span>
+                    <span className="flex-1 font-bold text-sm text-slate-700">
+                      {allPlayers.find(p => p.id === gameMasterId)?.name}
+                    </span>
+                    <span className="text-[8px] font-bold text-slate-400 uppercase italic">
+                      {t("mj-no-points")}
+                    </span>
+                </div>
+            )}
         </div>
+
         <div className="mt-auto pt-8 space-y-3">
           <button
             onClick={resetGame}
@@ -284,7 +370,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
-      {screen === "intro" && (
+        {screen === "intro" && (
         <div
           key="intro"
           initial={{ opacity: 0 }}
@@ -292,12 +378,20 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
           exit={{ opacity: 0 }}
           className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-6"
         >
-          <button
-            onClick={onBack}
-            className="self-start text-[10px] font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-md mb-6 uppercase tracking-wider transition-colors"
-          >
-            {t("back")}
-          </button>
+          <div className="flex justify-between items-center mb-6">
+            <button
+              onClick={handleQuit}
+              className="text-[10px] font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
+            >
+              {t("back")}
+            </button>
+            <button
+              onClick={() => setEditPlayersMode(true)}
+              className="text-[10px] font-bold text-[#0077b6] bg-[#e0f4f8] hover:bg-[#b0e2f0] px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
+            >
+              {t("edit-players")}
+            </button>
+          </div>
           <div className="text-center mb-8">
             <div className="font-sans text-3xl font-bold text-slate-900 mb-1 tracking-tight">
               Undercover
@@ -307,6 +401,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
             </div>
           </div>
           <div className="space-y-3 mb-8 overflow-y-auto pr-1">
+            {/* Roles recap cards... */}
             <div className="p-4 bg-white border border-slate-200 rounded-xl flex gap-3 shadow-sm">
               <div className="w-10 h-10 rounded-lg bg-[#e0f4f8] flex-shrink-0 flex items-center justify-center text-[#0077b6] border border-[#0077b6]/20">
                 <User size={18} />
@@ -360,9 +455,17 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
 
       {screen === "config" && (
         <div className="flex-1 flex flex-col scrollbar-hide px-5 py-6 pb-12 md:pb-6 overflow-y-auto">
-          <h2 className="text-xl font-bold text-slate-900 mb-1 tracking-tight">
-            {t("game-settings")}
-          </h2>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+              {t("game-settings")}
+            </h2>
+            <button
+              onClick={() => setEditPlayersMode(true)}
+              className="text-[10px] font-bold text-[#0077b6] bg-[#e0f4f8] hover:bg-[#b0e2f0] px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
+            >
+              {t("edit-players")}
+            </button>
+          </div>
           <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-8">
             {t("customise-match")}
           </p>
@@ -398,7 +501,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 <button
                   onClick={() =>
                     setUndercovers(
-                      Math.min(players.length - 2, undercovers + 1),
+                      Math.min(players.length - 1 - (!wordsHidden && gameMasterId ? 1 : 0), undercovers + 1),
                     )
                   }
                   className="w-10 h-10 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-xl text-slate-600 hover:border-[#0077b6] transition-colors shadow-sm"
@@ -427,7 +530,13 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                   {t("hide-words")}
                 </span>
                 <button
-                  onClick={() => setWordsHidden(!wordsHidden)}
+                  onClick={() => {
+                    const nextVal = !wordsHidden;
+                    setWordsHidden(nextVal);
+                    if (!nextVal && !gameMasterId && players.length > 0) {
+                        setGameMasterId(players[0].id);
+                    }
+                  }}
                   className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? "bg-[#0077b6]" : "bg-slate-200"}`}
                 >
                   <div
@@ -436,6 +545,28 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                 </button>
               </div>
             </div>
+
+            {!wordsHidden && (
+              <div>
+                <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-3 text-center">
+                  {t("select-mj")}
+                </label>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {players.map((p) => (
+                    <button
+                      key={p.id}
+                      onClick={() => setGameMasterId(p.id)}
+                      className={`px-4 py-2 rounded-xl border text-[10px] font-bold uppercase tracking-wider transition-all ${gameMasterId === p.id ? "bg-[#0077b6] text-white border-[#0077b6]" : "bg-slate-50 text-slate-500 border-slate-200"}`}
+                    >
+                      {p.name}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-[9px] text-slate-400 text-center mt-3 leading-tight italic">
+                  {t("mj-desc")}
+                </p>
+              </div>
+            )}
 
             <div>
               <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase block mb-3 text-center">
@@ -565,17 +696,34 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
       {screen === "game" && (
         <div className="flex-1 flex flex-col overflow-y-auto px-5 py-6 pb-12 md:pb-6">
           <div className="flex justify-between items-start mb-8 pb-6 border-b border-slate-100">
-            <div>
-              <div className="font-mono text-5xl font-bold text-slate-900 leading-none tracking-tighter">
-                {round}
+            <div className="flex gap-4">
+              <div>
+                <div className="font-mono text-5xl font-bold text-slate-900 leading-none tracking-tighter">
+                  {round}
+                </div>
+                <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mt-1">
+                  {t("round-label")}
+                </div>
               </div>
-              <div className="text-[10px] font-bold tracking-widest text-slate-400 uppercase mt-1">
-                {t("round-label")}
-              </div>
+              {!wordsHidden && gameMasterId && (
+                <div className="mt-1">
+                  <div className="bg-[#e0f4f8] text-[#0077b6] text-[8px] font-bold px-2 py-0.5 rounded uppercase tracking-wider border border-[#0077b6]/20">
+                    MJ: {players.find(p => p.id === gameMasterId)?.name}
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
-              {gamePlayers.filter((p) => !p.isEliminated).length}{" "}
-              {t("active-label")}
+            <div className="flex flex-col items-end gap-2">
+              <button 
+                onClick={handleQuit}
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-400 hover:bg-slate-200"
+              >
+                <X size={16} />
+              </button>
+              <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
+                {gamePlayers.filter((p) => !p.isEliminated).length}{" "}
+                {t("active-label")}
+              </div>
             </div>
           </div>
 
@@ -587,12 +735,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
                   key={p.id}
                   className={`flex items-center gap-3 p-2.5 bg-white border border-slate-200 rounded-xl transition-all shadow-sm ${p.isEliminated ? "opacity-30 grayscale" : "hover:border-[#0077b6]"}`}
                 >
-                  <button
-                    onClick={() => !p.isEliminated && handleRecheck(p.id)}
-                    className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center font-mono text-[10px] font-bold text-slate-600 border border-slate-200 hover:bg-slate-200 transition-colors"
+                  <div
+                    className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center font-mono text-[10px] font-bold text-slate-600 border border-slate-200"
                   >
                     {p.name.slice(0, 2).toUpperCase()}
-                  </button>
+                  </div>
                   <div className="flex-1 flex flex-col justify-center">
                     <span
                       className={`font-bold text-sm text-slate-700 ${p.isEliminated ? "line-through" : ""}`}
@@ -722,6 +869,132 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {undercoverBonusId && (
+        <div className="fixed inset-0 z-50 bg-red-900/90 backdrop-blur-sm flex items-center justify-center p-8">
+          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+            <div className="text-xl font-bold text-slate-900 mb-2">
+              {t("undercover-guess-title")}
+            </div>
+            <p className="text-xs text-slate-500 mb-8 leading-relaxed">
+              {t("undercover-guess-desc")}
+            </p>
+            <div className="grid grid-cols-1 gap-3">
+              <button
+                onClick={() => undercoverBonusAction(true)}
+                className="py-4 bg-red-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-red-500/20"
+              >
+                {t("guess-bonus-win")}
+              </button>
+              <button
+                onClick={() => undercoverBonusAction(false)}
+                className="py-4 bg-slate-100 text-slate-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-200"
+              >
+                {t("guess-bonus-fail")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {quitConfirm && (
+        <div className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-8">
+          <div className="bg-white rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl">
+            <div className="text-xl font-bold text-slate-900 mb-2">
+              {t("confirm-quit")}
+            </div>
+            <p className="text-xs text-slate-500 mb-8 leading-relaxed">
+              {t("confirm-quit-desc")}
+            </p>
+            <div className="grid grid-cols-1 gap-3">
+              <button
+                onClick={() => {
+                   setQuitConfirm(false);
+                   onBack();
+                }}
+                className="py-4 bg-red-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-red-500/20"
+              >
+                {t("exit-to-home")}
+              </button>
+              <button
+                onClick={() => setQuitConfirm(false)}
+                className="py-4 bg-slate-100 text-slate-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-slate-200"
+              >
+                {t("continue-playing")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editPlayersMode && (
+        <div className="fixed inset-0 z-50 bg-slate-900/90 backdrop-blur-sm flex flex-col p-6">
+           <div className="bg-white rounded-3xl flex-1 flex flex-col overflow-hidden max-w-md mx-auto w-full shadow-2xl">
+              <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                  <h3 className="font-bold text-slate-900 text-sm">{t("edit-players")}</h3>
+                  <button onClick={() => setEditPlayersMode(false)} className="bg-slate-200 text-slate-500 rounded-full p-1 hover:bg-slate-300 transition-colors">
+                      <X size={16} />
+                  </button>
+              </div>
+              <div className="p-4 border-b border-slate-100 bg-white">
+                  <div className="flex gap-2">
+                      <input 
+                        id="new-player-input"
+                        placeholder={t("player-name-placeholder")}
+                        className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm"
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                const input = e.currentTarget;
+                                if (input.value.trim()) {
+                                    setPlayers([...allPlayers, { id: Date.now().toString(), name: input.value.trim(), isActive: true, score: 0 }]);
+                                    input.value = '';
+                                }
+                            }
+                        }}
+                      />
+                      <button 
+                        onClick={() => {
+                            const input = document.getElementById('new-player-input') as HTMLInputElement;
+                            if (input.value.trim()) {
+                                setPlayers([...allPlayers, { id: Date.now().toString(), name: input.value.trim(), isActive: true, score: 0 }]);
+                                input.value = '';
+                            }
+                        }}
+                        className="bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold"
+                      >
+                          {t("add-player")}
+                      </button>
+                  </div>
+              </div>
+              <div className="flex-1 overflow-y-auto p-4 space-y-2">
+                  {allPlayers.map((p) => (
+                      <div key={p.id} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                          <button 
+                            onClick={() => togglePlayerActive(p.id)}
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${p.isActive !== false ? "bg-green-500 border-green-500 text-white" : "bg-white border-slate-300"}`}
+                          >
+                              {p.isActive !== false && <Check size={12} />}
+                          </button>
+                          <div className="flex-1">
+                              <div className="font-bold text-sm text-slate-800">{p.name}</div>
+                              <div className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                                  {p.score || 0} {t("score-pts")}
+                              </div>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+              <div className="p-6 border-t border-slate-100">
+                  <button 
+                    onClick={() => setEditPlayersMode(false)}
+                    className="w-full py-4 bg-slate-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest"
+                  >
+                      {t("done-btn")}
+                  </button>
+              </div>
+           </div>
         </div>
       )}
     </div>
