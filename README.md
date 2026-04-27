@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Undercover Party Game
 
-# Run and deploy your AI Studio app
+A fast-paced, interactive party game built with React, Vite, and Tailwind CSS. Players try to find the "Undercover" by describing secret words.
 
-This contains everything you need to run your app locally.
+## Prerequisites
 
-View your app in AI Studio: https://ai.studio/apps/c5caa2bd-8bab-414b-9456-99bff4291c7a
+- Node.js (18 or later recommended)
+- npm or yarn
 
-## Run Locally
+## Installation
 
-**Prerequisites:**  Node.js
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
+## Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+To start the development server:
+```bash
+npm run dev
+```
+
+The app will be available at `http://localhost:3000`.
+
+## Build for Production
+
+To create a production build:
+```bash
+npm run build
+```
+
+The built assets will be in the `dist` directory.
+
+## Features
+
+- Dynamic word list generator with English and French support
+- Assigns roles automatically
+- In-game word checking mechanism to prevent cheating
+- Mr. White role configuration
+
+## Tech Stack
+
+- **Framework**: React 19
+- **Build Tool**: Vite 6
+- **Styling**: Tailwind CSS 4
+- **Animations**: Motion (Framer Motion)
+- **Icons**: Lucide React

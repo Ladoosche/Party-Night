@@ -5,6 +5,7 @@ export type Language = 'en' | 'fr';
 export interface Player {
   id: string;
   name: string;
+  isActive?: boolean;
 }
 
 interface AppContextType {
@@ -32,6 +33,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'player-input-placeholder': 'Player name',
     'err-empty': 'Please enter a name.',
     'err-duplicate': 'This name is already in the list.',
+    'err-not-enough': 'At least 3 active players are required to play.',
     'start-game': 'Start game',
     'back': 'Back',
     'next': 'Next',
@@ -91,6 +93,7 @@ const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'player-input-placeholder': 'Nom du joueur',
     'err-empty': 'Veuillez entrer un nom.',
     'err-duplicate': 'Ce nom est déjà dans la liste.',
+    'err-not-enough': 'Au moins 3 joueurs actifs sont nécessaires pour jouer.',
     'start-game': 'Commencer',
     'back': 'Retour',
     'next': 'Suivant',

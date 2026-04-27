@@ -22,7 +22,8 @@ interface GamePlayer {
 }
 
 export const Undercover: React.FC<UndercoverProps> = ({ onBack }) => {
-  const { players, language, t } = useAppContext();
+  const { players: allPlayers, language, t } = useAppContext();
+  const players = allPlayers.filter(p => p.isActive !== false);
   const [screen, setScreen] = useState<Screen>('intro');
   const [undercovers, setUndercovers] = useState(1);
   const [mrWhiteOn, setMrWhiteOn] = useState(false);

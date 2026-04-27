@@ -16,7 +16,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
     const name = playerName.trim();
     if (!name) return setError(t('err-empty'));
     if (players.some(p => p.name.toLowerCase() === name.toLowerCase())) return setError(t('err-duplicate'));
-    setPlayers([...players, { id: crypto.randomUUID(), name }]);
+    setPlayers([...players, { id: crypto.randomUUID(), name, isActive: true }]);
     setPlayerName('');
   };
 
@@ -56,10 +56,15 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
         {error && <div className="text-red-500 text-[10px] font-bold mb-2 px-1 uppercase tracking-wider">{error}</div>}
         <Reorder.Group axis="y" values={players} onReorder={setPlayers} className="space-y-1">
           {players.map(p => (
-            <Reorder.Item key={p.id} value={p} className="flex items-center gap-2 p-2 bg-white border border-slate-200 rounded-lg shadow-sm">
+            <Reorder.Item key={p.id} value={p} className={`flex items-center gap-2 p-2 bg-white border border-slate-200 rounded-lg shadow-sm transition-opacity ${p.isActive === false ? 'opacity-50' : 'opacity-100'}`}>
               <div className="cursor-grab text-slate-300 hover:text-slate-500 transition-colors"><GripVertical size={16} /></div>
-              <div className="w-6 h-6 rounded bg-slate-100 flex items-center justify-center font-mono text-[9px] font-bold text-slate-600">{getInitials(p.name)}</div>
-              <span className="flex-1 text-sm font-medium text-slate-700 truncate">{p.name}</span>
+              <button 
+                onClick={() => setPlayers(players.map(x => x.id === p.id ? { ...x, isActive: x.isActive === false ? true : false } : x))}
+                className={`w-6 h-6 rounded flex items-center justify-center font-mono text-[9px] font-bold transition-colors ${p.isActive === false ? 'bg-slate-100 text-slate-400' : 'bg-indigo-100 text-indigo-600'}`}
+              >
+                {getInitials(p.name)}
+              </button>
+              <span className={`flex-1 text-sm font-medium truncate transition-colors ${p.isActive === false ? 'text-slate-400' : 'text-slate-700'}`}>{p.name}</span>
               <button onClick={() => setPlayers(players.filter(x => x.id !== p.id))} className="text-slate-300 hover:text-red-400 transition-colors"><X size={16} /></button>
             </Reorder.Item>
           ))}
@@ -69,7 +74,17 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame }) => {
       <div className="h-px bg-slate-100 my-6" />
 
       <div className="space-y-3">
-        <button onClick={() => onSelectGame('undercover')} className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 hover:bg-slate-50 group transition-all shadow-sm">
+        <button 
+          onClick={() => {
+            const activePlayers = players.filter(p => p.isActive !== false);
+            if (activePlayers.length < 3) {
+              setError(t('err-not-enough'));
+              return;
+            }
+            onSelectGame('undercover');
+          }} 
+          className="w-full text-left flex items-center gap-4 p-4 bg-white border border-slate-200 rounded-xl hover:border-indigo-500 hover:bg-slate-50 group transition-all shadow-sm"
+        >
           <div className="w-12 h-12 rounded-xl bg-indigo-50 flex items-center justify-center text-2xl group-hover:bg-white transition-colors border border-indigo-100">🕵️</div>
           <div className="flex-1">
             <h3 className="text-sm font-bold text-slate-900 tracking-tight">{t('uc-title')}</h3>
