@@ -237,5 +237,16 @@ export const en: Record<string, string> = {
   "trivia-next": "Next Question",
   "trivia-hint": "Show Hint",
   "trivia-everyone": "Everyone / Other",
-  "trivia-answer": "Show Answer"
+  "trivia-answer": "Show Answer",
+  "wheel-title": "The Wheel",
+  "wheel-desc": "Spin the wheel for random penalties and actions!",
+  "wheel-rules-desc": "Spin the wheel to select a player. They might have to perform an action, take some penalties, or just get lucky!",
+  "wheel-spin": "Spin Wheel",
+  "wheel-action": "Action",
+  "wheel-penalties": "Penalties",
+  "wheel-nothing": "Nothing happens",
+  "wheel-take-penalties": "{0} takes {1} penalties!",
+  "wheel-do-action": "{0} must: {1}",
+  "wheel-just-selected": "{0} was selected, but gets off easy! Lucky!",
+  "wheel-touch-only": "This game requires a touch device."
 };

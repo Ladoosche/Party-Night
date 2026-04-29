@@ -96,6 +96,7 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
       const drawn: Card[] = [];
       for (let i = 0; i < drawnCount; i++) {
           drawn.push(currentDeck.pop()!);
+      }
       setDeck(currentDeck);
 
       setLastDrawn(drawn);
@@ -193,12 +194,20 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => setShowRules(false)}
-              className="w-full mt-auto py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest transition-colors shadow-lg shadow-purple-500/25"
-            >
-              {t("start-game")}
-            </button>
+            <div className="mt-auto flex flex-col gap-3">
+              <button
+                onClick={onShowPlayers}
+                className="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+              >
+                {t("edit-players")}
+              </button>
+              <button
+                onClick={() => setShowRules(false)}
+                className="w-full py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest transition-colors shadow-lg shadow-purple-500/25"
+              >
+                {t("start-game")}
+              </button>
+            </div>
           </div>
         ) : (
           <div 
@@ -362,4 +371,3 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
     </div>
   );
 };
-}

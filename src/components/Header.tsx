@@ -1,8 +1,6 @@
 import React from 'react';
 import { useAppContext, Theme } from '../context/AppContext';
-import { Language } from '../i18n';
-import { Dropdown } from './Dropdown';
-import { Globe, Users, Settings } from 'lucide-react';
+import { Users, Settings } from 'lucide-react';
 
 interface HeaderProps {
     onShowPlayers?: () => void;
@@ -15,27 +13,10 @@ export const Header: React.FC<HeaderProps> = ({
   onShowSettings,
   showPlayersCount = true 
 }) => {
-  const { language, setLanguage, t, players } = useAppContext();
-
-  const langOptions = [
-    { value: 'en', label: 'English', icon: <Globe size={14} /> },
-    { value: 'fr', label: 'Français', icon: <Globe size={14} /> },
-    { value: 'fr-ca', label: 'Français (Québec)', icon: <Globe size={14} /> },
-    { value: 'es', label: 'Español', icon: <Globe size={14} /> },
-  ];
+  const { players } = useAppContext();
 
   return (
-    <header className="relative z-50 px-5 py-4 flex justify-between items-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-slate-200/50 dark:border-slate-800/50 transition-colors">
-      <div className="flex gap-2">
-        <Dropdown 
-          id="language-dropdown"
-          options={langOptions} 
-          value={language} 
-          onChange={(val) => setLanguage(val as Language)} 
-          align="left"
-        />
-      </div>
-
+    <header className="relative z-50 px-5 py-4 flex justify-end items-center bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-slate-200/50 dark:border-slate-800/50 transition-colors">
       <div className="flex items-center gap-2">
         {showPlayersCount && (
           <button 

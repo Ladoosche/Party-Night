@@ -237,5 +237,16 @@ export const frCA: Record<string, string> = {
   "trivia-next": "Prochaine Question",
   "trivia-hint": "Indice",
   "trivia-everyone": "Tout le monde / Autre",
-  "trivia-answer": "Réponse"
+  "trivia-answer": "Réponse",
+  "wheel-title": "La Roue",
+  "wheel-desc": "Fais tourner la roue pour des gages et des actions!",
+  "wheel-rules-desc": "Fais tourner la roue pour désigner un joueur. Il pourrait devoir faire une action, prendre des pénalités ou avoir d'la chance!",
+  "wheel-spin": "Tourner",
+  "wheel-action": "Action",
+  "wheel-penalties": "Pénalités",
+  "wheel-nothing": "Rien",
+  "wheel-take-penalties": "{0} prend {1} pénalité(s)!",
+  "wheel-do-action": "{0} doit : {1}",
+  "wheel-just-selected": "{0} a été pogné(e), mais s'en sort bien! Quelle chance!",
+  "wheel-touch-only": "Ce jeu marche juste su'un écran tactile."
 };

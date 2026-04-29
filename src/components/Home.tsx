@@ -10,6 +10,11 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
   const { players, t } = useAppContext();
   const [error, setError] = useState<string | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  React.useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-5 pb-12 md:pb-8 relative">
@@ -153,6 +158,19 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
           <div className="flex-1">
             <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('purple-title')}</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">{t('purple-desc')}</p>
+          </div>
+        </button>
+
+        <button 
+          onClick={() => onSelectGame('wheel')}
+          className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl transition-all shadow-sm group hover:border-amber-500 hover:shadow-md"
+        >
+          <div className="w-14 h-14 rounded-xl bg-amber-100 dark:bg-amber-900/20 flex items-center justify-center text-3xl group-hover:bg-white dark:group-hover:bg-amber-800 transition-colors border border-amber-200 dark:border-amber-600 shadow-inner">🎡</div>
+          <div className="flex-1">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('wheel-title')}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">
+              {t('wheel-desc')}
+            </p>
           </div>
         </button>
       </div>

@@ -237,5 +237,16 @@ export const es: Record<string, string> = {
   "trivia-next": "Siguiente Pregunta",
   "trivia-hint": "Pista",
   "trivia-everyone": "Todos / Otro",
-  "trivia-answer": "Respuesta"
+  "trivia-answer": "Respuesta",
+  "wheel-title": "La Ruleta",
+  "wheel-desc": "¡Gira la ruleta para obtener castigos y acciones!",
+  "wheel-rules-desc": "Gira la ruleta para seleccionar un jugador. ¡Podría tener que hacer una acción, recibir penalizaciones o tener suerte!",
+  "wheel-spin": "Girar",
+  "wheel-action": "Acción",
+  "wheel-penalties": "Penalizaciones",
+  "wheel-nothing": "Nada",
+  "wheel-take-penalties": "¡{0} recibe {1} penalización(es)!",
+  "wheel-do-action": "{0} debe: {1}",
+  "wheel-just-selected": "¡{0} fue seleccionado(a), pero se salva! ¡Qué suerte!",
+  "wheel-touch-only": "Este juego requiere una pantalla táctil."
 };

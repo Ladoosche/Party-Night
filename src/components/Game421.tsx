@@ -161,8 +161,8 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
   };
 
   return (
-    <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors">
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
+    <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors h-full">
+      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
         <button
           onClick={() => {
             if (showRules && gameState === "idle") {
@@ -178,15 +178,17 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
           <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
         <div className="w-10 sm:w-12" />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("game-421-title")}</h2>
+        <h2 className="text-sm font-bold uppercase tracking-widest text-[#10b981]">{t("game-421-title")}</h2>
         <div className="flex items-center gap-2">
-            {!showRules && (
+            {!showRules ? (
               <button
                 onClick={resetGame}
                 className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
               >
                 <RotateCcw size={18} />
               </button>
+            ) : (
+              <div className="w-8" />
             )}
         </div>
       </div>
@@ -195,11 +197,10 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
         {showRules ? (
           <div 
             key="rules"
-            className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
+            className="flex-1 flex flex-col px-5 pt-8 pb-6 overflow-y-auto"
           >
             <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
               <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden transition-colors">
-                <div className="absolute top-0 left-0 w-full h-1 bg-[#10b981]" />
                 <div className="absolute top-0 left-0 w-full h-1 bg-[#10b981]" />
                 <div className="w-16 h-16 bg-[#10b981]/10 dark:bg-[#10b981]/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-[#10b981]">
                   <Dices size={32} />
@@ -210,13 +211,16 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
                 </p>
               </div>
             </div>
-
-            <div className="mt-auto px-5 mb-4">
+            <div className="mt-auto flex flex-col gap-3">
               <button
-                onClick={() => {
-                  setShowRules(false);
-                }}
-                className="w-full py-4 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-800 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-900/10 dark:shadow-none"
+                onClick={onShowPlayers}
+                className="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+              >
+                {t("edit-players")}
+              </button>
+              <button
+                onClick={() => setShowRules(false)}
+                className="w-full py-4 bg-[#10b981] hover:bg-[#059669] text-white rounded-2xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg shadow-[#10b981]/25 flex items-center justify-center gap-2"
               >
                 {t("start-game")}
               </button>

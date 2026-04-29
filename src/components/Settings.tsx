@@ -1,18 +1,26 @@
 import React from 'react';
 import { useAppContext, Theme } from '../context/AppContext';
-import { ArrowLeft, Sun, Moon, Monitor, Shield, Info, Palette } from 'lucide-react';
+import { Language } from '../i18n';
+import { ArrowLeft, Sun, Moon, Monitor, Shield, Info, Palette, Globe } from 'lucide-react';
 
 interface SettingsProps {
   onBack: () => void;
 }
 
 export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
-  const { theme, setTheme, t } = useAppContext();
+  const { theme, setTheme, language, setLanguage, t } = useAppContext();
 
   const themeOptions = [
     { value: 'light' as Theme, label: t('theme-light'), icon: <Sun size={20} />, description: 'Clear and bright interface' },
     { value: 'dark' as Theme, label: t('theme-dark'), icon: <Moon size={20} />, description: 'Easier on the eyes in the dark' },
     { value: 'system' as Theme, label: t('theme-system'), icon: <Monitor size={20} />, description: 'Matches your device settings' },
+  ];
+
+  const langOptions = [
+    { value: 'en', label: 'English', icon: <span className="text-xl">🇬🇧</span> },
+    { value: 'fr', label: 'Français', icon: <span className="text-xl">🇫🇷</span> },
+    { value: 'fr-ca', label: 'Français (Québec)', icon: <span className="text-xl">🇨🇦</span> },
+    { value: 'es', label: 'Español', icon: <span className="text-xl">🇪🇸</span> },
   ];
 
   return (
@@ -57,6 +65,38 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
                 <div className="flex-1">
                   <div className="font-bold text-slate-900 dark:text-slate-100">{option.label}</div>
                   <div className="text-xs text-slate-500 dark:text-slate-400">{option.description}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <div className="flex items-center gap-2 mb-4 text-slate-400">
+            <Globe size={18} />
+            <h2 className="text-xs font-bold uppercase tracking-widest">{t('language') || 'Language'}</h2>
+          </div>
+          
+          <div className="grid gap-3">
+            {langOptions.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => setLanguage(option.value as Language)}
+                className={`flex items-center gap-4 p-4 rounded-2xl border-2 transition-all text-left ${
+                  language === option.value
+                    ? 'border-[#0a9396] bg-[#0a9396]/5 dark:bg-[#0a9396]/10'
+                    : 'border-slate-100 dark:border-slate-800 hover:border-slate-200 dark:hover:border-slate-700'
+                }`}
+              >
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  language === option.value
+                    ? 'bg-[#0a9396] text-white'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                }`}>
+                  {option.icon}
+                </div>
+                <div className="flex-1 font-bold text-slate-900 dark:text-slate-100">
+                  {option.label}
                 </div>
               </button>
             ))}

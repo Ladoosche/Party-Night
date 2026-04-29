@@ -144,71 +144,85 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   const currentQuestion = currentQuestions[currentIndex];
 
   return (
-    <div className="flex-1 flex flex-col relative overflow-hidden">
-        <React.Fragment>
-          {screen === "rules" && (
-            <div
-              key="rules"
-              className="flex-1 flex flex-col p-6 overflow-y-auto bg-slate-900"
+    <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors h-full">
+      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
+        <button
+          onClick={() => {
+            if (screen === "rules") {
+              onBack();
+            } else if (screen === "config") {
+              setScreen("rules");
+            } else {
+              setQuitConfirm(true);
+            }
+          }}
+          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
+        >
+          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+        </button>
+        <div className="w-10 sm:w-12" />
+        <h2 className="text-sm font-bold uppercase tracking-widest text-emerald-900 dark:text-emerald-400">{t("trivia-title")}</h2>
+        <div className="w-8">
+          {screen !== "rules" && screen !== "config" && (
+            <button 
+              onClick={() => setScreen("rules")}
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400"
             >
-              <button
-                onClick={onBack}
-                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-              >
-                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-              <div className="flex-1 flex flex-col items-center justify-center max-w-sm mx-auto w-full mt-8">
-                <div className="w-20 h-20 bg-emerald-500/10 rounded-3xl flex items-center justify-center mb-6 border border-emerald-500/20">
-                  <Target className="text-emerald-400" size={40} />
-                </div>
-                
-                <h1 className="text-3xl font-black text-white mb-4 tracking-tight text-center">
-                  {t("trivia-title")}
-                </h1>
-                
-                <div className="space-y-4 mb-8">
-                  <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700/50">
-                    <p className="text-sm font-medium text-slate-300 leading-relaxed text-center">
-                      {t("trivia-rules-desc")}
-                    </p>
-                  </div>
-                </div>
+              <Target size={16} />
+            </button>
+          )}
+        </div>
+      </div>
 
-                <div className="w-full space-y-3">
-                  <button
-                    onClick={() => setScreen("config")}
-                    className="w-full min-h-[60px] bg-emerald-500 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg flex items-center justify-center gap-2"
-                  >
-                    {t("next")}
-                    <ChevronLeft className="rotate-180" size={20} />
-                  </button>
+      <React.Fragment>
+        {screen === "rules" && (
+          <div
+            key="rules"
+            className="flex-1 flex flex-col px-5 pt-8 pb-6 overflow-y-auto"
+          >
+            <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
+              <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
+                <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mx-auto mb-6 text-emerald-600 dark:text-emerald-400">
+                  <Target size={32} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{t("trivia-title")}</h3>
+                <div className="text-sm text-slate-500 dark:text-slate-400 text-left whitespace-pre-wrap leading-relaxed">
+                  {t("trivia-rules-desc")}
                 </div>
               </div>
             </div>
-          )}
+            <div className="mt-auto flex flex-col gap-3">
+              <button
+                onClick={onShowPlayers}
+                className="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-200 dark:hover:bg-slate-700 transition-all flex items-center justify-center gap-2"
+              >
+                {t("edit-players")}
+              </button>
+              <button
+                onClick={() => setScreen("config")}
+                className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2"
+              >
+                {t("next")}
+                <ChevronLeft className="rotate-180" size={20} />
+              </button>
+            </div>
+          </div>
+        )}
 
-          {screen === "config" && (
+        {screen === "config" && (
           <div
             key="config"
-            className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
+            className="flex-1 flex flex-col px-5 py-6 overflow-y-auto"
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-6">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">{t("settings")}</h3>
               <button
-                onClick={onBack}
-                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
+                onClick={onShowPlayers}
+                className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
               >
-                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
+                {t("edit-players")}
               </button>
-              <div className="w-10 sm:w-12" />
-              <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("trivia-title")}</h2>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={onShowPlayers}
-                  className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-                >
-                  {t("edit-players")}
-                </button>
-              </div>
             </div>
             
             <div className="px-5 flex-1 space-y-6">

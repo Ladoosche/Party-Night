@@ -10,6 +10,7 @@ import { Killer } from './components/Killer';
 import { NeverHaveIEver } from './components/NeverHaveIEver';
 
 import { Purple } from './components/Purple';
+import { Wheel } from './components/Wheel';
 import { Header } from './components/Header';
 import { EditPlayersModal } from './components/EditPlayersModal';
 import { Settings } from './components/Settings';
@@ -36,7 +37,7 @@ function MainApp() {
 
         <div className="flex-1 overflow-hidden flex flex-col relative">
           {showSettings && (
-            <div className="absolute inset-0 z-40 bg-white dark:bg-slate-900">
+            <div className="absolute inset-0 z-40 flex flex-col bg-white dark:bg-slate-900">
               <Settings onBack={() => setShowSettings(false)} />
             </div>
           )}
@@ -66,6 +67,10 @@ function MainApp() {
 
           {activeGame === 'purple' && (
             <Purple onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+          )}
+
+          {activeGame === 'wheel' && (
+            <Wheel onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
           )}
 
           {activeGame === 'killer' && (
