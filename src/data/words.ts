@@ -1,156 +1,662 @@
 export const wordGroups: Record<string, string[][]> = {
-  EN: [
-    ['Laptop', 'Desktop Computer', 'Tablet'],
-    ['Hotel', 'Airbnb', 'Hostel', 'Camping'],
-    ['Fork', 'Spoon', 'Knife'],
-    ['Mountain', 'Hill', 'Cliff'],
-    ['Guitar', 'Piano', 'Violin', 'Drums'],
-    ['Doctor', 'Nurse', 'Surgeon'],
-    ['Rain', 'Snow', 'Hail', 'Fog'],
-    ['Sofa', 'Bed', 'Armchair'],
-    ['Wine', 'Beer', 'Champagne', 'Cider'],
-    ['Cinema', 'Theater', 'Opera'],
-    ['Dog', 'Cat', 'Hamster', 'Rabbit'],
-    ['Kitchen', 'Bathroom', 'Bedroom'],
-    ['Car', 'Plane', 'Train', 'Bus'],
-    ['Book', 'Magazine', 'Newspaper'],
-    ['Forest', 'Desert', 'Jungle', 'Swamp'],
-    ['Shirt', 'Trousers', 'Jacket', 'Dress'],
-    ['Summer', 'Winter', 'Spring', 'Autumn'],
-    ['Apple', 'Banana', 'Orange', 'Pear'],
-    ['Tea', 'Coffee', 'Hot Chocolate'],
-    ['Salt', 'Sugar', 'Flour', 'Pepper'],
-    ['Window', 'Door', 'Gate'],
-    ['Mirror', 'Painting', 'Photograph'],
-    ['Sword', 'Shield', 'Spear'],
-    ['King', 'Queen', 'Prince', 'Princess'],
-    ['Ocean', 'River', 'Lake', 'Canal'],
-    ['Pen', 'Pencil', 'Marker', 'Chalk'],
-    ['Key', 'Lock', 'Padlock'],
-    ['Fire', 'Ice', 'Steam'],
-    ['Gold', 'Silver', 'Bronze', 'Platinum'],
-    ['Moon', 'Sun', 'Star', 'Planet'],
-    ['Soccer', 'Basketball', 'Tennis', 'Rugby'],
-    ['Shoes', 'Socks', 'Slippers', 'Boots'],
-    ['Bicycle', 'Motorcycle', 'Scooter'],
-    ['School', 'University', 'College'],
-    ['Bread', 'Butter', 'Cheese', 'Jam'],
-    ['Restaurant', 'Bar', 'Café', 'Club'],
-    ['Knife', 'Scissors', 'Razor'],
-    ['Hat', 'Gloves', 'Scarf'],
-    ['Watch', 'Clock', 'Timer'],
-    ['Phone', 'Camera', 'Speaker'],
-    ['Taxes', 'Rent', 'Insurance', 'Bill'],
-    ['Lawyer', 'Judge', 'Police Officer'],
-    ['Gym', 'Swimming Pool', 'Stadium'],
-    ['Elevator', 'Escalator', 'Stairs'],
-    ['Suitcase', 'Backpack', 'Handbag'],
-    ['Cigarette', 'Cigar', 'Pipe'],
-    ['Contract', 'Invoice', 'Receipt'],
-    ['Election', 'Referendum', 'Vote'],
-    ['Dentist', 'Optician', 'Pharmacist'],
-    ['Island', 'Peninsula', 'Continent'],
-    ['Passport', 'ID Card', 'Visa', 'Driver’s License'],
-    ['Suitcase', 'Duffle Bag', 'Backpack', 'Trunk'],
-    ['Airport', 'Train Station', 'Harbor', 'Bus Terminal'],
-    ['Cash', 'Credit Card', 'Check', 'Bank Transfer'],
-    ['Stock', 'Bond', 'Cryptocurrency', 'Savings'],
-    ['Wallet', 'Purse', 'Safe', 'Piggy Bank'],
-    ['Museum', 'Art Gallery', 'Library', 'Exhibition'],
-    ['Gym', 'Yoga Studio', 'Crossfit Box', 'Swimming Pool'],
-    ['Nightclub', 'Pub', 'Speakeasy', 'Lounge'],
-    ['Candle', 'Incense', 'Diffuser', 'Lamp'],
-    ['Balcony', 'Terrace', 'Patio', 'Garden'],
-    ['Mirror', 'Painting', 'Poster', 'Clock'],
-    ['Towel', 'Bathrobe', 'Bath Mat', 'Sponge'],
-    ['Meeting', 'Seminar', 'Webinar', 'Workshop'],
-    ['Resume', 'Cover Letter', 'Portfolio', 'LinkedIn Profile'],
-    ['Salary', 'Bonus', 'Commission', 'Dividend'],
-    ['Spouse', 'Partner', 'Fiancé', 'Date'],,
-    ['Neighbor', 'Colleague', 'Classmate', 'Flatmate'],
-    ['Grandfather', 'Grandmother', 'Uncle', 'Aunt'],
-    ['Brick', 'Concrete', 'Wood', 'Steel'],
-    ['Tape', 'Glue', 'Staples', 'Paperclip'],
-    ['Ladder', 'Stepstool', 'Scaffolding'],
-    ['Headphones', 'Earbuds', 'Speaker', 'Soundbar'],
-    ['Charger', 'Power Bank', 'USB Cable', 'Adapter'],
-    ['Smartwatch', 'Fitness Tracker', 'Digital Watch']
-  ],
-  FR: [
-      ['Ordinateur portable', 'Ordinateur de bureau', 'Tablette'],
-      ['Hôtel', 'Airbnb', 'Auberge de jeunesse', 'Camping'],
-      ['Fourchette', 'Cuillère', 'Couteau'],
-      ['Montagne', 'Colline', 'Falaise'],
-      ['Guitare', 'Piano', 'Violon', 'Batterie'],
-      ['Médecin', 'Infirmier', 'Chirurgien'],
-      ['Pluie', 'Neige', 'Grêle', 'Brouillard'],
-      ['Canapé', 'Lit', 'Fauteuil'],
-      ['Vin', 'Bière', 'Champagne', 'Cidre'],
-      ['Cinéma', 'Théâtre', 'Opéra'],
-      ['Chien', 'Chat', 'Hamster', 'Lapin'],
-      ['Cuisine', 'Salle de bain', 'Chambre'],
-      ['Voiture', 'Avion', 'Train', 'Bus'],
-      ['Livre', 'Magazine', 'Journal'],
-      ['Forêt', 'Désert', 'Jungle', 'Marais'],
-      ['Chemise', 'Pantalon', 'Veste', 'Robe'],
-      ['Été', 'Hiver', 'Printemps', 'Automne'],
-      ['Pomme', 'Banane', 'Orange', 'Poire'],
-      ['Thé', 'Café', 'Chocolat chaud'],
-      ['Sel', 'Sucre', 'Farine', 'Poivre'],
-      ['Fenêtre', 'Porte', 'Portail'],
-      ['Miroir', 'Tableau', 'Photographie'],
-      ['Épée', 'Bouclier', 'Lance'],
-      ['Roi', 'Reine', 'Prince', 'Princesse'],
-      ['Océan', 'Rivière', 'Lac', 'Canal'],
-      ['Stylo', 'Crayon', 'Feutre', 'Craie'],
-      ['Clé', 'Serrure', 'Cadenas'],
-      ['Feu', 'Glace', 'Vapeur'],
-      ['Or', 'Argent', 'Bronze', 'Platine'],
-      ['Lune', 'Soleil', 'Étoile', 'Planète'],
-      ['Football', 'Basketball', 'Tennis', 'Rugby'],
-      ['Chaussures', 'Chaussettes', 'Chaussons', 'Bottes'],
-      ['Vélo', 'Moto', 'Trottinette'],
-      ['École', 'Université', 'Faculté'],
-      ['Pain', 'Beurre', 'Fromage', 'Confiture'],
-      ['Restaurant', 'Bar', 'Café', 'Boîte de nuit'],
-      ['Couteau', 'Ciseaux', 'Rasoir'],
-      ['Chapeau', 'Gants', 'Écharpe'],
-      ['Montre', 'Horloge', 'Minuteur'],
-      ['Téléphone', 'Appareil photo', 'Enceinte'],
-      ['Impôts', 'Loyer', 'Assurance', 'Facture'],
-      ['Avocat', 'Juge', 'Policier'],
-      ['Salle de sport', 'Piscine', 'Stade'],
-      ['Ascenseur', 'Escalator', 'Escalier'],
-      ['Valise', 'Sac à dos', 'Sac à main'],
-      ['Cigarette', 'Cigare', 'Pipe'],
-      ['Contrat', 'Facture', 'Reçu'],
-      ['Élection', 'Référendum', 'Vote'],
-      ['Dentiste', 'Opticien', 'Pharmacien'],
-      ['Île', 'Presqu\'île', 'Continent'],
-      ['Passeport', 'Carte d\'identité', 'Visa', 'Permis de conduire'],
-      ['Valise', 'Sac de sport', 'Sac à dos', 'Malle'],
-      ['Aéroport', 'Gare', 'Port', 'Gare routière'],
-      ['Espèces', 'Carte bancaire', 'Chèque', 'Virement'],
-      ['Action', 'Obligation', 'Cryptomonnaie', 'Épargne'],
-      ['Portefeuille', 'Porte-monnaie', 'Coffre-fort', 'Tirelire'],
-      ['Musée', 'Galerie d\'art', 'Bibliothèque', 'Exposition'],
-      ['Salle de sport', 'Studio de yoga', 'Salle de Crossfit', 'Piscine'],
-      ['Boîte de nuit', 'Pub', 'Bar clandestin', 'Salon'],
-      ['Bougie', 'Encens', 'Diffuseur', 'Lampe'],
-      ['Balcon', 'Terrasse', 'Patio', 'Jardin'],
-      ['Miroir', 'Tableau', 'Poster', 'Horloge'],
-      ['Serviette', 'Peignoir', 'Tapis de bain', 'Éponge'],
-      ['Réunion', 'Séminaire', 'Webinaire', 'Atelier'],
-      ['CV', 'Lettre de motivation', 'Portfolio', 'Profil LinkedIn'],
-      ['Salaire', 'Bonus', 'Commission', 'Dividende'],
-      ['Conjoint', 'Partenaire', 'Fiancé', 'Date'],
-      ['Voisin', 'Collègue', 'Camarade', 'Colocataire'],
-      ['Grand-père', 'Grand-mère', 'Oncle', 'Tante'],
-      ['Brique', 'Béton', 'Bois', 'Acier'],
-      ['Adhésif', 'Colle', 'Agrafes', 'Trombone'],
-      ['Échelle', 'Escabeau', 'Échafaudage'],
-      ['Casque', 'Écouteurs', 'Enceinte', 'Barre de son'],
-      ['Chargeur', 'Batterie externe', 'Câble USB', 'Adaptateur'],
-      ['Montre connectée', 'Bracelet fitness', 'Montre digitale']
-  ]
+  "EN": [
+    [
+        "Laptop",
+        "Desktop Computer",
+        "Tablet"
+    ],
+    [
+        "Hotel",
+        "Airbnb",
+        "Hostel",
+        "Camping"
+    ],
+    [
+        "Fork",
+        "Spoon",
+        "Knife"
+    ],
+    [
+        "Mountain",
+        "Hill",
+        "Cliff"
+    ],
+    [
+        "Guitar",
+        "Piano",
+        "Violin",
+        "Drums"
+    ],
+    [
+        "Doctor",
+        "Nurse",
+        "Surgeon"
+    ],
+    [
+        "Rain",
+        "Snow",
+        "Hail",
+        "Fog"
+    ],
+    [
+        "Sofa",
+        "Bed",
+        "Armchair"
+    ],
+    [
+        "Wine",
+        "Beer",
+        "Champagne",
+        "Cider"
+    ],
+    [
+        "Cinema",
+        "Theater",
+        "Opera"
+    ],
+    [
+        "Apple",
+        "Banana",
+        "Orange"
+    ],
+    [
+        "Car",
+        "Bus",
+        "Bicycle",
+        "Train"
+    ],
+    [
+        "Cat",
+        "Dog",
+        "Rabbit"
+    ],
+    [
+        "Sun",
+        "Moon",
+        "Star"
+    ],
+    [
+        "Coffee",
+        "Tea",
+        "Juice",
+        "Water"
+    ],
+    [
+        "Shoes",
+        "Socks",
+        "Boots"
+    ],
+    [
+        "Pen",
+        "Pencil",
+        "Marker"
+    ],
+    [
+        "Chair",
+        "Table",
+        "Desk"
+    ],
+    [
+        "Ocean",
+        "River",
+        "Lake"
+    ],
+    [
+        "Book",
+        "Magazine",
+        "Newspaper"
+    ],
+    [
+        "Shark",
+        "Dolphin",
+        "Whale"
+    ],
+    [
+        "Football",
+        "Basketball",
+        "Tennis",
+        "Baseball"
+    ],
+    [
+        "Rose",
+        "Tulip",
+        "Sunflower"
+    ],
+    [
+        "Winter",
+        "Summer",
+        "Spring",
+        "Autumn"
+    ],
+    [
+        "Happy",
+        "Sad",
+        "Angry",
+        "Excited"
+    ],
+    [
+        "Guitar",
+        "Piano",
+        "Violin",
+        "Drums"
+    ],
+    [
+        "Red",
+        "Blue",
+        "Green",
+        "Yellow"
+    ],
+    [
+        "City",
+        "Village",
+        "Town"
+    ],
+    [
+        "Police",
+        "Firefighter",
+        "Doctor",
+        "Teacher"
+    ],
+    [
+        "Eye",
+        "Ear",
+        "Nose",
+        "Mouth"
+    ]
+],
+  "FR": [
+    [
+        "Ordinateur portable",
+        "Ordinateur de bureau",
+        "Tablette"
+    ],
+    [
+        "Hôtel",
+        "Airbnb",
+        "Auberge de jeunesse",
+        "Camping"
+    ],
+    [
+        "Fourchette",
+        "Cuillère",
+        "Couteau"
+    ],
+    [
+        "Montagne",
+        "Colline",
+        "Falaise"
+    ],
+    [
+        "Guitare",
+        "Piano",
+        "Violon",
+        "Batterie"
+    ],
+    [
+        "Médecin",
+        "Infirmier",
+        "Chirurgien"
+    ],
+    [
+        "Pluie",
+        "Neige",
+        "Grêle",
+        "Brouillard"
+    ],
+    [
+        "Canapé",
+        "Lit",
+        "Fauteuil"
+    ],
+    [
+        "Vin",
+        "Bière",
+        "Champagne",
+        "Cidre"
+    ],
+    [
+        "Cinéma",
+        "Théâtre",
+        "Opéra"
+    ],
+    [
+        "Pomme",
+        "Banane",
+        "Orange"
+    ],
+    [
+        "Voiture",
+        "Bus",
+        "Vélo",
+        "Train"
+    ],
+    [
+        "Chat",
+        "Chien",
+        "Lapin"
+    ],
+    [
+        "Soleil",
+        "Lune",
+        "Étoile"
+    ],
+    [
+        "Café",
+        "Thé",
+        "Jus",
+        "Eau"
+    ],
+    [
+        "Chaussures",
+        "Chaussettes",
+        "Bottes"
+    ],
+    [
+        "Stylo",
+        "Crayon",
+        "Marqueur"
+    ],
+    [
+        "Chaise",
+        "Table",
+        "Bureau"
+    ],
+    [
+        "Océan",
+        "Rivière",
+        "Lac"
+    ],
+    [
+        "Livre",
+        "Magazine",
+        "Journal"
+    ],
+    [
+        "Requin",
+        "Dauphin",
+        "Baleine"
+    ],
+    [
+        "Football",
+        "Basketball",
+        "Tennis",
+        "Baseball"
+    ],
+    [
+        "Rose",
+        "Tulipe",
+        "Tournesol"
+    ],
+    [
+        "Hiver",
+        "Été",
+        "Printemps",
+        "Automne"
+    ],
+    [
+        "Heureux",
+        "Triste",
+        "En colère",
+        "Excité"
+    ],
+    [
+        "Guitare",
+        "Piano",
+        "Violon",
+        "Batterie"
+    ],
+    [
+        "Rouge",
+        "Bleu",
+        "Vert",
+        "Jaune"
+    ],
+    [
+        "Ville",
+        "Village",
+        "Bourg"
+    ],
+    [
+        "Policier",
+        "Pompier",
+        "Médecin",
+        "Professeur"
+    ],
+    [
+        "Œil",
+        "Oreille",
+        "Nez",
+        "Bouche"
+    ]
+],
+  "FR-CA": [
+    [
+        "Laptop",
+        "Ordi de bureau",
+        "Tablette"
+    ],
+    [
+        "Hôtel",
+        "Airbnb",
+        "Auberge",
+        "Camping"
+    ],
+    [
+        "Fourchette",
+        "Cuillère",
+        "Couteau"
+    ],
+    [
+        "Montagne",
+        "Colline",
+        "Falaise"
+    ],
+    [
+        "Guitare",
+        "Piano",
+        "Violon",
+        "Drum"
+    ],
+    [
+        "Docteur",
+        "Infirmière",
+        "Chirurgien"
+    ],
+    [
+        "Pluie",
+        "Neige",
+        "Grêle",
+        "Brouillard"
+    ],
+    [
+        "Divan",
+        "Lit",
+        "Fauteuil"
+    ],
+    [
+        "Vin",
+        "Bière",
+        "Champagne",
+        "Cidre"
+    ],
+    [
+        "Cinéma",
+        "Théâtre",
+        "Opéra"
+    ],
+    [
+        "Pomme",
+        "Banane",
+        "Orange"
+    ],
+    [
+        "Char",
+        "Autobus",
+        "Bécik",
+        "Train"
+    ],
+    [
+        "Chat",
+        "Chien",
+        "Lapin"
+    ],
+    [
+        "Soleil",
+        "Lune",
+        "Étoile"
+    ],
+    [
+        "Café",
+        "Thé",
+        "Jus",
+        "Eau"
+    ],
+    [
+        "Souliers",
+        "Bas",
+        "Bottes"
+    ],
+    [
+        "Crayon",
+        "Stylo",
+        "Marqueur"
+    ],
+    [
+        "Chaise",
+        "Table",
+        "Bureau"
+    ],
+    [
+        "Océan",
+        "Rivière",
+        "Lac"
+    ],
+    [
+        "Livre",
+        "Revue",
+        "Journal"
+    ],
+    [
+        "Requin",
+        "Dauphin",
+        "Baleine"
+    ],
+    [
+        "Soccer",
+        "Basketball",
+        "Tennis",
+        "Baseball"
+    ],
+    [
+        "Rose",
+        "Tulipe",
+        "Tournesol"
+    ],
+    [
+        "Hiver",
+        "Été",
+        "Printemps",
+        "Automne"
+    ],
+    [
+        "Content",
+        "Triste",
+        "Fâché",
+        "Excité"
+    ],
+    [
+        "Guitare",
+        "Piano",
+        "Violon",
+        "Drum"
+    ],
+    [
+        "Rouge",
+        "Bleu",
+        "Vert",
+        "Jaune"
+    ],
+    [
+        "Ville",
+        "Village",
+        "Bourg"
+    ],
+    [
+        "Police",
+        "Pompier",
+        "Docteur",
+        "Prof"
+    ],
+    [
+        "Œil",
+        "Oreille",
+        "Nez",
+        "Bouche"
+    ]
+],
+  "ES": [
+    [
+        "Portátil",
+        "Ordenador de sobremesa",
+        "Tableta"
+    ],
+    [
+        "Hotel",
+        "Airbnb",
+        "Hostal",
+        "Camping"
+    ],
+    [
+        "Tenedor",
+        "Cuchara",
+        "Cuchillo"
+    ],
+    [
+        "Montaña",
+        "Colina",
+        "Acantilado"
+    ],
+    [
+        "Guitarra",
+        "Piano",
+        "Violín",
+        "Batería"
+    ],
+    [
+        "Doctor",
+        "Enfermera",
+        "Cirujano"
+    ],
+    [
+        "Lluvia",
+        "Nieve",
+        "Granizo",
+        "Niebla"
+    ],
+    [
+        "Sofá",
+        "Cama",
+        "Sillón"
+    ],
+    [
+        "Vino",
+        "Cerveza",
+        "Champán",
+        "Sidra"
+    ],
+    [
+        "Cine",
+        "Teatro",
+        "Ópera"
+    ],
+    [
+        "Manzana",
+        "Plátano",
+        "Naranja"
+    ],
+    [
+        "Coche",
+        "Autobús",
+        "Bicicleta",
+        "Tren"
+    ],
+    [
+        "Gato",
+        "Perro",
+        "Conejo"
+    ],
+    [
+        "Sol",
+        "Luna",
+        "Estrella"
+    ],
+    [
+        "Café",
+        "Té",
+        "Jugo",
+        "Agua"
+    ],
+    [
+        "Zapatos",
+        "Calcetines",
+        "Botas"
+    ],
+    [
+        "Bolígrafo",
+        "Lápiz",
+        "Marcador"
+    ],
+    [
+        "Silla",
+        "Mesa",
+        "Escritorio"
+    ],
+    [
+        "Océano",
+        "Río",
+        "Lago"
+    ],
+    [
+        "Libro",
+        "Revista",
+        "Periódico"
+    ],
+    [
+        "Tiburón",
+        "Delfín",
+        "Ballena"
+    ],
+    [
+        "Fútbol",
+        "Baloncesto",
+        "Tenis",
+        "Béisbol"
+    ],
+    [
+        "Rosa",
+        "Tulipán",
+        "Girasol"
+    ],
+    [
+        "Invierno",
+        "Verano",
+        "Primavera",
+        "Otoño"
+    ],
+    [
+        "Feliz",
+        "Triste",
+        "Enojado",
+        "Emocionado"
+    ],
+    [
+        "Guitarra",
+        "Piano",
+        "Violín",
+        "Batería"
+    ],
+    [
+        "Rojo",
+        "Azul",
+        "Verde",
+        "Amarillo"
+    ],
+    [
+        "Ciudad",
+        "Pueblo",
+        "Aldea"
+    ],
+    [
+        "Policía",
+        "Bombero",
+        "Doctor",
+        "Profesor"
+    ],
+    [
+        "Ojo",
+        "Oreja",
+        "Nariz",
+        "Boca"
+    ]
+],
 };
