@@ -36,7 +36,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
               return;
             }
             onSelectGame('undercover');
-          }} 
+          }}
           className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#0a9396] hover:shadow-md transition-all shadow-sm group"
         >
           <div className="w-14 h-14 rounded-xl bg-[#0a9396]/10 flex items-center justify-center text-2xl group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors border border-[#0a9396]/20 shadow-inner">🕵️</div>
@@ -84,7 +84,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
               return;
             }
             onSelectGame('never-have-i-ever');
-          }} 
+          }}
           className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-purple-500 hover:shadow-md transition-all shadow-sm group"
         >
           <div className="w-14 h-14 rounded-xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-3xl group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors border border-purple-100 dark:border-purple-900/20 shadow-inner">🍸</div>
@@ -108,7 +108,7 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
               return;
             }
             onSelectGame('most-likely-to');
-          }} 
+          }}
           className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-[#ee6c4d] hover:shadow-md transition-all shadow-sm group"
         >
           <div className="w-14 h-14 rounded-xl bg-[#ee6c4d]/10 flex items-center justify-center text-3xl group-hover:bg-white dark:group-hover:bg-slate-700 transition-colors border border-[#ee6c4d]/20 shadow-inner">👇</div>

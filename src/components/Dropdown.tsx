@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
 interface DropdownOption {
@@ -60,13 +59,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
         <ChevronDown size={14} className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
-      <AnimatePresence>
+      <React.Fragment>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 8, scale: 0.95 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
+          <div
             className={`absolute z-50 mt-2 min-w-max bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl overflow-hidden ${align === 'right' ? 'right-0' : 'left-0'}`}
           >
             <div className="p-1.5 focus:outline-none">
@@ -94,9 +89,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
                 </button>
               ))}
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </React.Fragment>
     </div>
   );
 };

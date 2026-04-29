@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { 
   X, 
   RotateCcw,
@@ -192,13 +191,10 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
+      <React.Fragment>
         {showRules ? (
-          <motion.div 
+          <div 
             key="rules"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
             <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
@@ -225,13 +221,10 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
                 {t("start-game")}
               </button>
             </div>
-          </motion.div>
+          </div>
         ) : (
-          <motion.div 
+          <div 
             key="game"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
             className="flex-1 flex flex-col bg-white dark:bg-slate-900 transition-colors"
           >
             <div className="flex-1 flex flex-col items-center justify-center p-8">
@@ -310,9 +303,9 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
             <div className="p-8 text-center text-[10px] text-slate-400 dark:text-slate-500 font-medium leading-relaxed uppercase tracking-wider transition-colors">
                 {t("game-421-desc")}
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </React.Fragment>
 
       <QuitGameModal 
         isOpen={quitConfirm} 

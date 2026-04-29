@@ -21,7 +21,7 @@ import {
 import { useAppContext, Player } from "../context/AppContext";
 import { wordGroups } from "../data/words";
 import { killerActions } from "../data/killerActions";
-import { motion, AnimatePresence } from "motion/react";
+import { AllUsedModal } from './AllUsedModal';
 import { QuitGameModal } from './QuitGameModal';
 
 interface TargetInfo {
@@ -38,8 +38,6 @@ interface KillerProps {
   onBack: () => void;
   onShowPlayers: () => void;
 }
-
-import { AllUsedModal } from './AllUsedModal';
 
 export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
   const { players: allPlayers, setPlayers, t, language, usedItems, setUsedItems } = useAppContext();

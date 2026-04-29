@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { useAppContext } from "../context/AppContext";
 import { wordGroups } from "../data/words";
 import { QuitGameModal } from "./QuitGameModal";
@@ -446,7 +445,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
       </div>
     </div>
   );
-}
+  }
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
@@ -484,11 +483,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
       )}
 
       {screen === "intro" && (
-        <motion.div
+        <div
           key="intro"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900"
         >
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -565,7 +561,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
               <ChevronRight size={18} />
             </button>
           </div>
-        </motion.div>
+        </div>
       )}
 
       {screen === "config" && (
@@ -802,13 +798,12 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
             </button>
           </div>
           {isStartDisabled && (
-            <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest text-center mt-3 animate-pulse">
+              <p className="text-[9px] text-red-500 font-bold uppercase tracking-widest text-center mt-3 animate-pulse">
                 {!wordsHidden && !gameMasterId 
                   ? t("mj-required-error") 
                   : activePlayersToAssign.length < minRequiredCount 
                     ? t("err-not-enough")
-                    : ""
-                }
+                    : ""}
             </p>
           )}
         </div>

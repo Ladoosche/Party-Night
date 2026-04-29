@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -18,6 +17,7 @@ import { useAppContext } from "../context/AppContext";
 import { NHIE_QUESTIONS, NHIEQuestion } from "../data/neverHaveIEverQuestions";
 import { QuitGameModal } from "./QuitGameModal";
 import { AllUsedModal } from "./AllUsedModal";
+import { NotEnoughPlayers } from "./NotEnoughPlayers";
 
 interface NeverHaveIEverProps {
   onBack: () => void;
@@ -119,17 +119,15 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
 
   if (screen !== "rules" && players.length < 2) {
     // Standard validation
+    return <NotEnoughPlayers minPlayers={2} onBack={onBack} onManagePlayers={onShowPlayers} />;
   }
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
-        <AnimatePresence mode="wait">
+        <React.Fragment>
           {screen === "rules" && (
-            <motion.div
+            <div
               key="rules"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -177,15 +175,12 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                   <ChevronRight size={18} />
                 </button>
               </div>
-            </motion.div>
+            </div>
           )}
 
           {screen === "config" && (
-          <motion.div
+          <div
             key="config"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -289,15 +284,12 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                 {t("nhie-start")}
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {screen === "game" && currentQuestion && (
-            <motion.div
+            <div
                 key="game"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
                 className="flex-1 flex flex-col px-5 py-8 bg-white dark:bg-slate-900 transition-colors"
             >
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
@@ -320,10 +312,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                 </div>
 
                 <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
-                    <motion.div 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        key={currentQuestion.id}
+                    <div key={currentQuestion.id}
                         className="space-y-8 w-full"
                     >
                         <div className="inline-block px-3 py-1 rounded-full border border-purple-200 dark:border-purple-800/30 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-[10px] font-bold uppercase tracking-widest mb-2 transition-colors">
@@ -332,7 +321,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight max-w-sm mx-auto min-h-[140px] flex items-center justify-center transition-colors">
                             {language === 'fr' ? currentQuestion.fr : currentQuestion.en}
                         </h2>
-                    </motion.div>
+                    </div>
                 </div>
 
                 <div className="pt-8 pb-4">
@@ -344,9 +333,9 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                         <SkipForward size={18} />
                     </button>
                 </div>
-            </motion.div>
+            </div>
         )}
-        </AnimatePresence>
+        </React.Fragment>
 
       <QuitGameModal 
         isOpen={quitConfirm} 

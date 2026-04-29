@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -145,13 +144,10 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
-        <AnimatePresence mode="wait">
+        <React.Fragment>
           {screen === "rules" && (
-            <motion.div
+            <div
               key="rules"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
             >
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -199,14 +195,11 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                   <ChevronRight size={18} />
                 </button>
               </div>
-            </motion.div>
+            </div>
           )}
           {screen === "config" && (
-          <motion.div
+          <div
             key="config"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -310,15 +303,12 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                 {t("mlt-start")}
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {screen === "game" && currentQuestion && (
-          <motion.div
+          <div
             key="game"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
             className="flex-1 flex flex-col px-5 py-8 bg-white dark:bg-slate-900 transition-colors"
           >
              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -348,10 +338,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
              </div>
 
              <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
-                <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    key={currentQuestion.id}
+                <div key={currentQuestion.id}
                     className="space-y-6"
                 >
                     <div className="text-[10px] font-bold tracking-[0.2em] text-slate-400 dark:text-slate-500 uppercase">
@@ -360,7 +347,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 leading-tight tracking-tight max-w-sm mx-auto transition-colors">
                         {language === 'fr' ? currentQuestion.fr : currentQuestion.en}
                     </h2>
-                </motion.div>
+                </div>
              </div>
 
              <div className="space-y-3 pt-8 pb-4">
@@ -379,15 +366,12 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                     {t("mlt-skip")}
                 </button>
              </div>
-          </motion.div>
+          </div>
         )}
 
         {screen === "score" && (
-            <motion.div
+            <div
                 key="score"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
                 className="flex-1 flex flex-col bg-white dark:bg-slate-900 transition-colors"
             >
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
@@ -433,9 +417,9 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                 </div>
 
                 </div>
-            </motion.div>
+            </div>
         )}
-        </AnimatePresence>
+        </React.Fragment>
 
       <QuitGameModal 
         isOpen={quitConfirm} 
@@ -453,3 +437,4 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
     </div>
   );
 };
+

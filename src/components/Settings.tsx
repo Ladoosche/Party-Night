@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppContext, Theme } from '../context/AppContext';
-import { motion } from 'motion/react';
 import { ArrowLeft, Sun, Moon, Monitor, Shield, Info, Palette } from 'lucide-react';
 
 interface SettingsProps {

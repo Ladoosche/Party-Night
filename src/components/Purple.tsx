@@ -96,7 +96,6 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
       const drawn: Card[] = [];
       for (let i = 0; i < drawnCount; i++) {
           drawn.push(currentDeck.pop()!);
-      }
       setDeck(currentDeck);
 
       setLastDrawn(drawn);
@@ -176,13 +175,10 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
+      <React.Fragment>
         {showRules ? (
-          <motion.div 
+          <div 
             key="rules"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col px-5 pt-8 pb-6 overflow-y-auto"
           >
             <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
@@ -203,13 +199,11 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
             >
               {t("start-game")}
             </button>
-          </motion.div>
+          </div>
         ) : (
-          <motion.div 
+          <div 
             key="game"
             className="flex-1 flex flex-col h-full overflow-y-auto overflow-x-hidden p-4 sm:p-6"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
           >
             <div className="text-center shrink-0 mt-2 h-8 relative">
                <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider">
@@ -219,13 +213,10 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
 
             <div className="flex-1 w-full flex flex-col justify-start sm:justify-center items-center relative min-h-[300px] mt-2 sm:mt-0">
                <div className="w-full text-center pointer-events-none min-h-[40px] z-50 mb-2 sm:mb-4">
-                  <AnimatePresence mode="wait">
+                  <React.Fragment>
                     {feedback && (
-                        <motion.div
+                        <div
                            key={feedbackKey}
-                           initial={{ opacity: 0, scale: 0.5, y: 10 }}
-                           animate={{ opacity: 1, scale: 1, y: 0 }}
-                           exit={{ opacity: 0, scale: 0.5 }}
                            className={`inline-flex flex-col items-center justify-center px-4 py-1.5 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider shadow-lg backdrop-blur-md ${
                                 feedback === "correct" 
                                 ? "bg-green-500 text-white"
@@ -241,9 +232,9 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
                                   </>
                                )
                             }
-                        </motion.div>
+                        </div>
                     )}
-                  </AnimatePresence>
+                  </React.Fragment>
                </div>
                 <div className="flex items-center justify-center gap-4 sm:gap-10 w-full mb-6">
                   {/* DECK */}
@@ -359,9 +350,9 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
                        {pile.length >= 1 ? t('purple-stop').replace('{0}', pile.length.toString()) : t('purple-pass-turn')}
                    </button>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </React.Fragment>
 
       <QuitGameModal 
         isOpen={quitConfirm} 
@@ -371,3 +362,4 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
     </div>
   );
 };
+}

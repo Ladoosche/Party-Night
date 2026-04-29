@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { 
   ChevronLeft, 
   Trophy, 
@@ -146,13 +145,10 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
 
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
-        <AnimatePresence mode="wait">
+        <React.Fragment>
           {screen === "rules" && (
-            <motion.div
+            <div
               key="rules"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
               className="flex-1 flex flex-col p-6 overflow-y-auto bg-slate-900"
             >
               <button
@@ -188,15 +184,12 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           )}
 
           {screen === "config" && (
-          <motion.div
+          <div
             key="config"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-6">
@@ -318,15 +311,12 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                 {t("start-game")}
               </button>
             </div>
-          </motion.div>
+          </div>
           )}
 
           {screen === "select-asker" && (
-          <motion.div
+          <div
             key="select-asker"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col p-6 overflow-y-auto bg-slate-900"
           >
             <div className="flex-1 flex flex-col items-center justify-center max-w-sm mx-auto w-full">
@@ -352,15 +342,12 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                     ))}
                 </div>
             </div>
-          </motion.div>
+          </div>
           )}
 
           {screen === "game" && currentQuestion && (
-          <motion.div
+          <div
             key={`game-${currentIndex}`}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col items-center justify-center p-6 bg-emerald-50 text-emerald-900 dark:bg-slate-900 dark:text-emerald-50 transition-colors"
           >
              <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
@@ -456,15 +443,12 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                 </div>
 
              </div>
-          </motion.div>
+          </div>
           )}
 
           {screen === "score" && (
-          <motion.div
+          <div
             key="score"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="flex-1 flex flex-col bg-slate-900"
           >
             <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
@@ -504,9 +488,9 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
           )}
-        </AnimatePresence>
+        </React.Fragment>
 
         {/* Global sticky quit button */}
         {(screen === "game" || screen === "score" || screen === "select-asker") && (

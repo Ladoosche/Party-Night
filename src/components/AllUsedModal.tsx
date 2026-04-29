@@ -1,5 +1,4 @@
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
 import { RefreshCcw, LogOut } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 
@@ -13,20 +12,12 @@ export const AllUsedModal: React.FC<AllUsedModalProps> = ({ isOpen, onRestart, o
   const { t } = useAppContext();
 
   return (
-    <AnimatePresence>
+    <React.Fragment>
       {isOpen && (
         <React.Fragment>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm"
+          <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm"
           />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
           >
             <div className="bg-white dark:bg-slate-900 w-full max-w-sm rounded-[2rem] shadow-2xl overflow-hidden pointer-events-auto border border-slate-100 dark:border-slate-800">
               <div className="p-8 text-center space-y-4">
@@ -58,9 +49,9 @@ export const AllUsedModal: React.FC<AllUsedModalProps> = ({ isOpen, onRestart, o
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </React.Fragment>
       )}
-    </AnimatePresence>
+    </React.Fragment>
   );
 };

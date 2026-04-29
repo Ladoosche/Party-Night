@@ -19,7 +19,6 @@ export interface UsedItems {
   mlt: string[]; // question ids
   trivia: string[]; // question ids
 }
-
 export const defaultUsedItems: UsedItems = {
   undercoverWords: [],
   killerActions: [],
