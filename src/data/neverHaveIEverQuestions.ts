@@ -2528,5 +2528,167 @@ export const NHIE_QUESTIONS: NHIEQuestion[] = [
     "fr-ca": "J'ai jamais mis mes bobettes à l'envers quand je pensais que personne regardait.",
     "category": "habits",
     "difficulty": "soft"
+  },
+  {
+    "id": "new-nh-pty-1",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n`ai jamais dormi lors d`une soirée.",
+    "en": "Never have I ever fallen asleep at a party.",
+    "es": "Yo nunca he me he quedado dormido en una fiesta.",
+    "fr-ca": "J`ai jamais dormi direct dans un party."
+  },
+  {
+    "id": "new-nh-pty-2",
+    "difficulty": "hard",
+    "category": "party",
+    "fr": "Je n`ai jamais été viré d`une boîte de nuit.",
+    "en": "Never have I ever been kicked out of a club.",
+    "es": "Yo nunca he sido expulsado de una discoteca.",
+    "fr-ca": "J`ai jamais été sacré dehors d`un club."
+  },
+  {
+    "id": "new-nh-pty-3",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n`ai jamais chanté au karaoké devant des inconnus.",
+    "en": "Never have I ever sung karaoke in front of strangers.",
+    "es": "Yo nunca he cantado karaoke frente a extraños.",
+    "fr-ca": "J`ai jamais chanté au karaoké devant du monde que j`connais pas."
+  },
+  {
+    "id": "new-nh-hab-1",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Je n`ai jamais mangé de la nourriture tombée par terre.",
+    "en": "Never have I ever eaten food that fell on the floor.",
+    "es": "Yo nunca he comido comida que se cayó al piso.",
+    "fr-ca": "J`ai jamais mangé de quoi qui était tombé à terre."
+  },
+  {
+    "id": "new-nh-hab-2",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Je n`ai jamais porté les mêmes vêtements pendant trois jours.",
+    "en": "Never have I ever worn the same clothes for three days.",
+    "es": "Yo nunca he usado la misma ropa durante tres días.",
+    "fr-ca": "J`ai jamais porté le même linge pendant trois jours de suite."
+  },
+  {
+    "id": "new-nh-hab-3",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Je n`ai jamais oublié de me brosser les dents toute une journée.",
+    "en": "Never have I ever forgotten to brush my teeth for a whole day.",
+    "es": "Yo nunca he olvidado lavarme los dientes en todo un día.",
+    "fr-ca": "J`ai jamais oublié de me brosser les dents pendant toute une journée."
+  },
+  {
+    "id": "new-nh-soc-1",
+    "difficulty": "hard",
+    "category": "social",
+    "fr": "Je n`ai jamais ghosté quelqu`un après un premier rendez-vous.",
+    "en": "Never have I ever ghosted someone after a first date.",
+    "es": "Yo nunca he ignorado a alguien después de una primera cita.",
+    "fr-ca": "J`ai jamais ghosté quelqu`un après une première date."
+  },
+  {
+    "id": "new-nh-soc-2",
+    "difficulty": "soft",
+    "category": "social",
+    "fr": "Je n`ai jamais envoyé un message à la mauvaise personne.",
+    "en": "Never have I ever sent a text to the wrong person.",
+    "es": "Yo nunca he enviado un mensaje a la persona equivocada.",
+    "fr-ca": "J`ai jamais envoyé un texte à la mauvaise personne dans mes contacts."
+  },
+  {
+    "id": "new-nh-soc-3",
+    "difficulty": "soft",
+    "category": "social",
+    "fr": "Je n`ai jamais posé un lapin à quelqu`un.",
+    "en": "Never have I ever stood someone up.",
+    "es": "Yo nunca he dejado plantado a alguien.",
+    "fr-ca": "J`ai jamais posé un lapin à quelqu`un."
+  },
+  {
+    "id": "new-nh-adv-1",
+    "difficulty": "soft",
+    "category": "adventure",
+    "fr": "Je n`ai jamais voyagé seul(e) dans un autre pays.",
+    "en": "Never have I ever traveled to another country alone.",
+    "es": "Yo nunca he viajado a otro país solo.",
+    "fr-ca": "J`ai jamais voyagé tout seul dans un autre pays."
+  },
+  {
+    "id": "new-nh-adv-2",
+    "difficulty": "hard",
+    "category": "adventure",
+    "fr": "Je n`ai jamais sauté d`un véhicule en mouvement.",
+    "en": "Never have I ever jumped from a moving vehicle.",
+    "es": "Yo nunca he saltado de un vehículo en movimiento.",
+    "fr-ca": "J`ai jamais sauté en bas d`un véhicule qui roulait."
+  },
+  {
+    "id": "new-nh-adv-3",
+    "difficulty": "hard",
+    "category": "adventure",
+    "fr": "Je n`ai jamais fait de stop.",
+    "en": "Never have I ever hitchhiked.",
+    "es": "Yo nunca he hecho autostop.",
+    "fr-ca": "J`ai jamais fait de pouce."
+  },
+  {
+    "id": "new-nh-hot-1",
+    "difficulty": "hard",
+    "category": "hot",
+    "fr": "Je n`ai jamais eu de romance au bureau.",
+    "en": "Never have I ever had an office romance.",
+    "es": "Yo nunca he tenido un romance en la oficina.",
+    "fr-ca": "J`ai jamais eu d`amourette à la job."
+  },
+  {
+    "id": "new-nh-hot-2",
+    "difficulty": "hard",
+    "category": "hot",
+    "fr": "Je n`ai jamais envoyé de photo de moi nu(e).",
+    "en": "Never have I ever sent a nude photo.",
+    "es": "Yo nunca he enviado una foto mía desnudo(a).",
+    "fr-ca": "J`ai jamais envoyé de photo de moi tout nu."
+  },
+  {
+    "id": "new-nh-hot-3",
+    "difficulty": "soft",
+    "category": "hot",
+    "fr": "Je n`ai jamais flirté pour me sortir d`un problème.",
+    "en": "Never have I ever flirted to get out of trouble.",
+    "es": "Yo nunca he coqueteado para salir de un problema.",
+    "fr-ca": "J`ai jamais flirté avec le monde pour me sortir du trouble."
+  },
+  {
+    "id": "new-nh-car-1",
+    "difficulty": "soft",
+    "category": "career",
+    "fr": "Je n`ai jamais menti sur mon CV.",
+    "en": "Never have I ever lied on my resume.",
+    "es": "Yo nunca he mentido en mi currículum.",
+    "fr-ca": "J`ai jamais compté de menteries sur mon CV."
+  },
+  {
+    "id": "new-nh-car-2",
+    "difficulty": "soft",
+    "category": "career",
+    "fr": "Je n`ai jamais dormi pendant une réunion.",
+    "en": "Never have I ever fallen asleep during a meeting.",
+    "es": "Yo nunca he me he quedado dormido en una reunión.",
+    "fr-ca": "J`ai jamais cogné des clous pendant une réunion."
+  },
+  {
+    "id": "new-nh-car-3",
+    "difficulty": "hard",
+    "category": "career",
+    "fr": "Je n`ai jamais démissionné le premier jour.",
+    "en": "Never have I ever quit a job on the first day.",
+    "es": "Yo nunca he renunciado en mi primer día de trabajo.",
+    "fr-ca": "J`ai jamais démissionné direct la première journée."
   }
 ];

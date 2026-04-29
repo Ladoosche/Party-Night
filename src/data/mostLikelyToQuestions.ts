@@ -2519,5 +2519,167 @@ export const MLT_QUESTIONS: MLTQuestion[] = [
     "fr-ca": "Qui a le plus de chances de dormir 14h en ligne pour mettre de l'action ?",
     "category": "hot",
     "difficulty": "soft"
+  },
+  {
+    "id": "new-hab-1",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Qui est le plus susceptible de ne pas entendre son réveil ?",
+    "en": "Who is most likely to sleep through their morning alarm?",
+    "es": "¿Quién es más probable que se quede dormido sin escuchar su alarma?",
+    "fr-ca": "Qui a le plus de chances de pas entendre son cadran le matin ?"
+  },
+  {
+    "id": "new-hab-2",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Qui est le plus susceptible de manger un petit-déjeuner au dîner ?",
+    "en": "Who is most likely to eat breakfast food for dinner?",
+    "es": "¿Quién es más probable que coma algo de desayuno en la cena?",
+    "fr-ca": "Qui a le plus de chances de manger un petit-déjeuner pour souper ?"
+  },
+  {
+    "id": "new-hab-3",
+    "difficulty": "soft",
+    "category": "habits",
+    "fr": "Qui est le plus susceptible d`oublier son propre âge ?",
+    "en": "Who is most likely to forget their own age?",
+    "es": "¿Quién es más probable que olvide su propia edad?",
+    "fr-ca": "Qui a le plus de chances d`oublier quel âge il a ?"
+  },
+  {
+    "id": "new-adv-1",
+    "difficulty": "hard",
+    "category": "adventure",
+    "fr": "Qui est le plus susceptible de faire du saut en parachute de façon complètement spontanée ?",
+    "en": "Who is most likely to go skydiving completely spontaneously?",
+    "es": "¿Quién es más probable que se tire en paracaídas espontáneamente?",
+    "fr-ca": "Qui a le plus de chances de sauter en parachute sur un coup de tête ?"
+  },
+  {
+    "id": "new-adv-2",
+    "difficulty": "hard",
+    "category": "adventure",
+    "fr": "Qui est le plus susceptible de survivre seul dans la nature pendant un mois ?",
+    "en": "Who is most likely to survive alone in the wild for a month?",
+    "es": "¿Quién es más probable que sobreviva solo en la naturaleza por un mes?",
+    "fr-ca": "Qui a le plus de chances de survivre tout seul dans l`bois pendant un mois ?"
+  },
+  {
+    "id": "new-adv-3",
+    "difficulty": "soft",
+    "category": "adventure",
+    "fr": "Qui est le plus susceptible d`organiser un voyage et d`oublier de réserver l`hôtel ?",
+    "en": "Who is most likely to plan a trip and forget to book the hotel?",
+    "es": "¿Quién es más probable que planee un viaje y olvide reservar el hotel?",
+    "fr-ca": "Qui a le plus de chances d`organiser un voyage pis d`oublier de réserver l`hôtel ?"
+  },
+  {
+    "id": "new-car-1",
+    "difficulty": "soft",
+    "category": "career",
+    "fr": "Qui est le plus susceptible d`appeler son patron 'maman' ou 'papa' par erreur ?",
+    "en": "Who is most likely to accidentally call their boss 'Mom' or 'Dad'?",
+    "es": "¿Quién es más probable que llame accidentalmente 'mamá' o 'papá' a su jefe?",
+    "fr-ca": "Qui a le plus de chances d`appeler son boss 'maman' ou 'papa' par accident ?"
+  },
+  {
+    "id": "new-car-2",
+    "difficulty": "hard",
+    "category": "career",
+    "fr": "Qui est le plus susceptible de quitter son travail pour devenir influenceur à temps plein ?",
+    "en": "Who is most likely to quit their job to become a full-time influencer?",
+    "es": "¿Quién es más probable que deje su trabajo para ser influencer a tiempo completo?",
+    "fr-ca": "Qui a le plus de chances de lâcher sa job pour devenir influenceur à temps plein ?"
+  },
+  {
+    "id": "new-car-3",
+    "difficulty": "hard",
+    "category": "career",
+    "fr": "Qui est le plus susceptible de devenir le PDG d`une entreprise du Fortune 500 ?",
+    "en": "Who is most likely to become the CEO of a Fortune 500 company?",
+    "es": "¿Quién es más probable que se convierta en el director de una gran empresa?",
+    "fr-ca": "Qui a le plus de chances de devenir le boss d`une méga grosse compagnie ?"
+  },
+  {
+    "id": "new-soc-1",
+    "difficulty": "soft",
+    "category": "social",
+    "fr": "Qui est le plus susceptible d`éviter une amende pour excès de vitesse en parlant ?",
+    "en": "Who is most likely to talk their way out of a speeding ticket?",
+    "es": "¿Quién es más probable que logre librarse de una multa de tránsito hablando?",
+    "fr-ca": "Qui a le plus de chances de s`en sortir avec un ticket de vitesse juste en parlant au policier ?"
+  },
+  {
+    "id": "new-soc-2",
+    "difficulty": "hard",
+    "category": "social",
+    "fr": "Qui est le plus susceptible d`être reconnu dans la rue par un inconnu ?",
+    "en": "Who is most likely to be recognized on the street by a stranger?",
+    "es": "¿Quién es más probable que sea reconocido en la calle por un desconocido?",
+    "fr-ca": "Qui a le plus de chances d`être reconnu dans la rue par un inconnu ?"
+  },
+  {
+    "id": "new-soc-3",
+    "difficulty": "soft",
+    "category": "social",
+    "fr": "Qui est le plus susceptible de rire pendant un moment sérieux ?",
+    "en": "Who is most likely to laugh at a serious moment?",
+    "es": "¿Quién es más probable que se ría en un momento serio?",
+    "fr-ca": "Qui a le plus de chances de rire à un moment où tout le monde est sérieux ?"
+  },
+  {
+    "id": "new-pty-1",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Qui est le plus susceptible d`être le dernier sur la piste de danse ?",
+    "en": "Who is most likely to be the last one on the dance floor?",
+    "es": "¿Quién es más probable que sea el último en la pista de baile?",
+    "fr-ca": "Qui a le plus de chances d`être le dernier sur le plancher de danse ?"
+  },
+  {
+    "id": "new-pty-2",
+    "difficulty": "hard",
+    "category": "party",
+    "fr": "Qui est le plus susceptible de s`incruster à un mariage et de passer inaperçu ?",
+    "en": "Who is most likely to crash a wedding and blend right in?",
+    "es": "¿Quién es más probable que se cuele en una boda y se integre perfectamente?",
+    "fr-ca": "Qui a le plus de chances de s`incruster dans un mariage pis de passer totalement inaperçu ?"
+  },
+  {
+    "id": "new-pty-3",
+    "difficulty": "hard",
+    "category": "party",
+    "fr": "Qui est le plus susceptible d`organiser la meilleure fête surprise de tous les temps ?",
+    "en": "Who is most likely to organise the best surprise party ever?",
+    "es": "¿Quién es más probable que organice la mejor fiesta sorpresa de la historia?",
+    "fr-ca": "Qui a le plus de chances d`organiser le meilleur party surprise de la vie ?"
+  },
+  {
+    "id": "new-hot-1",
+    "difficulty": "hard",
+    "category": "hot",
+    "fr": "Qui est le plus susceptible d`avoir un admirateur secret en ce moment ?",
+    "en": "Who is most likely to have a secret admirer right now?",
+    "es": "¿Quién es más probable que tenga un admirador secreto ahora mismo?",
+    "fr-ca": "Qui a le plus de chances d`avoir un admirateur secret en ce moment ?"
+  },
+  {
+    "id": "new-hot-2",
+    "difficulty": "hard",
+    "category": "hot",
+    "fr": "Qui est le plus susceptible de flirter pour obtenir des verres gratuits ?",
+    "en": "Who is most likely to flirt their way into getting free drinks?",
+    "es": "¿Quién es más probable que coquetee para conseguir bebidas gratis?",
+    "fr-ca": "Qui a le plus de chances de flirter pour se faire payer des verres ?"
+  },
+  {
+    "id": "new-hot-3",
+    "difficulty": "soft",
+    "category": "hot",
+    "fr": "Qui est le plus susceptible d`envoyer un message compromettant complètement par erreur ?",
+    "en": "Who is most likely to send a risky text entirely by mistake?",
+    "es": "¿Quién es más probable que envíe un mensaje arriesgado completamente por error?",
+    "fr-ca": "Qui a le plus de chances d`envoyer un texte risqué carrément par erreur ?"
   }
 ];

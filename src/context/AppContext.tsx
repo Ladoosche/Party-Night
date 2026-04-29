@@ -11,6 +11,24 @@ export interface Player {
   score?: number;
 }
 
+export interface UsedItems {
+  undercoverWords: number[]; // indices of wordGroups
+  killerActions: number[]; // indices of killerActions
+  killerWords: number[]; // indices of wordGroups
+  nhie: string[]; // question ids
+  mlt: string[]; // question ids
+  trivia: string[]; // question ids
+}
+
+export const defaultUsedItems: UsedItems = {
+  undercoverWords: [],
+  killerActions: [],
+  killerWords: [],
+  nhie: [],
+  mlt: [],
+  trivia: [],
+};
+
 interface AppContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
@@ -19,6 +37,8 @@ interface AppContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   t: (key: string) => string;
+  usedItems: UsedItems;
+  setUsedItems: (items: UsedItems) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -38,6 +58,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem('uc_theme');
     return (saved as Theme) || 'system';
   });
+
+  const [usedItems, setUsedItems] = useState<UsedItems>(() => {
+    const saved = localStorage.getItem('uc_used_items');
+    return saved ? JSON.parse(saved) : defaultUsedItems;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('uc_used_items', JSON.stringify(usedItems));
+  }, [usedItems]);
 
   useEffect(() => {
     localStorage.setItem('uc_lang', language);
@@ -78,7 +107,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AppContext.Provider value={{ language, setLanguage, players, setPlayers, theme, setTheme, t }}>
+    <AppContext.Provider value={{ language, setLanguage, players, setPlayers, theme, setTheme, t, usedItems, setUsedItems }}>
       {children}
     </AppContext.Provider>
   );

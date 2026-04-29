@@ -6,7 +6,8 @@ import {
   Play,
   Check,
   ChevronLeft,
-  Dices
+  Dices,
+  LogOut
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 
@@ -173,10 +174,11 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
               setQuitConfirm(true);
             }
           }}
-          className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
         >
-          <ChevronLeft size={24} />
+          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
+        <div className="w-10 sm:w-12" />
         <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("game-421-title")}</h2>
         <div className="flex items-center gap-2">
             {!showRules && (

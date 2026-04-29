@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   ChevronLeft, 
@@ -11,11 +11,13 @@ import {
   User,
   Smile,
   Zap,
-  Info
+  Info,
+  LogOut
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 import { NHIE_QUESTIONS, NHIEQuestion } from "../data/neverHaveIEverQuestions";
 import { QuitGameModal } from "./QuitGameModal";
+import { AllUsedModal } from "./AllUsedModal";
 
 interface NeverHaveIEverProps {
   onBack: () => void;
@@ -25,7 +27,7 @@ interface NeverHaveIEverProps {
 type Screen = "rules" | "config" | "game";
 
 export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPlayers }) => {
-  const { players: allPlayers, setPlayers, language, t } = useAppContext();
+  const { players: allPlayers, setPlayers, language, t, usedItems, setUsedItems } = useAppContext();
   const players = allPlayers.filter((p) => p.isActive !== false);
   
   const [screen, setScreen] = useState<Screen>("rules");
@@ -34,6 +36,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
   const [currentQuestions, setCurrentQuestions] = useState<NHIEQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quitConfirm, setQuitConfirm] = useState(false);
+  const [allUsedOpen, setAllUsedOpen] = useState(false);
 
   const toggleDifficulty = (d: NHIEQuestion["difficulty"]) => {
     if (difficulties.includes(d)) {
@@ -53,22 +56,62 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
     }
   };
 
-  const startGame = () => {
+  const startGame = (clearUsed = false) => {
     if (selectedCategories.length === 0 || difficulties.length === 0) return;
     
-    const filtered = NHIE_QUESTIONS.filter(
-      (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+    let usedIds = clearUsed ? [] : usedItems.nhie;
+    if (clearUsed) {
+      setUsedItems({ ...usedItems, nhie: [] });
+    }
+
+    let filtered = NHIE_QUESTIONS.filter(
+      (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
     );
     
-    const questions = filtered.length > 0 ? filtered : NHIE_QUESTIONS.filter((q) => selectedCategories.includes(q.category));
+    if (filtered.length === 0) {
+      // Check if exhausted
+      let totalMatching = NHIE_QUESTIONS.filter(
+        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+      );
+      if (totalMatching.length > 0) {
+        setAllUsedOpen(true);
+        return;
+      }
+
+      const backup = NHIE_QUESTIONS.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
+      if (backup.length === 0) {
+        setAllUsedOpen(true);
+        return;
+      }
+      filtered = backup;
+    }
+
+    const questions = filtered;
     setCurrentQuestions([...questions].sort(() => Math.random() - 0.5));
     
     setCurrentIndex(0);
     setScreen("game");
   };
 
+  const recordQuestionUsed = (id: string) => {
+    if (!usedItems.nhie.includes(id)) {
+      setUsedItems({ ...usedItems, nhie: [...usedItems.nhie, id] });
+    }
+  };
+
+  // Record initially presented question
+  useEffect(() => {
+    if (screen === 'game' && currentQuestions[currentIndex]) {
+       recordQuestionUsed(currentQuestions[currentIndex].id);
+    }
+  }, [currentIndex, currentQuestions, screen]);
+
   const nextQuestion = () => {
-    setCurrentIndex((prev) => (prev + 1) % currentQuestions.length);
+    if (currentIndex < currentQuestions.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else {
+      startGame(false);
+    }
   };
 
   const currentQuestion = currentQuestions[currentIndex];
@@ -92,10 +135,11 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
               <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
                 <button
                   onClick={onBack}
-                  className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                  className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
                 </button>
+                <div className="w-10 sm:w-12" />
                 <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>
                 <div className="w-10" />
               </div>
@@ -147,10 +191,11 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
               <button
                 onClick={onBack}
-                className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
               </button>
+              <div className="w-10 sm:w-12" />
               <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>
               <div className="flex items-center gap-2">
                 <button
@@ -258,10 +303,11 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                 <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
                     <button
                         onClick={() => setQuitConfirm(true)}
-                        className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                        className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
                     >
-                        <X size={24} />
+                        <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
                     </button>
+                    <div className="w-10 sm:w-12" />
                     <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest transition-colors">
                         {t("nhie-title")}
                     </span>
@@ -306,6 +352,14 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
         isOpen={quitConfirm} 
         onClose={() => setQuitConfirm(false)} 
         onConfirm={onBack} 
+      />
+      <AllUsedModal
+        isOpen={allUsedOpen}
+        onRestart={() => {
+          setAllUsedOpen(false);
+          startGame(true);
+        }}
+        onQuit={onBack}
       />
     </div>
   );

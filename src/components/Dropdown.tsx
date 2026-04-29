@@ -67,7 +67,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.95 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className={`absolute z-50 mt-2 min-w-[140px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl overflow-hidden ${align === 'right' ? 'right-0' : 'left-0'}`}
+            className={`absolute z-50 mt-2 min-w-max bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl overflow-hidden ${align === 'right' ? 'right-0' : 'left-0'}`}
           >
             <div className="p-1.5 focus:outline-none">
               {options.map((option) => (

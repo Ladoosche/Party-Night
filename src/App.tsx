@@ -5,9 +5,11 @@ import { Home } from './components/Home';
 import { Undercover } from './components/Undercover';
 import { MostLikelyTo } from './components/MostLikelyTo';
 import { Game421 } from './components/Game421';
+import { Trivia } from './components/Trivia';
 import { Killer } from './components/Killer';
 import { NeverHaveIEver } from './components/NeverHaveIEver';
 
+import { Purple } from './components/Purple';
 import { Header } from './components/Header';
 import { EditPlayersModal } from './components/EditPlayersModal';
 import { Settings } from './components/Settings';
@@ -54,8 +56,16 @@ function MainApp() {
             <MostLikelyTo onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
           )}
 
+          {activeGame === 'trivia' && (
+            <Trivia onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+          )}
+
           {activeGame === 'game-421' && (
             <Game421 onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+          )}
+
+          {activeGame === 'purple' && (
+            <Purple onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
           )}
 
           {activeGame === 'killer' && (

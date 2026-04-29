@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useAppContext } from "../context/AppContext";
 import { wordGroups } from "../data/words";
 import { QuitGameModal } from "./QuitGameModal";
+import { AllUsedModal } from "./AllUsedModal";
 
 import {
   ChevronLeft,
@@ -18,6 +19,7 @@ import {
   Plus,
   Trash2,
   Eye,
+  LogOut
 } from "lucide-react";
 
 interface UndercoverProps {
@@ -47,7 +49,7 @@ interface GamePlayer {
 }
 
 export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers }) => {
-  const { players: allPlayers, setPlayers, language, t } = useAppContext();
+  const { players: allPlayers, setPlayers, language, t, usedItems, setUsedItems } = useAppContext();
   const players = allPlayers.filter((p) => p.isActive !== false);
 
   const [screen, setScreen] = useState<Screen>("intro");
@@ -72,6 +74,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
   const [undercoverBonusId, setUndercoverBonusId] = useState<string | null>(null);
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [undercoverFinalGuessSuccess, setUndercoverFinalGuessSuccess] = useState<boolean | null>(null);
+  const [allUsedOpen, setAllUsedOpen] = useState(false);
 
   useEffect(() => {
     if (players.length > 5) setUndercovers(2);
@@ -85,15 +88,33 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
   }, [players.length]);
 
   useEffect(() => {
-    if (screen === "config") {
+    if (screen === "config" && !customWord1 && !customWord2) {
       suggestWords();
     }
   }, [screen, language, wordsHidden]);
 
-  const suggestWords = () => {
+  const suggestWords = (clearUsed = false) => {
     const wordLang = language.toUpperCase() as "EN" | "FR";
     const list = wordGroups[wordLang] || wordGroups["EN"];
-    const group = list[Math.floor(Math.random() * list.length)];
+    
+    let currentUsed = clearUsed ? [] : usedItems.undercoverWords;
+    if (clearUsed) {
+      setUsedItems({ ...usedItems, undercoverWords: [] });
+    }
+
+    const availableIndices = list.map((_, i) => i).filter(i => !currentUsed.includes(i));
+    
+    if (availableIndices.length === 0) {
+      setAllUsedOpen(true);
+      return;
+    }
+
+    const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    const group = list[selectedIndex];
+    
+    // Record it as used immediately upon suggestion
+    setUsedItems({ ...usedItems, undercoverWords: [...currentUsed, selectedIndex] });
+
     const words = [...group];
 
     // Pick two random distinct words from the group
@@ -315,9 +336,10 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
     return (
       <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden">
         <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-            <button onClick={resetGame} className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
-              <ChevronLeft size={24} />
+            <button onClick={resetGame} className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group">
+              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
+            <div className="w-10 sm:w-12" />
             <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("roles-recap")}</h2>
             <button 
               onClick={onShowPlayers}
@@ -472,10 +494,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
             <button
               onClick={onBack}
-              className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
+            <div className="w-10 sm:w-12" />
             <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">Undercover</h2>
             <div className="w-10" />
           </div>
@@ -550,10 +573,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
           <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
             <button
               onClick={onBack}
-              className="p-2 -ml-2 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
+            <div className="w-10 sm:w-12" />
             <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">
               {t("game-settings")}
             </h2>
@@ -640,7 +664,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
 
             <div className="space-y-4">
               <div className="flex justify-between items-center py-3 px-1">
-                <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600">
+                <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600 dark:text-slate-400">
                   {t("mr-white")}
                 </span>
                 <button
@@ -650,15 +674,15 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
                     }
                   }}
                   disabled={players.length <= 2}
-                  className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? "bg-[#0077b6]" : "bg-slate-200"} ${players.length <= 2 ? "opacity-30 cursor-not-allowed" : ""}`}
+                  className={`w-11 h-6 rounded-full relative transition-colors ${mrWhiteOn ? "bg-[#0077b6] dark:bg-[#00b4d8]" : "bg-slate-200 dark:bg-slate-700"} ${players.length <= 2 ? "opacity-30 cursor-not-allowed" : ""}`}
                 >
                   <div
                     className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${mrWhiteOn ? "left-6" : "left-1"}`}
                   />
                 </button>
               </div>
-              <div className="flex justify-between items-center py-3 border-t border-slate-100 px-1">
-                <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600">
+              <div className="flex justify-between items-center py-3 border-t border-slate-100 dark:border-slate-800 px-1">
+                <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600 dark:text-slate-400">
                   {t("hide-words")}
                 </span>
                 <button
@@ -673,7 +697,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
                     }
                   }}
                   disabled={players.length <= 3}
-                  className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? "bg-[#0077b6]" : "bg-slate-200"} ${players.length <= 3 ? "opacity-30 cursor-not-allowed" : ""}`}
+                  className={`w-11 h-6 rounded-full relative transition-colors ${wordsHidden ? "bg-[#0077b6] dark:bg-[#00b4d8]" : "bg-slate-200 dark:bg-slate-700"} ${players.length <= 3 ? "opacity-30 cursor-not-allowed" : ""}`}
                 >
                   <div
                     className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${wordsHidden ? "left-6" : "left-1"}`}
@@ -865,10 +889,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
           <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 mb-8">
             <button 
               onClick={handleQuit}
-              className="p-2 -ml-2 text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
             >
-              <X size={24} />
+              <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
+            <div className="w-10 sm:w-12" />
             <div className="flex flex-col items-center">
               <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Undercover</h2>
               <p className="text-[9px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest mt-0.5">{t("round-label")} {round}</p>
@@ -1119,6 +1144,14 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
         isOpen={quitConfirm} 
         onClose={() => setQuitConfirm(false)} 
         onConfirm={onBack} 
+      />
+      <AllUsedModal
+        isOpen={allUsedOpen}
+        onRestart={() => {
+          setAllUsedOpen(false);
+          suggestWords(true);
+        }}
+        onQuit={onBack}
       />
     </div>
   );

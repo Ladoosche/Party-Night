@@ -124,6 +124,17 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
         </button>
 
         <button 
+          onClick={() => onSelectGame('trivia')}
+          className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-emerald-500 hover:shadow-md transition-all shadow-sm group"
+        >
+          <div className="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center text-2xl group-hover:bg-white dark:group-hover:bg-emerald-800 transition-colors border border-emerald-200 dark:border-emerald-600 shadow-inner">🌍</div>
+          <div className="flex-1">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('trivia-title')}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">{t('trivia-rules-desc')}</p>
+          </div>
+        </button>
+
+        <button 
           onClick={() => onSelectGame('game-421')}
           className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-slate-900 dark:hover:border-slate-100 hover:shadow-md transition-all shadow-sm group"
         >
@@ -131,6 +142,17 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
           <div className="flex-1">
             <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('game-421-title')}</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">{t('game-421-desc')}</p>
+          </div>
+        </button>
+
+        <button 
+          onClick={() => onSelectGame('purple')}
+          className="w-full text-left flex items-center gap-4 p-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:border-purple-500 hover:shadow-md transition-all shadow-sm group"
+        >
+          <div className="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-900/20 flex items-center justify-center text-2xl group-hover:bg-white dark:group-hover:bg-purple-800 transition-colors border border-purple-200 dark:border-purple-600 shadow-inner">🎴</div>
+          <div className="flex-1">
+            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('purple-title')}</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">{t('purple-desc')}</p>
           </div>
         </button>
       </div>

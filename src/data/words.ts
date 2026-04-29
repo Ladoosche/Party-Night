@@ -1,5 +1,10 @@
 export const wordGroups: Record<string, string[][]> = {
   "EN": [
+    [ "Mirror", "Window", "Glass" ],
+    [ "Sandwich", "Burger", "Hotdog" ],
+    [ "Helicopter", "Airplane", "Drone" ],
+    [ "Pool", "Jacuzzi", "Bathtub" ],
+    [ "Jacket", "Coat", "Sweater" ],
     [
         "Laptop",
         "Desktop Computer",
@@ -165,6 +170,11 @@ export const wordGroups: Record<string, string[][]> = {
     ]
 ],
   "FR": [
+    [ "Miroir", "Fenêtre", "Verre" ],
+    [ "Sandwich", "Burger", "Hotdog" ],
+    [ "Hélicoptère", "Avion", "Drone" ],
+    [ "Piscine", "Jacuzzi", "Baignoire" ],
+    [ "Veste", "Manteau", "Pull" ],
     [
         "Ordinateur portable",
         "Ordinateur de bureau",
@@ -330,6 +340,11 @@ export const wordGroups: Record<string, string[][]> = {
     ]
 ],
   "FR-CA": [
+    [ "Miroir", "Fenêtre", "Verre" ],
+    [ "Sandwich", "Burger", "Hotdog" ],
+    [ "Hélicoptère", "Avion", "Drone" ],
+    [ "Piscine", "Jacuzzi", "Bain" ],
+    [ "Manteau", "Veston", "Coton ouaté" ],
     [
         "Laptop",
         "Ordi de bureau",
@@ -495,6 +510,11 @@ export const wordGroups: Record<string, string[][]> = {
     ]
 ],
   "ES": [
+    [ "Espejo", "Ventana", "Cristal" ],
+    [ "Sándwich", "Hamburguesa", "Perrito caliente" ],
+    [ "Helicóptero", "Avión", "Dron" ],
+    [ "Piscina", "Jacuzzi", "Bañera" ],
+    [ "Chaqueta", "Abrigo", "Suéter" ],
     [
         "Portátil",
         "Ordenador de sobremesa",
