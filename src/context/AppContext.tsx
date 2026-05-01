@@ -37,7 +37,7 @@ interface AppContextType {
   setTheme: (theme: Theme) => void;
   t: (key: string) => string;
   usedItems: UsedItems;
-  setUsedItems: (items: UsedItems) => void;
+  setUsedItems: React.Dispatch<React.SetStateAction<UsedItems>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);

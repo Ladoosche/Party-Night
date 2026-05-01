@@ -62,7 +62,7 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
     let usedActions = clearUsed ? [] : usedItems.killerActions;
 
     if (clearUsed) {
-      setUsedItems({ ...usedItems, killerWords: [], killerActions: [] });
+      setUsedItems(prev => ({ ...prev, killerWords: [], killerActions: [] }));
     }
 
     const shuffled = [...activePlayers].sort(() => Math.random() - 0.5);
@@ -88,7 +88,7 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
       }
 
       const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-      setUsedItems({ ...usedItems, killerWords: [...usedWords, selectedIndex]});
+      setUsedItems(prev => ({ ...prev, killerWords: [...usedWords, selectedIndex]}));
 
       const group = groups[selectedIndex];
       tasks = [...group].sort(() => Math.random() - 0.5);
@@ -106,7 +106,7 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
 
       // pick neededTasksCount random items
       const selectedIndices = [...availableIndices].sort(() => Math.random() - 0.5).slice(0, neededTasksCount);
-      setUsedItems({ ...usedItems, killerActions: [...usedActions, ...selectedIndices] });
+      setUsedItems(prev => ({ ...prev, killerActions: [...usedActions, ...selectedIndices] }));
 
       tasks = selectedIndices.map(i => actions[i]).sort(() => Math.random() - 0.5);
     }

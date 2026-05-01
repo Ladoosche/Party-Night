@@ -65,7 +65,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
     
     let usedIds = clearUsed ? [] : usedItems.mlt;
     if (clearUsed) {
-      setUsedItems({ ...usedItems, mlt: [] });
+      setUsedItems(prev => ({ ...prev, mlt: [] }));
     }
 
     let filtered = MLT_QUESTIONS.filter(
@@ -99,9 +99,13 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
   };
 
   const recordQuestionUsed = (id: string) => {
-    if (!usedItems.mlt.includes(id)) {
-      setUsedItems({ ...usedItems, mlt: [...usedItems.mlt, id] });
-    }
+    setUsedItems(prev => {
+      const list = prev.mlt || [];
+      if (!list.includes(id)) {
+        return { ...prev, mlt: [...list, id] };
+      }
+      return prev;
+    });
   };
 
   // Record initially presented question

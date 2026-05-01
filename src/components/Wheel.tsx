@@ -56,6 +56,7 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<WheelOutcome | null>(null);
   const [screen, setScreen] = useState<"rules" | "game">("rules");
+  const [recentActions, setRecentActions] = useState<string[]>([]);
 
   const activePlayers = players.filter(p => p.isActive !== false);
 
@@ -73,38 +74,63 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
     setOutcome(null);
     setSelectedPlayer(null);
 
-    // Calculate rotation
-    const spins = 5 + Math.random() * 5; // 5 to 10 full spins
-    const randomAngle = Math.random() * 360;
-    const newRotation = rotation + spins * 360 + randomAngle;
-    setRotation(newRotation);
-
+    // Calculate target and rotation
+    const spins = 5 + Math.floor(Math.random() * 5); // 5 to 10 full spins
     const targetIndex = Math.floor(Math.random() * activePlayers.length);
     const sliceAngle = 360 / activePlayers.length;
     
-    const centerOfTarget = (targetIndex * sliceAngle) + sliceAngle / 2;
-    const requiredRotationToTop = (270 - centerOfTarget + 360) % 360;
+    // For n > 2, slice 0 starts at 12 o'clock (0 deg) and center is at sliceAngle / 2
+    // For n = 2, slice 0 is centered at 12 o'clock (0 deg)
+    let centerOfTarget;
+    if (activePlayers.length === 2) {
+      centerOfTarget = targetIndex * 180;
+    } else {
+      centerOfTarget = (targetIndex * sliceAngle) + sliceAngle / 2;
+    }
     
+    // Random offset inside the slice (80% of width to avoid boundaries)
     const randomOffset = (Math.random() - 0.5) * (sliceAngle * 0.8);
     
-    const finalNewRotation = rotation + spins * 360 + requiredRotationToTop + randomOffset;
+    // We want (rotation + delta) % 360 to be (360 - (centerOfTarget + randomOffset)) % 360
+    const currentModulo = rotation % 360;
+    const targetModulo = (360 - (centerOfTarget + randomOffset)) % 360;
+    
+    let extraRotation = targetModulo - currentModulo;
+    if (extraRotation <= 0) extraRotation += 360;
+    
+    const finalNewRotation = rotation + (spins * 360) + extraRotation;
     setRotation(finalNewRotation);
 
     // Generate outcome
     const rand = Math.random();
     let selectedOutcome: WheelOutcome;
     
-    if (rand < 0.33) {
-      selectedOutcome = { type: 'nothing' };
-    } else if (rand < 0.66) {
-      selectedOutcome = { type: 'penalty', penalties: Math.floor(Math.random() * 6) };
+    if (rand < 0.5) {
+      selectedOutcome = { type: 'penalty', penalties: Math.floor(Math.random() * 5) + 1 };
     } else {
       let rawLang = language.toUpperCase();
       if (rawLang === 'FR-CA') rawLang = 'FR';
       let lang = rawLang as keyof typeof ACTIONS;
       if (!ACTIONS[lang]) lang = 'EN';
       const actionList = ACTIONS[lang];
-      selectedOutcome = { type: 'action', actionText: actionList[Math.floor(Math.random() * actionList.length)] };
+      
+      let availableActions = actionList.filter(a => !recentActions.includes(a));
+      if (availableActions.length === 0) {
+        availableActions = actionList;
+      }
+      
+      const chosenAction = availableActions[Math.floor(Math.random() * availableActions.length)];
+      setRecentActions(prev => {
+        const next = [...prev, chosenAction];
+        if (next.length > 15) return next.slice(next.length - 15);
+        return next;
+      });
+
+      selectedOutcome = { 
+        type: 'action', 
+        actionText: chosenAction, 
+        penalties: Math.floor(Math.random() * 5) + 1 
+      };
     }
 
     setTimeout(() => {
@@ -115,7 +141,7 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
   };
 
   const colors = [
-    '#0a9396', '#ee9b00', '#ae2012', '#9b2226', '#005f73', '#e9d8a6', '#ca6702', '#bb3e03'
+    '#0a9396', '#b33939', '#227093', '#218c74', '#84817a', '#706fd3', '#40407a', '#cc8e35'
   ];
 
   return (
@@ -262,11 +288,30 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
                   exit={{ opacity: 0, y: -20 }}
                   className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 w-full text-center"
                 >
-                  <h3 className="text-3xl font-black text-[#0a9396] mb-3 uppercase tracking-wider">{selectedPlayer}</h3>
+                  <h3 
+                    className="text-3xl font-black mb-3 uppercase tracking-wider"
+                    style={{ color: colors[activePlayers.findIndex(p => p.name === selectedPlayer) % colors.length] }}
+                  >
+                    {selectedPlayer}
+                  </h3>
                   <div className="text-lg font-medium text-slate-700 dark:text-slate-300 leading-relaxed">
                     {outcome.type === 'nothing' && t('wheel-just-selected').replace('{0}', selectedPlayer)}
                     {outcome.type === 'penalty' && t('wheel-take-penalties').replace('{0}', selectedPlayer).replace('{1}', String(outcome.penalties))}
-                    {outcome.type === 'action' && t('wheel-do-action').replace('{0}', selectedPlayer).replace('{1}', outcome.actionText || '')}
+                    {outcome.type === 'action' && (
+                      <div className="flex flex-col gap-4">
+                        <div className="font-bold text-xl text-slate-900 dark:text-white">
+                          {t('wheel-do-action').replace('{0}', selectedPlayer).replace('{1}', outcome.actionText || '')}
+                        </div>
+                        <div className="flex items-center gap-3 w-full opacity-40">
+                          <div className="h-px bg-slate-500 flex-1"></div>
+                          <div className="w-2 h-2 rounded-full bg-slate-500"></div>
+                          <div className="h-px bg-slate-500 flex-1"></div>
+                        </div>
+                        <div className="text-red-500 dark:text-red-400 font-bold text-xl">
+                          {t('wheel-or-take-penalties').replace('{0}', String(outcome.penalties))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ) : (

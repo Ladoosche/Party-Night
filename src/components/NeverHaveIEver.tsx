@@ -61,7 +61,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
     
     let usedIds = clearUsed ? [] : usedItems.nhie;
     if (clearUsed) {
-      setUsedItems({ ...usedItems, nhie: [] });
+      setUsedItems(prev => ({ ...prev, nhie: [] }));
     }
 
     let filtered = NHIE_QUESTIONS.filter(
@@ -94,9 +94,13 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
   };
 
   const recordQuestionUsed = (id: string) => {
-    if (!usedItems.nhie.includes(id)) {
-      setUsedItems({ ...usedItems, nhie: [...usedItems.nhie, id] });
-    }
+    setUsedItems(prev => {
+      const list = prev.nhie || [];
+      if (!list.includes(id)) {
+        return { ...prev, nhie: [...list, id] };
+      }
+      return prev;
+    });
   };
 
   // Record initially presented question

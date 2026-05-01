@@ -246,7 +246,8 @@ export const en: Record<string, string> = {
   "wheel-penalties": "Penalties",
   "wheel-nothing": "Nothing happens",
   "wheel-take-penalties": "{0} takes {1} penalties!",
-  "wheel-do-action": "{0} must: {1}",
+  "wheel-do-action": "{0} must do an action: {1}",
+  "wheel-or-take-penalties": "Or take {0} penalty(ies)",
   "wheel-just-selected": "{0} was selected, but gets off easy! Lucky!",
   "wheel-touch-only": "This game requires a touch device."
 };

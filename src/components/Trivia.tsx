@@ -77,7 +77,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   const startGame = (clearUsed = false, overrideAsker?: string | null) => {
     let usedIds = clearUsed ? [] : (usedItems.trivia || []);
     if (clearUsed) {
-      setUsedItems({ ...usedItems, trivia: [] });
+      setUsedItems(prev => ({ ...prev, trivia: [] }));
     }
 
     let filtered = TRIVIA_QUESTIONS.filter(
@@ -110,10 +110,13 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   };
 
   const recordQuestionUsed = (id: string) => {
-    const list = usedItems.trivia || [];
-    if (!list.includes(id)) {
-      setUsedItems({ ...usedItems, trivia: [...list, id] });
-    }
+    setUsedItems(prev => {
+      const list = prev.trivia || [];
+      if (!list.includes(id)) {
+        return { ...prev, trivia: [...list, id] };
+      }
+      return prev;
+    });
   };
 
   useEffect(() => {
