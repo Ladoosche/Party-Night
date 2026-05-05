@@ -147,12 +147,6 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
     setPlayers(allPlayers.map((p) => (p.id === id ? { ...p, isActive: !p.isActive } : p)));
   };
 
-  if (screen !== "rules" && players.length < 2) {
-    // We already have state for this, but let's make sure it opens the modal
-    // No, we should just show rules or config and the buttons will work.
-    // Actually the user wants it to open automatically.
-  }
-
   return (
     <div className="flex-1 flex flex-col relative overflow-hidden">
         <React.Fragment>
@@ -324,7 +318,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                     className="space-y-6"
                 >
                     <div className="text-[10px] font-bold tracking-[0.2em] text-slate-400 dark:text-slate-500 uppercase">
-                         {language === 'fr' ? 'Qui pourrait...' : 'Who would...'}
+                         {t('mlt-who-would')}
                     </div>
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 leading-tight tracking-tight max-w-sm mx-auto transition-colors">
                         {currentQuestion.text}

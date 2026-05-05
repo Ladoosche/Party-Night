@@ -107,6 +107,7 @@ export const frCA: Record<string, string> = {
   'cancel': 'Annuler',
   'reset': 'Réinitialiser',
   'mlt-title': 'Qui pourrait',
+  'mlt-who-would': 'Qui pourrait...',
   'mlt-desc': 'Pointe du doigt celui qui correspond le mieux !',
   'mlt-mode': 'Catégorie',
   'mlt-mode-soft': 'Tranquille',

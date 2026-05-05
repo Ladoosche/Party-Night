@@ -21,7 +21,7 @@ interface Game421Props {
 type DiceValue = 1 | 2 | 3 | 4 | 5 | 6 | null;
 
 export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
-  const { language, setLanguage, t } = useAppContext();
+  const { t } = useAppContext();
   const [rulesDismissed, setRulesDismissed] = useState(false);
   const [showRules, setShowRules] = useState(true);
 

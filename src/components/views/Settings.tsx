@@ -123,11 +123,11 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
           <div className="space-y-4">
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-500">{t('Version') || 'Version'}</span>
-              <span className="font-mono text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">1.0.4</span>
+              <span className="font-mono text-slate-900 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">1.0.5</span>
             </div>
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-500">{t('Language Support') || 'Language Support'}</span>
-              <span className="font-bold text-slate-900 dark:text-slate-100 uppercase">EN / FR</span>
+              <span className="font-bold text-slate-900 dark:text-slate-100 uppercase">EN / FR / ES</span>
             </div>
           </div>
         </section>

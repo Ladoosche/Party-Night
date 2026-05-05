@@ -107,6 +107,7 @@ export const es: Record<string, string> = {
   'cancel': 'Cancelar',
   'reset': 'Reiniciar',
   'mlt-title': '¿Quién lo haría?',
+  'mlt-who-would': '¿Quién podría...',
   'mlt-desc': '¡Señala a la persona que mejor se ajusta a la descripción!',
   'mlt-mode': 'Categoría',
   'mlt-mode-soft': 'Tranquilo',
