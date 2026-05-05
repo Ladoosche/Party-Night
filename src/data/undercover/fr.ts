@@ -36,11 +36,6 @@ export const fr = [
     "Camping"
   ],
   [
-    "Fourchette",
-    "Cuillère",
-    "Couteau"
-  ],
-  [
     "Montagne",
     "Colline",
     "Falaise"
