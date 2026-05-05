@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useAppContext } from "../context/AppContext";
-import { getWordGroups } from "../data/undercover";
-import { GameHeader } from "./GameHeader";
-import { QuitGameModal } from "./QuitGameModal";
-import { AllUsedModal } from "./AllUsedModal";
+import { useAppContext } from '../../context/AppContext';
+import { getWordGroups } from '../../data/undercover';
+import { GameHeader } from '../shared/GameHeader';
+import { QuitGameModal } from '../modals/QuitGameModal';
+import { AllUsedModal } from '../modals/AllUsedModal';
 
 import {
   ChevronLeft,
