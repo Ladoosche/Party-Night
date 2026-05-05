@@ -7,10 +7,12 @@ import {
   Zap,
   Smile,
   LogOut,
-  Target
+  Target,
+  Loader2
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
-import { TRIVIA_QUESTIONS, TriviaQuestion } from "../data/triviaQuestions";
+import { getTriviaQuestions, TypeDef as TriviaQuestion } from "../data/trivia";
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 import { AllUsedModal } from "./AllUsedModal";
 
@@ -36,6 +38,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   const [askerId, setAskerId] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
@@ -74,39 +77,46 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
     }
   };
 
-  const startGame = (clearUsed = false, overrideAsker?: string | null) => {
-    let usedIds = clearUsed ? [] : (usedItems.trivia || []);
-    if (clearUsed) {
-      setUsedItems(prev => ({ ...prev, trivia: [] }));
-    }
+  const startGame = async (clearUsed = false, overrideAsker?: string | null) => {
+    setIsLoading(true);
+    try {
+      const getQuestionsResult = await getTriviaQuestions(language);
+      
+      let usedIds = clearUsed ? [] : (usedItems.trivia || []);
+      if (clearUsed) {
+        setUsedItems(prev => ({ ...prev, trivia: [] }));
+      }
 
-    let filtered = TRIVIA_QUESTIONS.filter(
-      (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
-    );
-    
-    if (filtered.length === 0) {
-      let totalMatching = TRIVIA_QUESTIONS.filter(
-        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+      let filtered = getQuestionsResult.filter(
+        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
       );
-      if (totalMatching.length > 0) {
-        setAllUsedOpen(true);
-        return;
+      
+      if (filtered.length === 0) {
+        let totalMatching = getQuestionsResult.filter(
+          (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+        );
+        if (totalMatching.length > 0) {
+          setAllUsedOpen(true);
+          return;
+        }
+        const backup = getQuestionsResult.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
+        if (backup.length === 0) {
+          setAllUsedOpen(true);
+          return;
+        }
+        filtered = backup;
       }
-      const backup = TRIVIA_QUESTIONS.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
-      if (backup.length === 0) {
-        setAllUsedOpen(true);
-        return;
+      
+      const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+      setCurrentQuestions(shuffled);
+      setCurrentIndex(0);
+      if (overrideAsker !== undefined) {
+        setAskerId(overrideAsker);
       }
-      filtered = backup;
+      setScreen("game");
+    } finally {
+      setIsLoading(false);
     }
-    
-    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
-    setCurrentQuestions(shuffled);
-    setCurrentIndex(0);
-    if (overrideAsker !== undefined) {
-      setAskerId(overrideAsker);
-    }
-    setScreen("game");
   };
 
   const recordQuestionUsed = (id: string) => {
@@ -148,34 +158,30 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
 
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors h-full">
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
-        <button
-          onClick={() => {
-            if (screen === "rules") {
-              onBack();
-            } else if (screen === "config") {
-              setScreen("rules");
-            } else {
-              setQuitConfirm(true);
-            }
-          }}
-          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-        >
-          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-        <div className="w-10 sm:w-12" />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-emerald-900 dark:text-emerald-400">{t("trivia-title")}</h2>
-        <div className="w-8">
-          {screen !== "rules" && screen !== "config" && (
-            <button 
-              onClick={() => setScreen("rules")}
-              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400"
-            >
-              <Target size={16} />
-            </button>
-          )}
-        </div>
-      </div>
+      <GameHeader
+        onQuit={() => {
+          if (screen === "rules") {
+            onBack();
+          } else if (screen === "config") {
+            setScreen("rules");
+          } else {
+            setQuitConfirm(true);
+          }
+        }}
+        title={<h2 className="text-sm font-bold uppercase tracking-widest text-emerald-900 dark:text-emerald-400">{t("trivia-title")}</h2>}
+        rightContent={
+          <div className="w-8">
+            {screen !== "rules" && screen !== "config" && (
+              <button 
+                onClick={() => setScreen("rules")}
+                className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400"
+              >
+                <Target size={16} />
+              </button>
+            )}
+          </div>
+        }
+      />
 
       <React.Fragment>
         {screen === "rules" && (
@@ -317,14 +323,14 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
             <div className="mt-8 px-5 pb-5">
               <button
                 onClick={handleModeStart}
-                disabled={selectedCategories.length === 0}
+                disabled={selectedCategories.length === 0 || isLoading}
                 className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-2 ${
                   selectedCategories.length > 0
                     ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100"
                     : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed"
                 }`}
               >
-                <Play size={18} fill="currentColor" />
+                {isLoading ? <Loader2 className="animate-spin" size={18} /> : <Play size={18} fill="currentColor" />}
                 {t("start-game")}
               </button>
             </div>
@@ -344,16 +350,20 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                 <div className="flex flex-col gap-3 w-full">
                     <button
                         onClick={() => startGame(false, "everyone")}
-                        className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-emerald-500 transition-colors"
+                        disabled={isLoading}
+                        className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-emerald-500 transition-colors flex justify-center items-center gap-2 disabled:opacity-50"
                     >
+                        {isLoading && <Loader2 className="animate-spin" size={18} />}
                         {t("trivia-everyone")}
                     </button>
                     {players.map(p => (
                         <button
                             key={p.id}
                             onClick={() => startGame(false, p.id)}
-                            className="w-full py-4 bg-slate-800 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-700 transition-colors"
+                            disabled={isLoading}
+                            className="w-full py-4 bg-slate-800 text-white rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-slate-700 transition-colors flex justify-center items-center gap-2 disabled:opacity-50"
                         >
+                            {isLoading && <Loader2 className="animate-spin" size={18} />}
                             {p.name}
                         </button>
                     ))}
@@ -392,7 +402,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                         </div>
                     )}
                     <h2 className="text-2xl sm:text-3xl font-black leading-tight mb-8">
-                       {currentQuestion[language.toLowerCase() as "fr" | "en" | "es" | "fr-ca"] || currentQuestion.en}
+                       {currentQuestion.text}
                     </h2>
 
                     <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
@@ -405,7 +415,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                             </button>
                         ) : (
                             <div className="w-full min-h-[52px] px-4 py-3 bg-slate-100 dark:bg-slate-800/50 rounded-xl text-sm text-slate-700 dark:text-slate-300 font-medium flex justify-center items-center text-center">
-                                💡 {(currentQuestion as any)[`hint_${language.toLowerCase().replace('-', '')}`] || (currentQuestion as any).hint_en}
+                                💡 {currentQuestion.hint}
                             </div>
                         )}
                         
@@ -418,7 +428,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                             </button>
                         ) : (
                             <div className="w-full min-h-[52px] px-4 py-3 bg-orange-500 text-white rounded-xl text-lg font-black tracking-wide shadow-inner flex justify-center items-center text-center">
-                                {(currentQuestion as any)[`answer_${language.toLowerCase().replace('-', '')}`] || (currentQuestion as any).answer_en}
+                                {currentQuestion.answer}
                             </div>
                         )}
                     </div>
@@ -468,17 +478,10 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
             key="score"
             className="flex-1 flex flex-col bg-slate-900"
           >
-            <div className="flex items-center justify-between border-b border-slate-800 px-5 py-4">
-              <button
-                onClick={() => setScreen("game")}
-                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-              >
-                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-              <div className="w-10 sm:w-12" />
-              <h2 className="text-sm font-bold uppercase tracking-widest text-white">{t("scoreboard")}</h2>
-              <div className="w-10"></div>
-            </div>
+            <GameHeader
+              onBack={() => setScreen("game")}
+              title={<h2 className="text-sm font-bold uppercase tracking-widest text-white">{t("scoreboard")}</h2>}
+            />
             
             <div className="px-5 py-6 flex-1 overflow-y-auto">
               <div className="space-y-3">

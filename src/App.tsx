@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AppProvider } from './context/AppContext';
 import { BackgroundCanvas } from './components/BackgroundCanvas';
 import { Home } from './components/Home';
-import { Undercover } from './components/Undercover';
-import { MostLikelyTo } from './components/MostLikelyTo';
-import { Game421 } from './components/Game421';
-import { Trivia } from './components/Trivia';
-import { Killer } from './components/Killer';
-import { NeverHaveIEver } from './components/NeverHaveIEver';
-
-import { Purple } from './components/Purple';
-import { Wheel } from './components/Wheel';
 import { Header } from './components/Header';
-import { EditPlayersModal } from './components/EditPlayersModal';
-import { Settings } from './components/Settings';
+
+// Lazy loaded components to reduce initial bundle size
+const Undercover = React.lazy(() => import('./components/Undercover').then(m => ({ default: m.Undercover })));
+const MostLikelyTo = React.lazy(() => import('./components/MostLikelyTo').then(m => ({ default: m.MostLikelyTo })));
+const Game421 = React.lazy(() => import('./components/Game421').then(m => ({ default: m.Game421 })));
+const Trivia = React.lazy(() => import('./components/Trivia').then(m => ({ default: m.Trivia })));
+const Killer = React.lazy(() => import('./components/Killer').then(m => ({ default: m.Killer })));
+const NeverHaveIEver = React.lazy(() => import('./components/NeverHaveIEver').then(m => ({ default: m.NeverHaveIEver })));
+const Purple = React.lazy(() => import('./components/Purple').then(m => ({ default: m.Purple })));
+const Wheel = React.lazy(() => import('./components/Wheel').then(m => ({ default: m.Wheel })));
+const EditPlayersModal = React.lazy(() => import('./components/EditPlayersModal').then(m => ({ default: m.EditPlayersModal })));
+const Settings = React.lazy(() => import('./components/Settings').then(m => ({ default: m.Settings })));
 
 function MainApp() {
   const [activeGame, setActiveGame] = React.useState<string | null>(null);
   const [showPlayersModal, setShowPlayersModal] = React.useState(false);
   const [showSettings, setShowSettings] = React.useState(false);
+
+  // We can show a small loading state while the game components download
+  const loadingFallback = (
+    <div className="flex items-center justify-center p-8 h-full bg-slate-50 dark:bg-slate-900 absolute inset-0 z-10 text-slate-400">
+      Loading...
+    </div>
+  );
 
   return (
     <div className="relative z-10 w-full h-[100dvh] overflow-hidden">
@@ -30,15 +38,21 @@ function MainApp() {
           />
         )}
         
-        <EditPlayersModal 
-          isOpen={showPlayersModal} 
-          onClose={() => setShowPlayersModal(false)} 
-        />
+        {showPlayersModal && (
+          <Suspense fallback={null}>
+            <EditPlayersModal 
+              isOpen={showPlayersModal} 
+              onClose={() => setShowPlayersModal(false)} 
+            />
+          </Suspense>
+        )}
 
         <div className="flex-1 overflow-hidden flex flex-col relative">
           {showSettings && (
             <div className="absolute inset-0 z-40 flex flex-col bg-white dark:bg-slate-900">
-              <Settings onBack={() => setShowSettings(false)} />
+              <Suspense fallback={loadingFallback}>
+                <Settings onBack={() => setShowSettings(false)} />
+              </Suspense>
             </div>
           )}
 
@@ -49,37 +63,39 @@ function MainApp() {
             />
           )}
 
-          {activeGame === 'undercover' && (
-            <Undercover onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+          <Suspense fallback={loadingFallback}>
+            {activeGame === 'undercover' && (
+              <Undercover onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'most-likely-to' && (
-            <MostLikelyTo onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'most-likely-to' && (
+              <MostLikelyTo onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'trivia' && (
-            <Trivia onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'trivia' && (
+              <Trivia onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'game-421' && (
-            <Game421 onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'game-421' && (
+              <Game421 onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'purple' && (
-            <Purple onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'purple' && (
+              <Purple onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'wheel' && (
-            <Wheel onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'wheel' && (
+              <Wheel onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'killer' && (
-            <Killer onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'killer' && (
+              <Killer onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
 
-          {activeGame === 'never-have-i-ever' && (
-            <NeverHaveIEver onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
-          )}
+            {activeGame === 'never-have-i-ever' && (
+              <NeverHaveIEver onBack={() => setActiveGame(null)} onShowPlayers={() => setShowPlayersModal(true)} />
+            )}
+          </Suspense>
         </div>
       </div>
     </div>

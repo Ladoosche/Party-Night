@@ -1,40 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { ArrowLeft, Play, Settings as SettingsIcon, LogOut, RotateCcw } from 'lucide-react';
+import { ArrowLeft, Play, Settings as SettingsIcon, LogOut, RotateCcw, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
-const ACTIONS = {
-  EN: [
-    "Do 10 pushups",
-    "Sing the chorus of a pop song",
-    "Imitate another player",
-    "Dance for 15 seconds",
-    "Speak with a foreign accent until your next turn",
-    "Let someone draw on your face with a pen",
-    "Tell an embarrassing story",
-    "Hug the person to your left"
-  ],
-  FR: [
-    "Fais 10 pompes",
-    "Chante le refrain d'une chanson pop",
-    "Imite un autre joueur",
-    "Danse pendant 15 secondes",
-    "Parle avec un accent étranger jusqu'à ton prochain tour",
-    "Laisse quelqu'un te faire un dessin sur le visage",
-    "Raconte une histoire embarrassante",
-    "Fais un câlin à la personne à ta gauche"
-  ],
-  ES: [
-    "Haz 10 flexiones",
-    "Canta el estribillo de una canción pop",
-    "Imita a otro jugador",
-    "Baila durante 15 segundos",
-    "Habla con un acento extranjero hasta tu próximo turno",
-    "Deja que alguien te dibuje en la cara con un bolígrafo",
-    "Cuenta una historia embarazosa",
-    "Abraza a la persona a tu izquierda"
-  ]
-};
+import { getWheelActions } from '../data/wheel';
 
 type OutcomeType = 'action' | 'penalty' | 'nothing';
 
@@ -43,6 +11,9 @@ interface WheelOutcome {
   actionText?: string;
   penalties?: number;
 }
+
+import { QuitGameModal } from "./QuitGameModal";
+import { GameHeader } from "./GameHeader";
 
 interface WheelProps {
   onBack: () => void;
@@ -56,7 +27,9 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   const [outcome, setOutcome] = useState<WheelOutcome | null>(null);
   const [screen, setScreen] = useState<"rules" | "game">("rules");
+  const [quitConfirm, setQuitConfirm] = useState(false);
   const [recentActions, setRecentActions] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const activePlayers = players.filter(p => p.isActive !== false);
 
@@ -67,9 +40,20 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
     }
   }, [activePlayers]);
 
-  const spinWheel = () => {
-    if (activePlayers.length === 0 || isSpinning) return;
+  const spinWheel = async () => {
+    if (activePlayers.length === 0 || isSpinning || isLoading) return;
     
+    setIsLoading(true);
+    let actionList: string[] = [];
+    try {
+      actionList = await getWheelActions(language);
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(false);
+
     setIsSpinning(true);
     setOutcome(null);
     setSelectedPlayer(null);
@@ -79,14 +63,8 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
     const targetIndex = Math.floor(Math.random() * activePlayers.length);
     const sliceAngle = 360 / activePlayers.length;
     
-    // For n > 2, slice 0 starts at 12 o'clock (0 deg) and center is at sliceAngle / 2
-    // For n = 2, slice 0 is centered at 12 o'clock (0 deg)
-    let centerOfTarget;
-    if (activePlayers.length === 2) {
-      centerOfTarget = targetIndex * 180;
-    } else {
-      centerOfTarget = (targetIndex * sliceAngle) + sliceAngle / 2;
-    }
+    // slice 0 starts at 12 o'clock (0 deg) and center is at sliceAngle / 2
+    const centerOfTarget = (targetIndex * sliceAngle) + sliceAngle / 2;
     
     // Random offset inside the slice (80% of width to avoid boundaries)
     const randomOffset = (Math.random() - 0.5) * (sliceAngle * 0.8);
@@ -108,12 +86,6 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
     if (rand < 0.5) {
       selectedOutcome = { type: 'penalty', penalties: Math.floor(Math.random() * 5) + 1 };
     } else {
-      let rawLang = language.toUpperCase();
-      if (rawLang === 'FR-CA') rawLang = 'FR';
-      let lang = rawLang as keyof typeof ACTIONS;
-      if (!ACTIONS[lang]) lang = 'EN';
-      const actionList = ACTIONS[lang];
-      
       let availableActions = actionList.filter(a => !recentActions.includes(a));
       if (availableActions.length === 0) {
         availableActions = actionList;
@@ -144,30 +116,30 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
     '#0a9396', '#b33939', '#227093', '#218c74', '#84817a', '#706fd3', '#40407a', '#cc8e35'
   ];
 
+    const sliceAngle = activePlayers.length > 0 ? 360 / activePlayers.length : 360;
+    const conicGradients = activePlayers.map((_, i) => {
+      const c = colors[i % colors.length];
+      return `${c} ${i * sliceAngle}deg ${(i + 1) * sliceAngle}deg`;
+    }).join(', ');
+    
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 transition-colors relative overflow-hidden h-full">
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
-        <button 
-          onClick={onBack}
-          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-        >
-          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-        <div className="w-10 sm:w-12" />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-[#0a9396]">{t("wheel-title")}</h2>
-        <div className="flex items-center gap-2">
-            {screen !== "rules" ? (
-              <button 
-                onClick={() => setScreen("rules")}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                <SettingsIcon size={18} />
-              </button>
-            ) : (
-              <div className="w-8" />
-            )}
-        </div>
-      </div>
+      <GameHeader
+        onQuit={() => setQuitConfirm(true)}
+        title={<h2 className="text-sm font-bold uppercase tracking-widest text-[#0a9396]">{t("wheel-title")}</h2>}
+        rightContent={
+          screen !== "rules" ? (
+            <button 
+              onClick={() => setScreen("rules")}
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              <SettingsIcon size={18} />
+            </button>
+          ) : (
+            <div className="w-8" />
+          )
+        }
+      />
 
       <React.Fragment>
         {screen === "rules" ? (
@@ -221,61 +193,32 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
                 </button>
               </div>
             ) : (
-          <div className="flex flex-col items-center w-full max-w-md">
-            <div className="relative w-80 h-80 mb-10">
+          <div className="flex flex-col items-center w-full max-w-md px-4 pb-20">
+            <div className="relative w-full max-w-[320px] aspect-square mb-10">
               {/* Pointer */}
               <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-8 bg-slate-900 dark:bg-white z-20 pointer-events-none" style={{ clipPath: 'polygon(50% 100%, 0 0, 100% 0)' }}></div>
               
               <motion.div 
                 className="w-full h-full rounded-full border-4 border-white dark:border-slate-800 shadow-2xl relative overflow-hidden bg-slate-200 dark:bg-slate-700"
+                style={{ background: `conic-gradient(${conicGradients})` }}
                 animate={{ rotate: rotation }}
                 transition={{ duration: 5, ease: [0.2, 0.8, 0.2, 1] }}
               >
                 {activePlayers.map((player, i) => {
-                  const sliceAngle = 360 / activePlayers.length;
-                  const rotateStr = `rotate(${i * sliceAngle}deg)`;
-                  const skewStr = `skewY(${-(90 - sliceAngle)}deg)`;
+                  const rotationAngle = (i * sliceAngle) + sliceAngle / 2;
                   
-                  if (activePlayers.length > 2) {
-                    return (
-                      <div 
-                        key={player.id} 
-                        className="absolute w-1/2 h-1/2 top-0 right-0 origin-bottom-left flex items-center justify-end"
-                        style={{
-                          transform: `${rotateStr} ${skewStr}`,
-                          backgroundColor: colors[i % colors.length],
-                          boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.2)'
-                        }}
-                      >
-                        <div 
-                          className="text-white font-bold text-sm absolute drop-shadow-md right-4 bottom-2 truncate max-w-[80px]"
-                          style={{
-                            transform: `skewY(${90 - sliceAngle}deg) rotate(${sliceAngle / 2}deg)`,
-                            transformOrigin: 'bottom right'
-                          }}
-                        >
-                          {player.name}
-                        </div>
-                      </div>
-                    );
-                  } else {
-                     // For 2 players, simple split
-                     return (
-                      <div 
-                        key={player.id} 
-                        className="absolute w-full h-1/2 left-0 origin-bottom flex items-center justify-center p-4"
-                        style={{
-                          top: i === 0 ? 0 : '50%',
-                          backgroundColor: colors[i % colors.length],
-                          transform: i === 1 ? 'rotate(180deg)' : 'none'
-                        }}
-                      >
-                        <span className="text-white font-bold text-xl drop-shadow-md pb-10" style={i===1 ? {transform: 'rotate(180deg)'} : {}}>
-                            {player.name}
-                        </span>
-                      </div>
-                     );
-                  }
+                  return (
+                    <div
+                      key={player.id}
+                      className="absolute top-1/2 left-1/2 flex items-center justify-end font-bold text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] text-[10px] sm:text-xs md:text-sm pr-2 sm:pr-4 pointer-events-none"
+                      style={{
+                        width: '45%',
+                        transform: `translate(-50%, -50%) rotate(${rotationAngle - 90}deg) translateX(55%)`
+                      }}
+                    >
+                      <span className="truncate" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}>{player.name}</span>
+                    </div>
+                  );
                 })}
               </motion.div>
             </div>
@@ -323,10 +266,10 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
                 >
                    <button
                     onClick={spinWheel}
-                    disabled={isSpinning || activePlayers.length < 2}
-                    className="w-full py-5 bg-slate-900 dark:bg-slate-50 text-white dark:text-slate-900 font-black text-xl uppercase tracking-widest rounded-2xl shadow-xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none"
+                    disabled={isSpinning || isLoading || activePlayers.length < 2}
+                    className="w-full py-5 bg-slate-900 dark:bg-slate-50 text-white dark:text-slate-900 font-black text-xl uppercase tracking-widest rounded-2xl shadow-xl hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2"
                   >
-                    {isSpinning ? '...' : t('wheel-spin')}
+                    {isLoading ? <Loader2 size={24} className="animate-spin" /> : isSpinning ? '...' : t('wheel-spin')}
                   </button>
                 </motion.div>
               )}
@@ -338,10 +281,11 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
                 <motion.button
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 w-full py-4 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold uppercase tracking-widest rounded-xl hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+                  className="mt-6 w-full py-4 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold uppercase tracking-widest rounded-xl hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                   onClick={spinWheel}
+                  disabled={isLoading}
                 >
-                   {t('wheel-spin')}
+                   {isLoading ? <Loader2 size={24} className="animate-spin" /> : t('wheel-spin')}
                 </motion.button>
               )}
             </AnimatePresence>
@@ -351,6 +295,11 @@ export const Wheel: React.FC<WheelProps> = ({ onBack, onShowPlayers }) => {
       </div>
     )}
   </React.Fragment>
+  <QuitGameModal 
+    isOpen={quitConfirm} 
+    onClose={() => setQuitConfirm(false)} 
+    onConfirm={onBack} 
+  />
 </div>
   );
 };

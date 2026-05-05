@@ -101,12 +101,24 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
   }, [theme]);
 
-  const t = (key: string) => {
+  const t = React.useCallback((key: string) => {
     return TRANSLATIONS[language][key] || key;
-  };
+  }, [language]);
+
+  const contextValue = React.useMemo(() => ({
+    language,
+    setLanguage,
+    players,
+    setPlayers,
+    theme,
+    setTheme,
+    t,
+    usedItems,
+    setUsedItems
+  }), [language, players, theme, t, usedItems]);
 
   return (
-    <AppContext.Provider value={{ language, setLanguage, players, setPlayers, theme, setTheme, t, usedItems, setUsedItems }}>
+    <AppContext.Provider value={contextValue}>
       {children}
     </AppContext.Provider>
   );

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
 
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 
 interface Game421Props {
@@ -162,36 +163,30 @@ export const Game421: React.FC<Game421Props> = ({ onBack, onShowPlayers }) => {
 
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors h-full">
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
-        <button
-          onClick={() => {
-            if (showRules && gameState === "idle") {
-              onBack();
-            } else if (showRules && gameState !== "idle") {
-              setShowRules(false);
-            } else {
-              setQuitConfirm(true);
-            }
-          }}
-          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-        >
-          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-        <div className="w-10 sm:w-12" />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-[#10b981]">{t("game-421-title")}</h2>
-        <div className="flex items-center gap-2">
-            {!showRules ? (
-              <button
-                onClick={resetGame}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-              >
-                <RotateCcw size={18} />
-              </button>
-            ) : (
-              <div className="w-8" />
-            )}
-        </div>
-      </div>
+      <GameHeader
+        onQuit={() => {
+          if (showRules && gameState === "idle") {
+            onBack();
+          } else if (showRules && gameState !== "idle") {
+            setShowRules(false);
+          } else {
+            setQuitConfirm(true);
+          }
+        }}
+        title={<h2 className="text-sm font-bold uppercase tracking-widest text-[#10b981]">{t("game-421-title")}</h2>}
+        rightContent={
+          !showRules ? (
+            <button
+              onClick={resetGame}
+              className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+            >
+              <RotateCcw size={18} />
+            </button>
+          ) : (
+            <div className="w-8" />
+          )
+        }
+      />
 
       <React.Fragment>
         {showRules ? (

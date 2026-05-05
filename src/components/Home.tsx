@@ -10,11 +10,6 @@ interface HomeProps {
 export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
   const { players, t } = useAppContext();
   const [error, setError] = useState<string | null>(null);
-  const [isTouch, setIsTouch] = useState(false);
-
-  React.useEffect(() => {
-    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
-  }, []);
 
   return (
     <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide px-5 py-5 pb-12 md:pb-8 relative">
@@ -145,7 +140,12 @@ export const Home: React.FC<HomeProps> = ({ onSelectGame, onShowPlayers }) => {
         >
           <div className="w-14 h-14 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-2xl group-hover:bg-white dark:group-hover:bg-slate-600 transition-colors border border-slate-200 dark:border-slate-600 shadow-inner">🎲</div>
           <div className="flex-1">
-            <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-1">{t('game-421-title')}</h3>
+            <div className="flex justify-between items-center mb-1">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100 tracking-tight">{t('game-421-title')}</h3>
+              <span className="text-[9px] font-bold text-orange-600 bg-orange-100 dark:bg-orange-900/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                HOT
+              </span>
+            </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-tight font-medium">{t('game-421-desc')}</p>
           </div>
         </button>

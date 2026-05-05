@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, Info, Droplets, LogOut } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 
 interface PurpleProps {
@@ -147,34 +148,30 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
 
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden relative transition-colors h-full">
-      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 pb-4 shrink-0">
-        <button
-          onClick={() => {
-            if (showRules && pile.length === 0 && lastDrawn.length === 0) {
-              onBack();
-            } else if (showRules) {
-              setShowRules(false);
-            } else {
-              setQuitConfirm(true);
-            }
-          }}
-          className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-        >
-          <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
-        <div className="w-10 sm:w-12" />
-        <h2 className="text-sm font-bold uppercase tracking-widest text-purple-900 dark:text-purple-400">{t("purple-title")}</h2>
-        <div className="w-8">
-           {!showRules && (
-              <button 
-                onClick={() => setShowRules(true)}
-                className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400"
-              >
-                <Info size={16} />
-              </button>
-           )}
-        </div>
-      </div>
+      <GameHeader
+        onQuit={() => {
+          if (showRules && pile.length === 0 && lastDrawn.length === 0) {
+            onBack();
+          } else if (showRules) {
+            setShowRules(false);
+          } else {
+            setQuitConfirm(true);
+          }
+        }}
+        title={<h2 className="text-sm font-bold uppercase tracking-widest text-purple-900 dark:text-purple-400">{t("purple-title")}</h2>}
+        rightContent={
+          <div className="w-8">
+             {!showRules && (
+                <button 
+                  onClick={() => setShowRules(true)}
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400"
+                >
+                  <Info size={16} />
+                </button>
+             )}
+          </div>
+        }
+      />
 
       <React.Fragment>
         {showRules ? (
@@ -354,7 +351,12 @@ export const Purple: React.FC<PurpleProps> = ({ onBack, onShowPlayers }) => {
 
                    <button 
                        onClick={stopAndDistribute}
-                       className={`col-span-2 py-3 sm:py-4 mt-1 ${pile.length >= 1 ? 'bg-[#10b981] hover:bg-[#059669] shadow-[#10b981]/25' : 'bg-slate-700 hover:bg-slate-800 shadow-slate-700/25'} text-white rounded-xl font-bold text-[11px] sm:text-xs uppercase tracking-widest transition-colors shadow-lg flex items-center justify-center gap-2`}
+                       disabled={pile.length === 0 && feedback !== 'wrong'}
+                       className={`col-span-2 py-3 sm:py-4 mt-1 ${
+                           pile.length >= 1 ? 'bg-[#10b981] hover:bg-[#059669] shadow-[#10b981]/25 text-white' : 
+                           (pile.length === 0 && feedback !== 'wrong') ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed border border-slate-300 dark:border-slate-700' :
+                           'bg-slate-700 hover:bg-slate-800 shadow-slate-700/25 text-white'
+                       } rounded-xl font-bold text-[11px] sm:text-xs uppercase tracking-widest transition-colors shadow-lg flex items-center justify-center gap-2`}
                    >
                        {pile.length >= 1 ? t('purple-stop').replace('{0}', pile.length.toString()) : t('purple-pass-turn')}
                    </button>

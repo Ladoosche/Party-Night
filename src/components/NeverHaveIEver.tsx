@@ -11,10 +11,12 @@ import {
   Smile,
   Zap,
   Info,
-  LogOut
+  LogOut,
+  Loader2
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
-import { NHIE_QUESTIONS, NHIEQuestion } from "../data/neverHaveIEverQuestions";
+import { getNHIEQuestions, TypeDef as NHIEQuestion } from "../data/neverHaveIEver";
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 import { AllUsedModal } from "./AllUsedModal";
 import { NotEnoughPlayers } from "./NotEnoughPlayers";
@@ -37,6 +39,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleDifficulty = (d: NHIEQuestion["difficulty"]) => {
     if (difficulties.includes(d)) {
@@ -56,41 +59,47 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
     }
   };
 
-  const startGame = (clearUsed = false) => {
+  const startGame = async (clearUsed = false) => {
     if (selectedCategories.length === 0 || difficulties.length === 0) return;
     
-    let usedIds = clearUsed ? [] : usedItems.nhie;
-    if (clearUsed) {
-      setUsedItems(prev => ({ ...prev, nhie: [] }));
-    }
+    setIsLoading(true);
+    try {
+      const getQuestionsResult = await getNHIEQuestions(language);
+      
+      let usedIds = clearUsed ? [] : (usedItems.nhie || []);
+      if (clearUsed) {
+        setUsedItems(prev => ({ ...prev, nhie: [] }));
+      }
 
-    let filtered = NHIE_QUESTIONS.filter(
-      (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
-    );
-    
-    if (filtered.length === 0) {
-      // Check if exhausted
-      let totalMatching = NHIE_QUESTIONS.filter(
-        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+      let filtered = getQuestionsResult.filter(
+        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
       );
-      if (totalMatching.length > 0) {
-        setAllUsedOpen(true);
-        return;
+      
+      if (filtered.length === 0) {
+        let totalMatching = getQuestionsResult.filter(
+          (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+        );
+        if (totalMatching.length > 0) {
+          setAllUsedOpen(true);
+          return;
+        }
+
+        const backup = getQuestionsResult.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
+        if (backup.length === 0) {
+          setAllUsedOpen(true);
+          return;
+        }
+        filtered = backup;
       }
 
-      const backup = NHIE_QUESTIONS.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
-      if (backup.length === 0) {
-        setAllUsedOpen(true);
-        return;
-      }
-      filtered = backup;
+      const questions = filtered;
+      setCurrentQuestions([...questions].sort(() => Math.random() - 0.5));
+      
+      setCurrentIndex(0);
+      setScreen("game");
+    } finally {
+      setIsLoading(false);
     }
-
-    const questions = filtered;
-    setCurrentQuestions([...questions].sort(() => Math.random() - 0.5));
-    
-    setCurrentIndex(0);
-    setScreen("game");
   };
 
   const recordQuestionUsed = (id: string) => {
@@ -134,17 +143,10 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
               key="rules"
               className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-                <button
-                  onClick={onBack}
-                  className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-                >
-                  <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-                </button>
-                <div className="w-10 sm:w-12" />
-                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>
-                <div className="w-10" />
-              </div>
+              <GameHeader
+                onBack={onBack}
+                title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>}
+              />
 
               <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
                 <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden transition-colors">
@@ -187,24 +189,11 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
             key="config"
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-              <button
-                onClick={onBack}
-                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-              >
-                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-              <div className="w-10 sm:w-12" />
-              <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={onShowPlayers}
-                  className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-                >
-                  {t("edit-players")}
-                </button>
-              </div>
-            </div>
+            <GameHeader
+              onBack={onBack}
+              onShowPlayers={onShowPlayers}
+              title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white transition-colors">{t("nhie-title")}</h2>}
+            />
             
             <div className="px-5 flex-1">
               <div className="space-y-6">
@@ -277,14 +266,14 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                   }
                   startGame();
                 }}
-                disabled={selectedCategories.length === 0}
+                disabled={selectedCategories.length === 0 || isLoading}
                 className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-2 ${
                   selectedCategories.length > 0
                   ? "bg-purple-500 text-white hover:bg-purple-600 shadow-purple-500/20 shadow-xl" 
                   : "bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600 cursor-not-allowed shadow-none"
                 }`}
               >
-                <Play size={18} fill="currentColor" />
+                {isLoading ? <Loader2 className="animate-spin" size={18} /> : <Play size={18} fill="currentColor" />}
                 {t("nhie-start")}
               </button>
             </div>
@@ -296,24 +285,15 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                 key="game"
                 className="flex-1 flex flex-col px-5 py-8 bg-white dark:bg-slate-900 transition-colors"
             >
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
-                    <button
-                        onClick={() => setQuitConfirm(true)}
-                        className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-                    >
-                        <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-                    </button>
-                    <div className="w-10 sm:w-12" />
+                <GameHeader
+                  onQuit={() => setQuitConfirm(true)}
+                  onShowPlayers={onShowPlayers}
+                  title={
                     <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest transition-colors">
                         {t("nhie-title")}
                     </span>
-                    <button
-                        onClick={onShowPlayers}
-                        className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-                    >
-                        {t("edit-players")}
-                    </button>
-                </div>
+                  }
+                />
 
                 <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
                     <div key={currentQuestion.id}
@@ -323,7 +303,7 @@ export const NeverHaveIEver: React.FC<NeverHaveIEverProps> = ({ onBack, onShowPl
                            {t(`nhie-cat-${currentQuestion.category}`)}
                         </div>
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight max-w-sm mx-auto min-h-[140px] flex items-center justify-center transition-colors">
-                            {language === 'fr' ? currentQuestion.fr : currentQuestion.en}
+                            {currentQuestion.text}
                         </h2>
                     </div>
                 </div>

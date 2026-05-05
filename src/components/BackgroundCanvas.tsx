@@ -64,8 +64,18 @@ export const BackgroundCanvas: React.FC = () => {
     };
 
     draw();
-    window.addEventListener('resize', draw);
-    return () => window.removeEventListener('resize', draw);
+    
+    let resizeTimer: number;
+    const handleResize = () => {
+      window.cancelAnimationFrame(resizeTimer);
+      resizeTimer = window.requestAnimationFrame(draw);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.cancelAnimationFrame(resizeTimer);
+    };
   }, []);
 
   return <canvas ref={canvasRef} className="fixed inset-0 z-0 pointer-events-none" />;

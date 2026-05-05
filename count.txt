@@ -1,0 +1,542 @@
+    "fr-ca": "J'ai jamais quitté une conversation WhatsApp drette après avoir lu de quoi de fâchant."
+  },
+  {
+    "id": "pty-s1",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais fait un 'Irish Exit' (parti sans dire au revoir).",
+    "en": "Never have I ever pulled an Irish Exit (left without saying goodbye).",
+    "es": "Yo nunca me he ido a la francesa de una fiesta.",
+    "fr-ca": "J'ai jamais fait une sortie en douce d'un party sans dire bye."
+  },
+  {
+    "id": "pty-s2",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais renversé mon verre sur quelqu'un par accident.",
+    "en": "Never have I ever accidentally spilled my drink on someone.",
+    "es": "Yo nunca le he tirado una bebida encima a alguien sin querer.",
+    "fr-ca": "J'ai jamais renversé mon verre sur quelqu'un par accident."
+  },
+  {
+    "id": "pty-s3",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais volé un briquet en soirée sans m'en rendre compte.",
+    "en": "Never have I ever accidentally stolen a lighter at a party.",
+    "es": "Yo nunca me he robado un encendedor en una fiesta sin darme cuenta.",
+    "fr-ca": "J'ai jamais piqué un lighter dans un party sans m'en rendre compte."
+  },
+  {
+    "id": "pty-s4",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais essayé de rentrer en boîte avec des chaussures sales.",
+    "en": "Never have I ever tried to get into a club with dirty shoes.",
+    "es": "Yo nunca he tratado de entrar a un antro con tenis o zapatos sucios.",
+    "fr-ca": "J'ai jamais essayé de rentrer aux danseuses ou dans un club avec des souliers sales."
+  },
+  {
+    "id": "pty-s5",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais envoyé un message gênant à un ex en étant ivre.",
+    "en": "Never have I ever drunk-texted an ex.",
+    "es": "Yo nunca le he mandado un mensaje vergonzoso a un ex estando borracho.",
+    "fr-ca": "J'ai jamais texté de quoi de gênant à un ex pendant que j'étais chaud."
+  },
+  {
+    "id": "pty-s6",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais chanté à tue-tête sur une chanson dont je ne connaissais pas les paroles.",
+    "en": "Never have I ever belted out a song I didn't know the lyrics to.",
+    "es": "Yo nunca he cantado a todo pulmón una canción sin saberme la letra.",
+    "fr-ca": "J'ai jamais braillé une toune comme un débile quand je connaissais pas les paroles."
+  },
+  {
+    "id": "pty-s7",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais dansé sur une table ou un bar.",
+    "en": "Never have I ever danced on a table or a bar.",
+    "es": "Yo nunca he bailado arriba de una mesa o en la barra.",
+    "fr-ca": "J'ai jamais dansé sur une table ou au bar."
+  },
+  {
+    "id": "pty-s8",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais menti au videur pour rentrer dans un club.",
+    "en": "Never have I ever lied to a bouncer to get into a club.",
+    "es": "Yo nunca le he mentido al cadenero para que me deje entrar al antro.",
+    "fr-ca": "J'ai jamais menti au bouncer pour pouvoir rentrer dans l'club."
+  },
+  {
+    "id": "pty-s9",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais mangé de la junk food à 4h du matin assis sur le trottoir.",
+    "en": "Never have I ever eaten junk food at 4 AM sitting on the sidewalk.",
+    "es": "Yo nunca he comido comida chatarra a las 4 de la mañana sentado en la banqueta.",
+    "fr-ca": "J'ai jamais mangé du fast-food à 4h le matin su'l bord de la rue."
+  },
+  {
+    "id": "pty-s10",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n'ai jamais perdu mon téléphone ou mes clés en soirée.",
+    "en": "Never have I ever lost my phone or keys at a party.",
+    "es": "Yo nunca he perdido el celular o las llaves en plena fiesta.",
+    "fr-ca": "J'ai jamais perdu mon cell ou mes clés din partys."
+  },
+--
+    "id": "gen-nhie-4",
+    "en": "Never have I ever eaten something off the floor at a party.",
+    "es": "Yo nunca he comido algo del suelo en una fiesta.",
+    "fr": "Je n'ai jamais mangé quelque chose par terre à une soirée.",
+    "fr-ca": "J'ai jamais mangé de quoi à terre dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-5",
+    "en": "Never have I ever eaten something off the floor while drunk.",
+    "es": "Yo nunca he comido algo del suelo mientras estaba borracho.",
+    "fr": "Je n'ai jamais mangé quelque chose par terre en étant ivre.",
+    "fr-ca": "J'ai jamais mangé de quoi à terre en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-6",
+    "en": "Never have I ever eaten something off the floor during a serious meeting.",
+--
+    "id": "gen-nhie-15",
+    "en": "Never have I ever pretended to be sick at a party.",
+    "es": "Yo nunca he fingido estar enfermo en una fiesta.",
+    "fr": "Je n'ai jamais fait semblant d'être malade à une soirée.",
+    "fr-ca": "J'ai jamais fait semblant d'être malade dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-16",
+    "en": "Never have I ever pretended to be sick while drunk.",
+    "es": "Yo nunca he fingido estar enfermo mientras estaba borracho.",
+    "fr": "Je n'ai jamais fait semblant d'être malade en étant ivre.",
+    "fr-ca": "J'ai jamais fait semblant d'être malade en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-17",
+    "en": "Never have I ever pretended to be sick during a serious meeting.",
+--
+    "id": "gen-nhie-26",
+    "en": "Never have I ever stolen something small at a party.",
+    "es": "Yo nunca he robado algo pequeño en una fiesta.",
+    "fr": "Je n'ai jamais volé un petit truc à une soirée.",
+    "fr-ca": "J'ai jamais volé de quoi de petit dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-27",
+    "en": "Never have I ever stolen something small while drunk.",
+    "es": "Yo nunca he robado algo pequeño mientras estaba borracho.",
+    "fr": "Je n'ai jamais volé un petit truc en étant ivre.",
+    "fr-ca": "J'ai jamais volé de quoi de petit en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-28",
+    "en": "Never have I ever stolen something small during a serious meeting.",
+--
+    "id": "gen-nhie-37",
+    "en": "Never have I ever snooped through a phone at a party.",
+    "es": "Yo nunca he revisado un teléfono en una fiesta.",
+    "fr": "Je n'ai jamais fouillé dans un téléphone à une soirée.",
+    "fr-ca": "J'ai jamais fouillé dans un cell dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-38",
+    "en": "Never have I ever snooped through a phone while drunk.",
+    "es": "Yo nunca he revisado un teléfono mientras estaba borracho.",
+    "fr": "Je n'ai jamais fouillé dans un téléphone en étant ivre.",
+    "fr-ca": "J'ai jamais fouillé dans un cell en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-39",
+    "en": "Never have I ever snooped through a phone during a serious meeting.",
+--
+    "id": "gen-nhie-48",
+    "en": "Never have I ever lied in a job interview at a party.",
+    "es": "Yo nunca he mentido en una entrevista de trabajo en una fiesta.",
+    "fr": "Je n'ai jamais menti lors d'un entretien d'embauche à une soirée.",
+    "fr-ca": "J'ai jamais menti dans une entrevue de job dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-49",
+    "en": "Never have I ever lied in a job interview while drunk.",
+    "es": "Yo nunca he mentido en una entrevista de trabajo mientras estaba borracho.",
+    "fr": "Je n'ai jamais menti lors d'un entretien d'embauche en étant ivre.",
+    "fr-ca": "J'ai jamais menti dans une entrevue de job en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-50",
+    "en": "Never have I ever lied in a job interview during a serious meeting.",
+--
+    "id": "gen-nhie-59",
+    "en": "Never have I ever cried in a public place at a party.",
+    "es": "Yo nunca he llorado en un lugar público en una fiesta.",
+    "fr": "Je n'ai jamais pleuré dans un lieu public à une soirée.",
+    "fr-ca": "J'ai jamais braillé en public dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-60",
+    "en": "Never have I ever cried in a public place while drunk.",
+    "es": "Yo nunca he llorado en un lugar público mientras estaba borracho.",
+    "fr": "Je n'ai jamais pleuré dans un lieu public en étant ivre.",
+    "fr-ca": "J'ai jamais braillé en public en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-61",
+    "en": "Never have I ever cried in a public place during a serious meeting.",
+--
+    "id": "gen-nhie-70",
+    "en": "Never have I ever forgotten someone's name instantly at a party.",
+    "es": "Yo nunca he olvidado el nombre de alguien al instante en una fiesta.",
+    "fr": "Je n'ai jamais oublié le nom de quelqu'un instantanément à une soirée.",
+    "fr-ca": "J'ai jamais oublié le nom de quelqu'un d'un coup dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-71",
+    "en": "Never have I ever forgotten someone's name instantly while drunk.",
+    "es": "Yo nunca he olvidado el nombre de alguien al instante mientras estaba borracho.",
+    "fr": "Je n'ai jamais oublié le nom de quelqu'un instantanément en étant ivre.",
+    "fr-ca": "J'ai jamais oublié le nom de quelqu'un d'un coup en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-72",
+    "en": "Never have I ever forgotten someone's name instantly during a serious meeting.",
+--
+    "id": "gen-nhie-81",
+    "en": "Never have I ever tripped over myself at a party.",
+    "es": "Yo nunca he tropezado conmigo mismo en una fiesta.",
+    "fr": "Je n'ai jamais trébuché tout seul à une soirée.",
+    "fr-ca": "J'ai jamais trébuché tout seul dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-82",
+    "en": "Never have I ever tripped over myself while drunk.",
+    "es": "Yo nunca he tropezado conmigo mismo mientras estaba borracho.",
+    "fr": "Je n'ai jamais trébuché tout seul en étant ivre.",
+    "fr-ca": "J'ai jamais trébuché tout seul en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-83",
+    "en": "Never have I ever tripped over myself during a serious meeting.",
+--
+    "id": "gen-nhie-92",
+    "en": "Never have I ever eaten a whole pizza alone at a party.",
+    "es": "Yo nunca he comido una pizza entera solo en una fiesta.",
+    "fr": "Je n'ai jamais mangé une pizza entière seul à une soirée.",
+    "fr-ca": "J'ai jamais mangé une pizza au complet tout seul dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-93",
+    "en": "Never have I ever eaten a whole pizza alone while drunk.",
+    "es": "Yo nunca he comido una pizza entera solo mientras estaba borracho.",
+    "fr": "Je n'ai jamais mangé une pizza entière seul en étant ivre.",
+    "fr-ca": "J'ai jamais mangé une pizza au complet tout seul en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-94",
+    "en": "Never have I ever eaten a whole pizza alone during a serious meeting.",
+--
+    "id": "gen-nhie-103",
+    "en": "Never have I ever texted the wrong person at a party.",
+    "es": "Yo nunca he enviado un mensaje a la persona equivocada en una fiesta.",
+    "fr": "Je n'ai jamais envoyé un message à la mauvaise personne à une soirée.",
+    "fr-ca": "J'ai jamais texté la mauvaise personne dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-104",
+    "en": "Never have I ever texted the wrong person while drunk.",
+    "es": "Yo nunca he enviado un mensaje a la persona equivocada mientras estaba borracho.",
+    "fr": "Je n'ai jamais envoyé un message à la mauvaise personne en étant ivre.",
+    "fr-ca": "J'ai jamais texté la mauvaise personne en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-105",
+    "en": "Never have I ever texted the wrong person during a serious meeting.",
+--
+    "id": "gen-nhie-114",
+    "en": "Never have I ever fallen asleep at work at a party.",
+    "es": "Yo nunca he quedado dormido en el trabajo en una fiesta.",
+    "fr": "Je n'ai jamais endormi au travail à une soirée.",
+    "fr-ca": "J'ai jamais endormi à job dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-115",
+    "en": "Never have I ever fallen asleep at work while drunk.",
+    "es": "Yo nunca he quedado dormido en el trabajo mientras estaba borracho.",
+    "fr": "Je n'ai jamais endormi au travail en étant ivre.",
+    "fr-ca": "J'ai jamais endormi à job en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-116",
+    "en": "Never have I ever fallen asleep at work during a serious meeting.",
+--
+    "id": "gen-nhie-125",
+    "en": "Never have I ever used a fake name at a party.",
+    "es": "Yo nunca he usado un nombre falso en una fiesta.",
+    "fr": "Je n'ai jamais utilisé un faux nom à une soirée.",
+    "fr-ca": "J'ai jamais utilisé un faux nom dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-126",
+    "en": "Never have I ever used a fake name while drunk.",
+    "es": "Yo nunca he usado un nombre falso mientras estaba borracho.",
+    "fr": "Je n'ai jamais utilisé un faux nom en étant ivre.",
+    "fr-ca": "J'ai jamais utilisé un faux nom en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-127",
+    "en": "Never have I ever used a fake name during a serious meeting.",
+--
+    "id": "gen-nhie-136",
+    "en": "Never have I ever regifted a present at a party.",
+    "es": "Yo nunca he regalado un regalo que me dieron en una fiesta.",
+    "fr": "Je n'ai jamais offert un cadeau qu'on m'avait donné à une soirée.",
+    "fr-ca": "J'ai jamais redonné un cadeau à quelqu'un d'autre dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-137",
+    "en": "Never have I ever regifted a present while drunk.",
+    "es": "Yo nunca he regalado un regalo que me dieron mientras estaba borracho.",
+    "fr": "Je n'ai jamais offert un cadeau qu'on m'avait donné en étant ivre.",
+    "fr-ca": "J'ai jamais redonné un cadeau à quelqu'un d'autre en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-138",
+    "en": "Never have I ever regifted a present during a serious meeting.",
+--
+    "id": "gen-nhie-147",
+    "en": "Never have I ever skipped a shower at a party.",
+    "es": "Yo nunca he saltado una ducha en una fiesta.",
+    "fr": "Je n'ai jamais sauté une douche à une soirée.",
+    "fr-ca": "J'ai jamais sauté une douche dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-148",
+    "en": "Never have I ever skipped a shower while drunk.",
+    "es": "Yo nunca he saltado una ducha mientras estaba borracho.",
+    "fr": "Je n'ai jamais sauté une douche en étant ivre.",
+    "fr-ca": "J'ai jamais sauté une douche en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-149",
+    "en": "Never have I ever skipped a shower during a serious meeting.",
+--
+    "id": "gen-nhie-158",
+    "en": "Never have I ever gotten lost in my own city at a party.",
+    "es": "Yo nunca he perdido en mi propia ciudad en una fiesta.",
+    "fr": "Je n'ai jamais perdu dans ma propre ville à une soirée.",
+    "fr-ca": "J'ai jamais perdu dans ma propre ville dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-159",
+    "en": "Never have I ever gotten lost in my own city while drunk.",
+    "es": "Yo nunca he perdido en mi propia ciudad mientras estaba borracho.",
+    "fr": "Je n'ai jamais perdu dans ma propre ville en étant ivre.",
+    "fr-ca": "J'ai jamais perdu dans ma propre ville en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-160",
+    "en": "Never have I ever gotten lost in my own city during a serious meeting.",
+--
+    "id": "gen-nhie-169",
+    "en": "Never have I ever laughed at a very inappropriate time at a party.",
+    "es": "Yo nunca he reído en un momento muy inapropiado en una fiesta.",
+    "fr": "Je n'ai jamais ri à un moment très inapproprié à une soirée.",
+    "fr-ca": "J'ai jamais ri à un mauvais moment dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-170",
+    "en": "Never have I ever laughed at a very inappropriate time while drunk.",
+    "es": "Yo nunca he reído en un momento muy inapropiado mientras estaba borracho.",
+    "fr": "Je n'ai jamais ri à un moment très inapproprié en étant ivre.",
+    "fr-ca": "J'ai jamais ri à un mauvais moment en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-171",
+    "en": "Never have I ever laughed at a very inappropriate time during a serious meeting.",
+--
+    "id": "gen-nhie-180",
+    "en": "Never have I ever sneaked out of a party at a party.",
+    "es": "Yo nunca he escapado de una fiesta en una fiesta.",
+    "fr": "Je n'ai jamais éclipsé d'une soirée à une soirée.",
+    "fr-ca": "J'ai jamais éclipsé d'un party dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-181",
+    "en": "Never have I ever sneaked out of a party while drunk.",
+    "es": "Yo nunca he escapado de una fiesta mientras estaba borracho.",
+    "fr": "Je n'ai jamais éclipsé d'une soirée en étant ivre.",
+    "fr-ca": "J'ai jamais éclipsé d'un party en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-182",
+    "en": "Never have I ever sneaked out of a party during a serious meeting.",
+--
+    "id": "gen-nhie-191",
+    "en": "Never have I ever Googled my own name at a party.",
+    "es": "Yo nunca he buscado mi propio nombre en Google en una fiesta.",
+    "fr": "Je n'ai jamais cherché mon propre nom sur Google à une soirée.",
+    "fr-ca": "J'ai jamais googlé mon propre nom dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-192",
+    "en": "Never have I ever Googled my own name while drunk.",
+    "es": "Yo nunca he buscado mi propio nombre en Google mientras estaba borracho.",
+    "fr": "Je n'ai jamais cherché mon propre nom sur Google en étant ivre.",
+    "fr-ca": "J'ai jamais googlé mon propre nom en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-193",
+    "en": "Never have I ever Googled my own name during a serious meeting.",
+--
+    "id": "gen-nhie-202",
+    "en": "Never have I ever cheated on a test at a party.",
+    "es": "Yo nunca he copiado en un examen en una fiesta.",
+    "fr": "Je n'ai jamais triché à un examen à une soirée.",
+    "fr-ca": "J'ai jamais triché dans un examen dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-203",
+    "en": "Never have I ever cheated on a test while drunk.",
+    "es": "Yo nunca he copiado en un examen mientras estaba borracho.",
+    "fr": "Je n'ai jamais triché à un examen en étant ivre.",
+    "fr-ca": "J'ai jamais triché dans un examen en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-204",
+    "en": "Never have I ever cheated on a test during a serious meeting.",
+--
+    "id": "gen-nhie-213",
+    "en": "Never have I ever worn underwear inside out at a party.",
+    "es": "Yo nunca he usado ropa interior al revés en una fiesta.",
+    "fr": "Je n'ai jamais porté des sous-vêtements à l'envers à une soirée.",
+    "fr-ca": "J'ai jamais mis mes bobettes à l'envers dans un party.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-214",
+    "en": "Never have I ever worn underwear inside out while drunk.",
+    "es": "Yo nunca he usado ropa interior al revés mientras estaba borracho.",
+    "fr": "Je n'ai jamais porté des sous-vêtements à l'envers en étant ivre.",
+    "fr-ca": "J'ai jamais mis mes bobettes à l'envers en étant chaud.",
+    "category": "party",
+    "difficulty": "soft"
+  },
+  {
+    "id": "gen-nhie-215",
+    "en": "Never have I ever worn underwear inside out during a serious meeting.",
+--
+    "difficulty": "soft"
+  },
+  {
+    "id": "new-nh-pty-1",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n`ai jamais dormi lors d`une soirée.",
+    "en": "Never have I ever fallen asleep at a party.",
+    "es": "Yo nunca he me he quedado dormido en una fiesta.",
+    "fr-ca": "J`ai jamais dormi direct dans un party."
+  },
+  {
+    "id": "new-nh-pty-2",
+    "difficulty": "hard",
+    "category": "party",
+    "fr": "Je n`ai jamais été viré d`une boîte de nuit.",
+    "en": "Never have I ever been kicked out of a club.",
+    "es": "Yo nunca he sido expulsado de una discoteca.",
+    "fr-ca": "J`ai jamais été sacré dehors d`un club."
+  },
+  {
+    "id": "new-nh-pty-3",
+    "difficulty": "soft",
+    "category": "party",
+    "fr": "Je n`ai jamais chanté au karaoké devant des inconnus.",
+    "en": "Never have I ever sung karaoke in front of strangers.",
+    "es": "Yo nunca he cantado karaoke frente a extraños.",
+    "fr-ca": "J`ai jamais chanté au karaoké devant du monde que j`connais pas."
+  },

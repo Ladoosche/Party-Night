@@ -16,12 +16,14 @@ import {
   Sparkles,
   Info,
   CheckCircle2,
-  LogOut
+  LogOut,
+  Loader2
 } from "lucide-react";
 import { useAppContext, Player } from "../context/AppContext";
-import { wordGroups } from "../data/words";
-import { killerActions } from "../data/killerActions";
+import { getWordGroups } from "../data/undercover";
+import { getKillerActions } from "../data/killer";
 import { AllUsedModal } from './AllUsedModal';
+import { GameHeader } from './GameHeader';
 import { QuitGameModal } from './QuitGameModal';
 
 interface TargetInfo {
@@ -52,104 +54,109 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const [midGameRevealPlayer, setMidGameRevealPlayer] = useState<string | null>(null);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const activePlayers = allPlayers.filter(p => p.isActive !== false);
 
-  const startGame = (clearUsed = false) => {
+  const startGame = async (clearUsed = false) => {
     if (activePlayers.length < 3) return;
 
-    let usedWords = clearUsed ? [] : usedItems.killerWords;
-    let usedActions = clearUsed ? [] : usedItems.killerActions;
+    setIsLoading(true);
+    try {
+      let usedWords = clearUsed ? [] : (usedItems.killerWords || []);
+      let usedActions = clearUsed ? [] : (usedItems.killerActions || []);
 
-    if (clearUsed) {
-      setUsedItems(prev => ({ ...prev, killerWords: [], killerActions: [] }));
-    }
-
-    const shuffled = [...activePlayers].sort(() => Math.random() - 0.5);
-    let finalPlayers: TargetInfo[] = [];
-
-    let wolfIdx = -1;
-    if (whiteWolfOn) {
-      wolfIdx = Math.floor(Math.random() * shuffled.length);
-    }
-
-    const killers = shuffled.filter((_, i) => i !== wolfIdx);
-    const wolf = wolfIdx !== -1 ? shuffled[wolfIdx] : null;
-
-    let tasks: string[] = [];
-    if (mode === 'word') {
-      const languageKey = language.toUpperCase() as keyof typeof wordGroups;
-      const groups = wordGroups[languageKey] || wordGroups['EN'];
-      
-      const availableIndices = groups.map((_, i) => i).filter(i => !usedWords.includes(i));
-      if (availableIndices.length === 0) {
-        setAllUsedOpen(true);
-        return;
+      if (clearUsed) {
+        setUsedItems(prev => ({ ...prev, killerWords: [], killerActions: [] }));
       }
 
-      const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-      setUsedItems(prev => ({ ...prev, killerWords: [...usedWords, selectedIndex]}));
+      const shuffled = [...activePlayers].sort(() => Math.random() - 0.5);
+      let finalPlayers: TargetInfo[] = [];
 
-      const group = groups[selectedIndex];
-      tasks = [...group].sort(() => Math.random() - 0.5);
-    } else if (mode === 'action') {
-      const languageKey = language.toUpperCase() as keyof typeof killerActions;
-      const actions = killerActions[languageKey] || killerActions['EN'];
-      
-      const neededTasksCount = killers.length;
-      let availableIndices = actions.map((_, i) => i).filter(i => !usedActions.includes(i));
-      
-      if (availableIndices.length < neededTasksCount) {
-        setAllUsedOpen(true);
-        return;
+      let wolfIdx = -1;
+      if (whiteWolfOn) {
+        wolfIdx = Math.floor(Math.random() * shuffled.length);
       }
 
-      // pick neededTasksCount random items
-      const selectedIndices = [...availableIndices].sort(() => Math.random() - 0.5).slice(0, neededTasksCount);
-      setUsedItems(prev => ({ ...prev, killerActions: [...usedActions, ...selectedIndices] }));
+      const killers = shuffled.filter((_, i) => i !== wolfIdx);
+      const wolf = wolfIdx !== -1 ? shuffled[wolfIdx] : null;
 
-      tasks = selectedIndices.map(i => actions[i]).sort(() => Math.random() - 0.5);
-    }
+      let tasks: string[] = [];
+      if (mode === 'word') {
+        const groups = await getWordGroups(language);
+        
+        const availableIndices = groups.map((_: any, i: number) => i).filter((i: number) => !usedWords.includes(i));
+        if (availableIndices.length === 0) {
+          setAllUsedOpen(true);
+          return;
+        }
 
-    if (randomTargets) {
-      killers.forEach((k, i) => {
-        const potentialTargets = killers.filter(p => p.id !== k.id);
-        const target = potentialTargets[Math.floor(Math.random() * potentialTargets.length)];
-        finalPlayers.push({
-          playerId: k.id,
-          targetId: target.id,
-          role: 'killer',
-          isEliminated: false,
-          targetTask: tasks.length > 0 ? tasks[i % tasks.length] : undefined
+        const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+        setUsedItems(prev => ({ ...prev, killerWords: [...usedWords, selectedIndex]}));
+
+        const group = groups[selectedIndex];
+        tasks = [...group].sort(() => Math.random() - 0.5);
+      } else if (mode === 'action') {
+        const actionsData = await getKillerActions(language);
+        const actions = actionsData;
+        
+        const neededTasksCount = killers.length;
+        let availableIndices = actions.map((_: any, i: number) => i).filter((i: number) => !usedActions.includes(i));
+        
+        if (availableIndices.length < neededTasksCount) {
+          setAllUsedOpen(true);
+          return;
+        }
+
+        // pick neededTasksCount random items
+        const selectedIndices = [...availableIndices].sort(() => Math.random() - 0.5).slice(0, neededTasksCount);
+        setUsedItems(prev => ({ ...prev, killerActions: [...usedActions, ...selectedIndices] }));
+
+        tasks = selectedIndices.map(i => actions[i]).sort(() => Math.random() - 0.5);
+      }
+
+      if (randomTargets) {
+        killers.forEach((k, i) => {
+          const potentialTargets = killers.filter(p => p.id !== k.id);
+          const target = potentialTargets[Math.floor(Math.random() * potentialTargets.length)];
+          finalPlayers.push({
+            playerId: k.id,
+            targetId: target.id,
+            role: 'killer',
+            isEliminated: false,
+            targetTask: tasks.length > 0 ? tasks[i % tasks.length] : undefined
+          });
         });
-      });
-    } else {
-      killers.forEach((k, i) => {
-        const target = killers[(i + 1) % killers.length];
-        finalPlayers.push({
-          playerId: k.id,
-          targetId: target.id,
-          role: 'killer',
-          isEliminated: false,
-          targetTask: tasks.length > 0 ? tasks[i % tasks.length] : undefined
+      } else {
+        killers.forEach((k, i) => {
+          const target = killers[(i + 1) % killers.length];
+          finalPlayers.push({
+            playerId: k.id,
+            targetId: target.id,
+            role: 'killer',
+            isEliminated: false,
+            targetTask: tasks.length > 0 ? tasks[i % tasks.length] : undefined
+          });
         });
-      });
-    }
+      }
 
-    if (wolf) {
-      finalPlayers.push({
-        playerId: wolf.id,
-        targetId: null,
-        role: 'white-wolf',
-        isEliminated: false,
-        isUnmasked: false
-      });
-    }
+      if (wolf) {
+        finalPlayers.push({
+          playerId: wolf.id,
+          targetId: null,
+          role: 'white-wolf',
+          isEliminated: false,
+          isUnmasked: false
+        });
+      }
 
-    setGamePlayers(finalPlayers.sort(() => Math.random() - 0.5));
-    setCurrentPlayerIdx(0);
-    setRound(1);
-    setScreen('pass');
+      setGamePlayers(finalPlayers.sort(() => Math.random() - 0.5));
+      setCurrentPlayerIdx(0);
+      setRound(1);
+      setScreen('pass');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleRevealNext = () => {
@@ -312,17 +319,10 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
     if (screen === 'intro') {
       return (
         <div className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors text-slate-900 dark:text-slate-100">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8 text-slate-900 dark:text-slate-100 transition-colors">
-            <button 
-              onClick={onBack} 
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <h2 className="text-sm font-bold uppercase tracking-widest">{t('killer-title')}</h2>
-            <div className="w-10" />
-          </div>
+          <GameHeader
+            onBack={onBack}
+            title={<h2 className="text-sm font-bold uppercase tracking-widest">{t('killer-title')}</h2>}
+          />
 
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden transition-colors">
@@ -377,24 +377,11 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
     if (screen === 'config') {
       return (
         <div className="flex-1 flex flex-col p-6 bg-white dark:bg-slate-900 overflow-y-auto transition-colors text-slate-900 dark:text-slate-100">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-            <button 
-              onClick={onBack} 
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <h2 className="text-sm font-bold uppercase tracking-widest">{t('killer-title')}</h2>
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={onShowPlayers}
-                className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-              >
-                {t("edit-players")}
-              </button>
-            </div>
-          </div>
+          <GameHeader
+            onBack={onBack}
+            onShowPlayers={onShowPlayers}
+            title={<h2 className="text-sm font-bold uppercase tracking-widest">{t('killer-title')}</h2>}
+          />
 
           <div className="flex-1 space-y-8">
             <div className="space-y-4">
@@ -469,8 +456,10 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
               }
               startGame();
             }}
-            className="w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-widest mt-8 transition-all shadow-lg bg-slate-900 dark:bg-slate-700 text-white hover:bg-slate-800 dark:hover:bg-slate-600 shadow-slate-900/10 dark:shadow-none"
+            disabled={isLoading}
+            className="w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-widest mt-8 transition-all shadow-lg bg-slate-900 dark:bg-slate-700 text-white hover:bg-slate-800 dark:hover:bg-slate-600 shadow-slate-900/10 dark:shadow-none flex items-center justify-center gap-2 disabled:opacity-50"
           >
+            {isLoading && <Loader2 className="animate-spin" size={18} />}
             {t('start-game')}
           </button>
         </div>
@@ -490,7 +479,7 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
             onClick={() => setScreen('reveal')}
             className="px-10 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold text-sm uppercase tracking-widest shadow-xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
           >
-            {t('killer-see-action-target')}
+            {mode === 'action' ? t('killer-see-action-target') : mode === 'word' ? t('killer-see-word-target') : t('killer-see-target')}
           </button>
         </div>
       );
@@ -543,7 +532,7 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
               onClick={() => setShowTarget(true)}
               className="px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-bold text-sm uppercase tracking-widest shadow-2xl flex items-center gap-3 hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors"
             >
-              <Eye size={20} /> {t('killer-see-action-target')}
+              <Eye size={20} /> {mode === 'action' ? t('killer-see-action-target') : mode === 'word' ? t('killer-see-word-target') : t('killer-see-target')}
             </button>
           )}
         </div>
@@ -553,25 +542,23 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
     if (screen === 'game') {
       return (
         <div className="flex-1 flex flex-col p-6 bg-white dark:bg-slate-900 overflow-y-auto transition-colors text-slate-900 dark:text-slate-100">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
-            <button 
-              onClick={() => setShowQuitConfirm(true)} 
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <div className="flex flex-col items-center">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">{t('killer-title')}</h2>
-              <p className="text-[9px] font-bold uppercase tracking-widest mt-0.5">{t('killer-round').replace('{0}', round.toString())}</p>
-            </div>
-            <button 
-              onClick={finishGame}
-              className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-            >
-              {t('finish-game')}
-            </button>
-          </div>
+          <GameHeader
+            onQuit={() => setShowQuitConfirm(true)}
+            title={
+              <>
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">{t('killer-title')}</h2>
+                <p className="text-[9px] font-bold uppercase tracking-widest mt-0.5">{t('killer-round').replace('{0}', round.toString())}</p>
+              </>
+            }
+            rightContent={
+              <button 
+                onClick={finishGame}
+                className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
+              >
+                {t('finish-game')}
+              </button>
+            }
+          />
 
           {lastActionMessage && (
             <div className="mb-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-100 dark:border-yellow-900/30 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2">
@@ -671,8 +658,10 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
                 }
                 startGame();
               }}
-              className="w-full py-4 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest shadow-lg shadow-slate-900/10 dark:shadow-none transition-all"
+              disabled={isLoading}
+              className="w-full py-4 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-bold text-sm uppercase tracking-widest shadow-lg shadow-slate-900/10 dark:shadow-none transition-all flex items-center justify-center gap-2 disabled:opacity-50"
             >
+              {isLoading && <Loader2 className="animate-spin" size={18} />}
               {t('play-again')}
             </button>
             <button

@@ -16,10 +16,12 @@ import {
   Check,
   Trash2,
   Info,
-  LogOut
+  LogOut,
+  Loader2
 } from "lucide-react";
 import { useAppContext } from "../context/AppContext";
-import { MLT_QUESTIONS, MLTQuestion } from "../data/mostLikelyToQuestions";
+import { getMLTQuestions, TypeDef as MLTQuestion } from "../data/mostLikelyTo";
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 import { AllUsedModal } from "./AllUsedModal";
 
@@ -41,6 +43,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleDifficulty = (d: MLTQuestion["difficulty"]) => {
     if (difficulties.includes(d)) {
@@ -60,42 +63,46 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
     }
   };
 
-  const startGame = (clearUsed = false) => {
+  const startGame = async (clearUsed = false) => {
     if (selectedCategories.length === 0 || difficulties.length === 0) return;
     
-    let usedIds = clearUsed ? [] : usedItems.mlt;
-    if (clearUsed) {
-      setUsedItems(prev => ({ ...prev, mlt: [] }));
-    }
+    setIsLoading(true);
+    try {
+      const getQuestionsResult = await getMLTQuestions(language);
+      
+      let usedIds = clearUsed ? [] : (usedItems.mlt || []);
+      if (clearUsed) {
+        setUsedItems(prev => ({ ...prev, mlt: [] }));
+      }
 
-    let filtered = MLT_QUESTIONS.filter(
-      (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
-    );
-    
-    if (filtered.length === 0) {
-      // Check if we exhausted all available matching these categories
-      let totalMatching = MLT_QUESTIONS.filter(
-        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+      let filtered = getQuestionsResult.filter(
+        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
       );
-      if (totalMatching.length > 0) {
-        // All used
-        setAllUsedOpen(true);
-        return;
-      }
+      
+      if (filtered.length === 0) {
+        let totalMatching = getQuestionsResult.filter(
+          (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+        );
+        if (totalMatching.length > 0) {
+          setAllUsedOpen(true);
+          return;
+        }
 
-      // fallback
-      const backup = MLT_QUESTIONS.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
-      if (backup.length === 0) {
-        setAllUsedOpen(true);
-        return;
+        const backup = getQuestionsResult.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
+        if (backup.length === 0) {
+          setAllUsedOpen(true);
+          return;
+        }
+        filtered = backup;
       }
-      filtered = backup;
+      
+      const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+      setCurrentQuestions(shuffled);
+      setCurrentIndex(0);
+      setScreen("game");
+    } finally {
+      setIsLoading(false);
     }
-    
-    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
-    setCurrentQuestions(shuffled);
-    setCurrentIndex(0);
-    setScreen("game");
   };
 
   const recordQuestionUsed = (id: string) => {
@@ -154,17 +161,10 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
               key="rules"
               className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
             >
-              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-                <button
-                  onClick={onBack}
-                  className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-                >
-                  <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-                </button>
-                <div className="w-10 sm:w-12" />
-                <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-title")}</h2>
-                <div className="w-10" />
-              </div>
+              <GameHeader
+                onBack={onBack}
+                title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-title")}</h2>}
+              />
 
               <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
                 <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden transition-colors">
@@ -206,24 +206,11 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
             key="config"
             className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900 transition-colors"
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-              <button
-                onClick={onBack}
-                className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-              >
-                <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-              </button>
-              <div className="w-10 sm:w-12" />
-              <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-title")}</h2>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={onShowPlayers}
-                  className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-                >
-                  {t("edit-players")}
-                </button>
-              </div>
-            </div>
+            <GameHeader
+              onBack={onBack}
+              onShowPlayers={onShowPlayers}
+              title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-title")}</h2>}
+            />
             
             <div className="px-5 flex-1">
               <div className="space-y-6">
@@ -296,14 +283,14 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                   }
                   startGame();
                 }}
-                disabled={selectedCategories.length === 0}
+                disabled={selectedCategories.length === 0 || isLoading}
                 className={`w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-widest transition-all shadow-xl flex items-center justify-center gap-2 ${
                   selectedCategories.length > 0
                   ? "bg-slate-900 dark:bg-slate-700 text-white hover:bg-slate-800 dark:hover:bg-slate-600 shadow-slate-900/10 dark:shadow-none" 
                   : "bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600 cursor-not-allowed shadow-none"
                 }`}
               >
-                <Play size={18} fill="currentColor" />
+                {isLoading ? <Loader2 className="animate-spin" size={18} /> : <Play size={18} fill="currentColor" />}
                 {t("mlt-start")}
               </button>
             </div>
@@ -315,31 +302,22 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
             key="game"
             className="flex-1 flex flex-col px-5 py-8 bg-white dark:bg-slate-900 transition-colors"
           >
-             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-                <button
-                  onClick={() => setQuitConfirm(true)}
-                  className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-                >
-                  <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-                </button>
-                <div className="w-10 sm:w-12" />
-                <div className="flex flex-col items-center">
-                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
-                        {t("mlt-title")}
-                    </span>
-                    <span className={`text-[10px] font-bold uppercase ${
-                        currentQuestion.difficulty === "soft" ? "text-green-500 dark:text-green-400" : "text-orange-500 dark:text-orange-400"
-                    }`}>
-                        {t(`mlt-mode-${currentQuestion.difficulty}`)}
-                    </span>
-                </div>
-                <button
-                    onClick={onShowPlayers}
-                    className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-                >
-                  {t("edit-players")}
-                </button>
-             </div>
+             <GameHeader
+               onQuit={() => setQuitConfirm(true)}
+               onShowPlayers={onShowPlayers}
+               title={
+                 <>
+                   <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+                     {t("mlt-title")}
+                   </span>
+                   <span className={`text-[10px] font-bold uppercase ${
+                     currentQuestion.difficulty === "soft" ? "text-green-500 dark:text-green-400" : "text-orange-500 dark:text-orange-400"
+                   }`}>
+                     {t(`mlt-mode-${currentQuestion.difficulty}`)}
+                   </span>
+                 </>
+               }
+             />
 
              <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
                 <div key={currentQuestion.id}
@@ -349,7 +327,7 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                          {language === 'fr' ? 'Qui pourrait...' : 'Who would...'}
                     </div>
                     <h2 className="text-3xl font-bold text-slate-900 dark:text-slate-100 leading-tight tracking-tight max-w-sm mx-auto transition-colors">
-                        {language === 'fr' ? currentQuestion.fr : currentQuestion.en}
+                        {currentQuestion.text}
                     </h2>
                 </div>
              </div>
@@ -378,17 +356,10 @@ export const MostLikelyTo: React.FC<MostLikelyToProps> = ({ onBack, onShowPlayer
                 key="score"
                 className="flex-1 flex flex-col bg-white dark:bg-slate-900 transition-colors"
             >
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-                    <button
-                        onClick={() => setScreen("game")}
-                        className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-                    >
-                        <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-                    </button>
-                    <div className="w-10 sm:w-12" />
-                    <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-vote-for")}</h2>
-                    <div className="w-20"></div>
-                </div>
+                <GameHeader
+                  onBack={() => setScreen("game")}
+                  title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("mlt-vote-for")}</h2>}
+                />
 
                 <div className="flex-1 flex flex-col px-5 overflow-y-auto">
                     <div className="mb-6">

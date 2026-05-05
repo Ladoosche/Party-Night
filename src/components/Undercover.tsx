@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAppContext } from "../context/AppContext";
-import { wordGroups } from "../data/words";
+import { getWordGroups } from "../data/undercover";
+import { GameHeader } from "./GameHeader";
 import { QuitGameModal } from "./QuitGameModal";
 import { AllUsedModal } from "./AllUsedModal";
 
@@ -18,7 +19,8 @@ import {
   Plus,
   Trash2,
   Eye,
-  LogOut
+  LogOut,
+  Loader2
 } from "lucide-react";
 
 interface UndercoverProps {
@@ -71,6 +73,7 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
   );
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (players.length > 5) setUndercovers(2);
@@ -89,43 +92,47 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
     }
   }, [screen, language, wordsHidden]);
 
-  const suggestWords = (clearUsed = false) => {
-    const wordLang = language.toUpperCase() as "EN" | "FR";
-    const list = wordGroups[wordLang] || wordGroups["EN"];
-    
-    let currentUsed = clearUsed ? [] : usedItems.undercoverWords;
-    if (clearUsed) {
-      setUsedItems(prev => ({ ...prev, undercoverWords: [] }));
+  const suggestWords = async (clearUsed = false) => {
+    setIsLoading(true);
+    try {
+      const list = await getWordGroups(language);
+      
+      let currentUsed = clearUsed ? [] : (usedItems.undercoverWords || []);
+      if (clearUsed) {
+        setUsedItems(prev => ({ ...prev, undercoverWords: [] }));
+      }
+
+      const availableIndices = list.map((_, i) => i).filter((i: number) => !currentUsed.includes(i));
+      
+      if (availableIndices.length === 0) {
+        setAllUsedOpen(true);
+        return;
+      }
+
+      const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+      const group = list[selectedIndex];
+      
+      // Record it as used immediately upon suggestion
+      setUsedItems(prev => ({ ...prev, undercoverWords: [...currentUsed, selectedIndex] }));
+
+      const words = [...group];
+
+      // Pick two random distinct words from the group
+      const idx1 = Math.floor(Math.random() * words.length);
+      const word1 = words.splice(idx1, 1)[0];
+      const idx2 = Math.floor(Math.random() * words.length);
+      const word2 = words[idx2];
+
+      setCustomWord1(word1);
+      setCustomWord2(word2);
+    } finally {
+      setIsLoading(false);
     }
-
-    const availableIndices = list.map((_, i) => i).filter(i => !currentUsed.includes(i));
-    
-    if (availableIndices.length === 0) {
-      setAllUsedOpen(true);
-      return;
-    }
-
-    const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-    const group = list[selectedIndex];
-    
-    // Record it as used immediately upon suggestion
-    setUsedItems(prev => ({ ...prev, undercoverWords: [...currentUsed, selectedIndex] }));
-
-    const words = [...group];
-
-    // Pick two random distinct words from the group
-    const idx1 = Math.floor(Math.random() * words.length);
-    const word1 = words.splice(idx1, 1)[0];
-    const idx2 = Math.floor(Math.random() * words.length);
-    const word2 = words[idx2];
-
-    setCustomWord1(word1);
-    setCustomWord2(word2);
   };
 
   const activePlayersToAssign = players.filter(p => !p.isActive === false && (wordsHidden || p.id !== gameMasterId));
   const minRequiredCount = 3;
-  const isStartDisabled = (!wordsHidden && !gameMasterId) || activePlayersToAssign.length < minRequiredCount;
+  const isStartDisabled = (!wordsHidden && !gameMasterId) || activePlayersToAssign.length < minRequiredCount || isLoading;
 
   const updateScores = (winningRole: Role | "civilians", mrWhiteGuessed = false) => {
     setPlayers(prev => prev.map(p => {
@@ -150,68 +157,85 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
     }));
   };
 
-  const startGame = () => {
+  const startGame = async () => {
     if (isStartDisabled) return;
+    setIsLoading(true);
 
-    let w1 = customWord1,
-      w2 = customWord2;
-    if (wordsHidden || !w1 || !w2) {
-      const wordLang = language.toUpperCase() as "EN" | "FR";
-      const list = wordGroups[wordLang] || wordGroups["EN"];
-      const group = list[Math.floor(Math.random() * list.length)];
-      const words = [...group];
+    try {
+      let w1 = customWord1,
+        w2 = customWord2;
+        
+      if (wordsHidden || !w1 || !w2) {
+        const list = await getWordGroups(language);
+        let currentUsed = usedItems.undercoverWords || [];
+        let availableIndices = list.map((_: any, i: number) => i).filter((i: number) => !currentUsed.includes(i));
+        
+        if (availableIndices.length === 0) {
+            setAllUsedOpen(true);
+            return;
+        }
 
-      const idx1 = Math.floor(Math.random() * words.length);
-      w1 = words.splice(idx1, 1)[0];
-      const idx2 = Math.floor(Math.random() * words.length);
-      w2 = words[idx2];
+        const selectedIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+        const group = list[selectedIndex];
+        
+        setUsedItems(prev => ({ ...prev, undercoverWords: [...currentUsed, selectedIndex] }));
+
+        const words = [...group];
+
+        const idx1 = Math.floor(Math.random() * words.length);
+        w1 = words.splice(idx1, 1)[0];
+        const idx2 = Math.floor(Math.random() * words.length);
+        w2 = words[idx2];
+      }
+
+      let rolesPool: Role[] = [];
+      for (let i = 0; i < undercovers; i++) rolesPool.push("undercover");
+      if (mrWhiteOn) rolesPool.push("mrwhite");
+      while (rolesPool.length < activePlayersToAssign.length) rolesPool.push("civilian");
+      rolesPool.sort(() => Math.random() - 0.5);
+
+      const gp: GamePlayer[] = activePlayersToAssign.map((p, i) => ({
+        ...p,
+        role: rolesPool[i],
+        word:
+          rolesPool[i] === "undercover"
+            ? w2
+            : rolesPool[i] === "civilian"
+              ? w1
+              : "",
+        recheckCount: 0,
+        isEliminated: false,
+      }));
+
+      setGamePlayers(gp);
+
+      const civilians = gp
+        .map((_, i) => i)
+        .filter((i) => gp[i].role === "civilian");
+      const startIdx = civilians[Math.floor(Math.random() * civilians.length)];
+      const mwIdx = gp.findIndex((p) => p.role === "mrwhite");
+
+      let orderExcludeMW: number[] = [];
+      for (let i = 0; i < gp.length; i++) {
+        const idx = (startIdx + i) % gp.length;
+        if (idx !== mwIdx) orderExcludeMW.push(idx);
+      }
+
+      let finalOrder = [...orderExcludeMW];
+      if (mwIdx !== -1) {
+        const minPos = Math.max(1, Math.floor(gp.length * 0.6));
+        const randomPos =
+          minPos + Math.floor(Math.random() * (gp.length - minPos));
+        finalOrder.splice(randomPos, 0, mwIdx);
+      }
+
+      setPassOrder(finalOrder);
+      setPassIndex(0);
+      setRound(1);
+      setScreen("pass");
+    } finally {
+      setIsLoading(false);
     }
-
-    let rolesPool: Role[] = [];
-    for (let i = 0; i < undercovers; i++) rolesPool.push("undercover");
-    if (mrWhiteOn) rolesPool.push("mrwhite");
-    while (rolesPool.length < activePlayersToAssign.length) rolesPool.push("civilian");
-    rolesPool.sort(() => Math.random() - 0.5);
-
-    const gp: GamePlayer[] = activePlayersToAssign.map((p, i) => ({
-      ...p,
-      role: rolesPool[i],
-      word:
-        rolesPool[i] === "undercover"
-          ? w2
-          : rolesPool[i] === "civilian"
-            ? w1
-            : "",
-      recheckCount: 0,
-      isEliminated: false,
-    }));
-
-    setGamePlayers(gp);
-
-    const civilians = gp
-      .map((_, i) => i)
-      .filter((i) => gp[i].role === "civilian");
-    const startIdx = civilians[Math.floor(Math.random() * civilians.length)];
-    const mwIdx = gp.findIndex((p) => p.role === "mrwhite");
-
-    let orderExcludeMW: number[] = [];
-    for (let i = 0; i < gp.length; i++) {
-      const idx = (startIdx + i) % gp.length;
-      if (idx !== mwIdx) orderExcludeMW.push(idx);
-    }
-
-    let finalOrder = [...orderExcludeMW];
-    if (mwIdx !== -1) {
-      const minPos = Math.max(1, Math.floor(gp.length * 0.6));
-      const randomPos =
-        minPos + Math.floor(Math.random() * (gp.length - minPos));
-      finalOrder.splice(randomPos, 0, mwIdx);
-    }
-
-    setPassOrder(finalOrder);
-    setPassIndex(0);
-    setRound(1);
-    setScreen("pass");
   };
 
   const nextReveal = () => {
@@ -307,19 +331,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
   if (winner) {
     return (
       <div className="flex-1 flex flex-col bg-white dark:bg-slate-900 overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-            <button onClick={resetGame} className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group">
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("roles-recap")}</h2>
-            <button 
-              onClick={onShowPlayers}
-              className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-            >
-              {t("edit-players")}
-            </button>
-        </div>
+        <GameHeader
+          onBack={resetGame}
+          onShowPlayers={onShowPlayers}
+          title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("roles-recap")}</h2>}
+        />
 
         <div className="flex-1 flex flex-col px-5 overflow-y-auto">
           <div className="text-center mb-10">
@@ -427,17 +443,10 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
           key="intro"
           className="flex-1 flex flex-col px-5 py-6 overflow-y-auto bg-white dark:bg-slate-900"
         >
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-8">
-            <button
-              onClick={onBack}
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">Undercover</h2>
-            <div className="w-10" />
-          </div>
+          <GameHeader
+            onBack={onBack}
+            title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">Undercover</h2>}
+          />
 
           <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 dark:shadow-none text-center mb-8 relative overflow-hidden">
@@ -506,26 +515,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
 
       {screen === "config" && (
         <div className="flex-1 flex flex-col scrollbar-hide px-5 py-6 pb-12 md:pb-6 overflow-y-auto bg-white dark:bg-slate-900">
-          <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-5 py-4 mb-4">
-            <button
-              onClick={onBack}
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">
-              {t("game-settings")}
-            </h2>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={onShowPlayers}
-                className="text-[10px] font-bold text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-3 py-1 rounded-md uppercase tracking-wider transition-colors"
-              >
-                {t("edit-players")}
-              </button>
-            </div>
-          </div>
+          <GameHeader
+            onBack={onBack}
+            onShowPlayers={onShowPlayers}
+            title={<h2 className="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-slate-100">{t("game-settings")}</h2>}
+          />
           <div className="px-5">
             <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-8 text-center">
               {t("customise-match")}
@@ -705,9 +699,11 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm outline-none focus:border-[#0077b6] transition-all shadow-sm font-medium"
                     />
                     <button
-                      onClick={suggestWords}
-                      className="text-[10px] text-[#0077b6] dark:text-[#38bdf8] font-bold uppercase tracking-widest px-1 hover:opacity-80 transition-colors w-full"
+                      onClick={() => suggestWords()}
+                      disabled={isLoading}
+                      className="text-[10px] text-[#0077b6] dark:text-[#38bdf8] font-bold uppercase tracking-widest px-1 hover:opacity-80 transition-colors w-full flex items-center justify-center gap-2 disabled:opacity-50"
                     >
+                      {isLoading && <Loader2 className="animate-spin" size={14} />}
                       {t("suggest-words")}
                     </button>
                   </div>
@@ -732,8 +728,9 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
             <button
               onClick={startGame}
               disabled={isStartDisabled}
-              className={`flex-[2] py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg ${isStartDisabled ? "bg-slate-300 text-slate-500 cursor-not-allowed shadow-none" : "bg-slate-900 text-white hover:bg-slate-800 shadow-slate-900/10"}`}
+              className={`flex-[2] py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2 ${isStartDisabled ? "bg-slate-300 text-slate-500 cursor-not-allowed shadow-none" : "bg-slate-900 text-white hover:bg-slate-800 shadow-slate-900/10"}`}
             >
+              {isLoading && <Loader2 className="animate-spin" size={18} />}
               {t("start-game")}
             </button>
           </div>
@@ -821,34 +818,32 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
 
       {screen === "game" && (
         <div className="flex-1 flex flex-col overflow-y-auto pb-12 md:pb-6">
-          <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 mb-8">
-            <button 
-              onClick={handleQuit}
-              className="absolute top-4 left-4 z-40 p-2 sm:p-2.5 bg-white shadow-md border border-slate-200 dark:bg-slate-800 dark:border-slate-700 rounded-full text-slate-800 dark:text-white hover:scale-105 transition-all group"
-            >
-              <LogOut size={16} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-            </button>
-            <div className="w-10 sm:w-12" />
-            <div className="flex flex-col items-center">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Undercover</h2>
-              <p className="text-[9px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest mt-0.5">{t("round-label")} {round}</p>
-            </div>
-            <div className="flex flex-col items-end">
-              <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
-                {gamePlayers.filter((p) => !p.isEliminated).length}{" "}
-                {t("active-label")}
+          <GameHeader
+            onQuit={handleQuit}
+            title={
+              <div className="flex flex-col items-center">
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Undercover</h2>
+                <p className="text-[9px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-widest mt-0.5">{t("round-label")} {round}</p>
               </div>
-              {!wordsHidden && gameMasterId && !isExternalHost && (
-                <div className="mt-1">
-                  <div className="text-[#0077b6] text-[8px] font-bold px-1 uppercase tracking-wider">
-                    MJ: {players.find(p => p.id === gameMasterId)?.name}
-                  </div>
+            }
+            rightContent={
+              <div className="flex flex-col items-end">
+                <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded shadow-sm uppercase tracking-wider">
+                  {gamePlayers.filter((p) => !p.isEliminated).length}{" "}
+                  {t("active-label")}
                 </div>
-              )}
-            </div>
-          </div>
+                {!wordsHidden && gameMasterId && !isExternalHost && (
+                  <div className="mt-1">
+                    <div className="text-[#0077b6] text-[8px] font-bold px-1 uppercase tracking-wider">
+                      MJ: {players.find(p => p.id === gameMasterId)?.name}
+                    </div>
+                  </div>
+                )}
+              </div>
+            }
+          />
 
-          <div className="flex-1 overflow-y-auto scrollbar-hide space-y-1.5 px-5">
+          <div className="flex-1 overflow-y-auto scrollbar-hide space-y-1.5 px-5 mt-8">
             {passOrder.map((idx) => {
               const p = gamePlayers[idx];
               return (
