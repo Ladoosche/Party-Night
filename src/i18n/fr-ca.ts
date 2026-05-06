@@ -252,5 +252,14 @@ export const frCA: Record<string, string> = {
   "wheel-do-action": "{0} doit faire une action : {1}",
   "wheel-or-take-penalties": "Ou bien prend {0} pénalité(s)",
   "wheel-just-selected": "{0} a été pogné(e), mais s'en sort bien! Quelle chance!",
-  "wheel-touch-only": "Ce jeu marche juste su'un écran tactile."
+  "wheel-touch-only": "Ce jeu marche juste su'un écran tactile.",
+  "scoreboard": "Classement",
+  "options": "Options",
+  "settings": "Paramètres",
+  "Settings": "Paramètres",
+  "Appearance": "Apparence",
+  "Privacy & Data": "Confidentialité & Données",
+  "About": "À propos",
+  "Version": "Version",
+  "Language Support": "Langues supportées"
 };

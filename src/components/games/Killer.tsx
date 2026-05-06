@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  X, 
-  ChevronLeft, 
-  ChevronRight, 
-  Eye, 
-  EyeOff, 
-  RotateCcw,
+import {
+  ChevronRight,
+  Eye,
   Play,
   Skull,
   User,
   Medal,
   Book,
-  Hand,
-  Dices,
   Sparkles,
   Info,
   CheckCircle2,
-  LogOut,
   Loader2
 } from "lucide-react";
-import { useAppContext, Player } from '../../context/AppContext';
+import { useAppContext } from '../../context/AppContext';
 import { getWordGroups } from '../../data/undercover';
 import { getKillerActions } from '../../data/killer';
 import { AllUsedModal } from '../modals/AllUsedModal';
@@ -221,44 +214,6 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
     const activeLeft = gamePlayers.filter(p => !p.isEliminated).length;
     if (!isTargetingSelf && targetPlayer?.targetId && activeLeft > 3) {
       showNewTargetPass(playerId);
-    }
-  };
-
-  const eliminatePlayer = (playerId: string) => {
-    const playerToEliminate = gamePlayers.find(p => p.playerId === playerId);
-    if (!playerToEliminate || playerToEliminate.isEliminated) return;
-
-    if (playerToEliminate.role === 'white-wolf') {
-      unmaskWolf(playerId);
-      return;
-    }
-
-    const killer = gamePlayers.find(p => p.targetId === playerId);
-    const isTargetingSelf = playerToEliminate.targetId === killer?.playerId;
-    
-    setGamePlayers(prev => {
-      return prev.map(p => {
-        if (p.playerId === playerId) {
-          return { ...p, isEliminated: true };
-        }
-        if (p.targetId === playerId) {
-          const isP_TargetingSelf = playerToEliminate.targetId === p.playerId;
-          return { 
-            ...p, 
-            wonPoints: (p.wonPoints || 0) + 1,
-            targetId: playerToEliminate.targetId,
-            targetTask: playerToEliminate.targetTask
-          };
-        }
-        return p;
-      });
-    });
-
-    setRound(prev => prev + 1);
-
-    const activeLeft = gamePlayers.filter(p => !p.isEliminated).length;
-    if (killer && !isTargetingSelf && playerToEliminate.targetId && activeLeft > 3) {
-      showNewTargetPass(killer.playerId);
     }
   };
 

@@ -252,5 +252,14 @@ export const en: Record<string, string> = {
   "wheel-do-action": "{0} must do an action: {1}",
   "wheel-or-take-penalties": "Or take {0} penalty(ies)",
   "wheel-just-selected": "{0} was selected, but gets off easy! Lucky!",
-  "wheel-touch-only": "This game requires a touch device."
+  "wheel-touch-only": "This game requires a touch device.",
+  "scoreboard": "Scoreboard",
+  "options": "Options",
+  "settings": "Settings",
+  "Settings": "Settings",
+  "Appearance": "Appearance",
+  "Privacy & Data": "Privacy & Data",
+  "About": "About",
+  "Version": "Version",
+  "Language Support": "Language Support"
 };

@@ -1,16 +1,30 @@
 export const frca = [
   [
     "Miroir",
-    "Fenêtre",
-    "Verre"
+    "Fenêtre"
+  ],
+  [
+    "Velux",
+    "Baie-vitrée",
+    "Fenêtre"
+  ],
+  [
+    "Verre",
+    "Assiette",
+    "Fourchette",
+    "Couteau",
+    "Cuillère"
   ],
   [
     "Sandwich",
+    "Panini",
+    "Bagel",
     "Burger",
     "Hotdog"
   ],
   [
     "Hélicoptère",
+    "Planeur",
     "Avion",
     "Drone"
   ],
@@ -20,25 +34,21 @@ export const frca = [
     "Bain"
   ],
   [
-    "Manteau",
     "Veston",
-    "Coton ouaté"
+    "Coton ouaté",
+    "Manteau",
+    "Pull"
   ],
   [
     "Laptop",
     "Ordi de bureau",
+    "Téléphone",
     "Tablette"
   ],
   [
     "Hôtel",
-    "Airbnb",
     "Auberge",
     "Camping"
-  ],
-  [
-    "Fourchette",
-    "Cuillère",
-    "Couteau"
   ],
   [
     "Montagne",
@@ -47,6 +57,7 @@ export const frca = [
   ],
   [
     "Guitare",
+    "Flûte",
     "Piano",
     "Violon",
     "Drum"
@@ -54,16 +65,21 @@ export const frca = [
   [
     "Docteur",
     "Infirmière",
+    "Hôpital",
+    "Piqûre",
+    "Sang",
     "Chirurgien"
   ],
   [
     "Pluie",
+    "Verglas",
     "Neige",
     "Grêle",
     "Brouillard"
   ],
   [
     "Divan",
+    "Siège",
     "Lit",
     "Fauteuil"
   ],
@@ -71,79 +87,123 @@ export const frca = [
     "Vin",
     "Bière",
     "Champagne",
+    "Whisky",
+    "Rhum",
+    "Gin",
+    "Vodka",
     "Cidre"
   ],
   [
     "Cinéma",
     "Théâtre",
+    "Ballet",
+    "Spectacle",
+    "Concert",
     "Opéra"
   ],
   [
     "Pomme",
     "Banane",
+    "Poire",
+    "Abricot",
+    "Pêche",
+    "Ananas",
+    "Fraise",
+    "Framboise",
+    "Citron",
+    "Raisin",
     "Orange"
   ],
   [
     "Char",
     "Autobus",
     "Bécik",
+    "Métro",
     "Train"
   ],
   [
     "Chat",
     "Chien",
+    "Hamster",
     "Lapin"
   ],
   [
     "Soleil",
     "Lune",
+    "Ciel",
+    "Astres",
     "Étoile"
   ],
   [
     "Café",
     "Thé",
     "Jus",
+    "Soda",
     "Eau"
   ],
   [
     "Souliers",
     "Bas",
+    "Sandales",
+    "Espadrilles",
     "Bottes"
   ],
   [
-    "Crayon",
     "Stylo",
+    "Crayon",
+    "Feutre",
+    "Surligneur",
     "Marqueur"
   ],
   [
     "Chaise",
     "Table",
+    "Divan",
+    "Armoire",
     "Bureau"
   ],
   [
     "Océan",
     "Rivière",
+    "Fleuve",
+    "Ruisseau",
     "Lac"
   ],
   [
-    "Livre",
-    "Revue",
+    "Roman",
+    "Magazine",
+    "Bande-Dessinée",
     "Journal"
   ],
   [
     "Requin",
     "Dauphin",
+    "Cachalot",
+    "Béluga",
+    "Poisson",
+    "Tortue",
     "Baleine"
+  ],
+  [
+    "Algue",
+    "Corail",
+    "Plancton"
   ],
   [
     "Soccer",
     "Basketball",
     "Tennis",
+    "Handball",
+    "Rugby",
     "Baseball"
   ],
   [
     "Rose",
     "Tulipe",
+    "Muguet",
+    "Pivoine",
+    "Hortensia",
+    "Marguerite",
     "Tournesol"
   ],
   [
@@ -156,18 +216,17 @@ export const frca = [
     "Content",
     "Triste",
     "Fâché",
-    "Excité"
-  ],
-  [
-    "Guitare",
-    "Piano",
-    "Violon",
-    "Drum"
+    "Frustré",
+    "Nostalgique",
+    "Excité",
+    "Anxieux"
   ],
   [
     "Rouge",
     "Bleu",
     "Vert",
+    "Orange",
+    "Violet",
     "Jaune"
   ],
   [
@@ -178,13 +237,182 @@ export const frca = [
   [
     "Police",
     "Pompier",
+    "Ambulancier",
     "Docteur",
     "Prof"
   ],
   [
     "Œil",
     "Oreille",
+    "Lèvres",
+    "Langue",
+    "Front",
+    "Joue",
+    "Menton",
+    "Sourcil",
+    "Cheveux",
     "Nez",
     "Bouche"
+  ],
+  [
+    "Cheveux",
+    "Moustache",
+    "Poil",
+    "Barbe"
+  ],
+  [
+    "États-Unis",
+    "Canada",
+    "Mexique"
+  ],
+  [
+    "Japon",
+    "Corée du Sud",
+    "Vietnam",
+    "Inde",
+    "Thaïlande",
+    "Indonésie",
+    "Chine"
+  ],
+  [
+    "Argentine",
+    "Chili",
+    "Colombie",
+    "Brésil",
+    "Uruguay",
+    "Guatemala",
+    "Pérou"
+  ],
+  [
+    "Congo",
+    "Egypte",
+    "Maroc",
+    "Tunisie",
+    "Algérie",
+    "Côte d'Ivoire",
+    "Gabon",
+    "Afrique du Sud"
+  ],
+  [
+    "Antiquité",
+    "Moyen-Âge",
+    "Préhistoire",
+    "Renaissance",
+    "Temps Modernes",
+    "Époque Contemporaine"
+  ],
+  [
+    "Peinture",
+    "Sculpture",
+    "Dessin",
+    "Musique"
+  ],
+  [
+    "Photographie",
+    "Multimédia",
+    "Vidéo",
+    "Caméra",
+    "Montage"
+  ],
+  [
+    "Réalisateur",
+    "Monteur",
+    "Acteur"
+  ],
+  [
+    "Sorcier",
+    "Fée",
+    "Vampire",
+    "Loup-Garou",
+    "Elfe"
+  ],
+  [
+    "Série",
+    "Film",
+    "Court-Métrage"
+  ],
+  [
+    "Voilier",
+    "Bateau à Moteur"
+  ],
+  [
+    "Mathématiques",
+    "Géographie",
+    "Anglais",
+    "Sciences et Vie de la Terre",
+    "Arts Plastiques",
+    "Histoire"
+  ],
+  [
+    "Four",
+    "Micro-Onde",
+    "Réfrigérateur",
+    "Congélateur",
+    "Machine à Café",
+    "Grille-Pain"
+  ],
+  [
+    "Paris",
+    "Tokyo",
+    "Milan",
+    "Londres",
+    "New York"
+  ],
+  [
+    "Lasagnes",
+    "Steak-Frites",
+    "Gratin"
+  ],
+  [
+    "Bolognaise",
+    "Pesto",
+    "Fruits de Mer",
+    "Jambon Beurre",
+    "Carbonara",
+    "Raviolis"
+  ],
+  [
+    "Frites",
+    "Patates",
+    "Patates Dauphines",
+    "Chips"
+  ],
+  [
+    "Yogourt",
+    "Gâteau",
+    "Salade de Fruits",
+    "Biscuits"
+  ],
+  [
+    "Diamant",
+    "Rubis",
+    "Émeraude",
+    "Topaze",
+    "Aigue-Marine",
+    "Saphir"
+  ],
+  [
+    "Bague",
+    "Collier",
+    "Bracelet",
+    "Boucles d'oreilles"
+  ],
+  [
+    "Mojito",
+    "Aperol Spritz",
+    "Tequila Sunrise",
+    "Pornstar Martini",
+    "Margarita",
+    "Gin & Tonic"
+  ],
+  [
+    "France",
+    "Allemagne",
+    "Angleterre",
+    "Portugal",
+    "Italie",
+    "Pays-Bas",
+    "Danemark",
+    "Espagne"
   ]
 ];
