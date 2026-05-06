@@ -143,7 +143,10 @@ export const Killer: React.FC<KillerProps> = ({ onBack, onShowPlayers }) => {
         });
       }
 
-      setGamePlayers(finalPlayers.sort(() => Math.random() - 0.5));
+      const registrationOrder = new Map(activePlayers.map((p, i) => [p.id, i]));
+      setGamePlayers(finalPlayers.sort((a, b) =>
+        (registrationOrder.get(a.playerId) ?? 0) - (registrationOrder.get(b.playerId) ?? 0)
+      ));
       setCurrentPlayerIdx(0);
       setRound(1);
       setScreen('pass');
