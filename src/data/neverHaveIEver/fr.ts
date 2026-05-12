@@ -1,1792 +1,364 @@
 import { TypeDef } from './index';
 
 export const fr: TypeDef[] = [
-  {
-    "id": "hab-s1",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais porté le même pyjama pendant une semaine entière."
-  },
-  {
-    "id": "hab-s2",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais mangé au-dessus de l'évier pour ne pas faire de vaisselle."
-  },
-  {
-    "id": "hab-s3",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais passé une journée entière sans me brosser les dents."
-  },
-  {
-    "id": "hab-s4",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais senti mes vêtements sales pour savoir s'ils pouvaient encore être portés."
-  },
-  {
-    "id": "hab-s5",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais nettoyé un couvert sale juste avec mon doigt ou ma salive."
-  },
-  {
-    "id": "hab-s6",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais utilisé du parfum pour cacher que je n'avais pas pris de douche."
-  },
-  {
-    "id": "hab-s7",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais laissé la vaisselle traîner jusqu'à ce qu'elle sente mauvais."
-  },
-  {
-    "id": "hab-s8",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais mangé quelque chose tombé par terre après plus de 5 secondes."
-  },
-  {
-    "id": "hab-s9",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais fait semblant de ne pas être chez moi pour ne pas ouvrir au livreur."
-  },
-  {
-    "id": "hab-s10",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n'ai jamais porté des chaussettes dépareillées par flemme d'en chercher deux pareilles."
-  },
-  {
-    "id": "adv-s1",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais fait du camping sauvage sans autorisation."
-  },
-  {
-    "id": "adv-s2",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais eu peur d'une araignée ou d'un insecte sous ma tente."
-  },
-  {
-    "id": "adv-s3",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais fait une randonnée de plus de 5 heures."
-  },
-  {
-    "id": "adv-s4",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais essayé de faire un feu de camp sans briquet ni allumettes."
-  },
-  {
-    "id": "adv-s5",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais bu l'eau d'une rivière ou d'une source naturelle."
-  },
-  {
-    "id": "adv-s6",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais mangé des baies sauvages sans être sûr qu'elles étaient comestibles."
-  },
-  {
-    "id": "adv-s7",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais fait du stop (auto-stop) pour me déplacer."
-  },
-  {
-    "id": "adv-s8",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais dormi à la belle étoile sans matelas ni duvet."
-  },
-  {
-    "id": "adv-s9",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais fait une activité de sport extrême (saut à l'élastique, parachute...)."
-  },
-  {
-    "id": "adv-s10",
-    "difficulty": "soft",
-    "category": "adventure",
-    "text": "Je n'ai jamais eu besoin d'une boussole ou d'un GPS pour retrouver mon chemin."
-  },
-  {
-    "id": "car-s1",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais fait semblant de travailler alors que je scrollais sur les réseaux sociaux."
-  },
-  {
-    "id": "car-s2",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais envoyé un e-mail à la mauvaise personne par inattention."
-  },
-  {
-    "id": "car-s3",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais oublié de mettre la pièce jointe dans un mail 'ci-joint'."
-  },
-  {
-    "id": "car-s4",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais fait semblant d'être en réunion pour éviter une tâche ennuyeuse."
-  },
-  {
-    "id": "car-s5",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais volé des fournitures de bureau (stylos, cahiers, agrafeuse...)."
-  },
-  {
-    "id": "car-s6",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais travaillé en pyjama (bas du corps) lors d'une visioconférence."
-  },
-  {
-    "id": "car-s7",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais mangé le déjeuner d'un collègue dans le frigo commun."
-  },
-  {
-    "id": "car-s8",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais pris un jour de congé 'maladie' alors que j'étais en pleine forme."
-  },
-  {
-    "id": "car-s9",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais critiqué un collègue par erreur sur le fil de discussion où il se trouvait."
-  },
-  {
-    "id": "car-s10",
-    "difficulty": "soft",
-    "category": "career",
-    "text": "Je n'ai jamais fait une sieste pendant mes heures de télétravail."
-  },
-  {
-    "id": "soc-s1",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais stalké le profil d'un ex jusqu'à ses photos de 2015."
-  },
-  {
-    "id": "soc-s2",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais fait semblant de ne pas voir quelqu'un dans la rue pour éviter de lui parler."
-  },
-  {
-    "id": "soc-s3",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais menti pour annuler une soirée et rester seul devant une série."
-  },
-  {
-    "id": "soc-s4",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais liké par erreur une très vieille photo en stalkant quelqu'un."
-  },
-  {
-    "id": "soc-s5",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais créé un faux compte sur les réseaux sociaux pour espionner quelqu'un."
-  },
-  {
-    "id": "soc-s6",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais fait semblant d'être au téléphone pour éviter une conversation gênante."
-  },
-  {
-    "id": "soc-s7",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais oublié le prénom d'une personne à qui je parlais depuis 10 minutes."
-  },
-  {
-    "id": "soc-s8",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais checké mon téléphone pendant un rendez-vous galant parce que je m'ennuyais."
-  },
-  {
-    "id": "soc-s9",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais menti sur mon âge ou ma profession lors d'une soirée."
-  },
-  {
-    "id": "soc-s10",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n'ai jamais quitté un groupe WhatsApp juste après avoir lu un message énervant."
-  },
-  {
-    "id": "pty-s1",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais fait un 'Irish Exit' (parti sans dire au revoir)."
-  },
-  {
-    "id": "pty-s2",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais renversé mon verre sur quelqu'un par accident."
-  },
-  {
-    "id": "pty-s3",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais volé un briquet en soirée sans m'en rendre compte."
-  },
-  {
-    "id": "pty-s4",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais essayé de rentrer en boîte avec des chaussures sales."
-  },
-  {
-    "id": "pty-s5",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais envoyé un message gênant à un ex en étant ivre."
-  },
-  {
-    "id": "pty-s6",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais chanté à tue-tête sur une chanson dont je ne connaissais pas les paroles."
-  },
-  {
-    "id": "pty-s7",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais dansé sur une table ou un bar."
-  },
-  {
-    "id": "pty-s8",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais menti au videur pour rentrer dans un club."
-  },
-  {
-    "id": "pty-s9",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais mangé de la junk food à 4h du matin assis sur le trottoir."
-  },
-  {
-    "id": "pty-s10",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n'ai jamais perdu mon téléphone ou mes clés en soirée."
-  },
-  {
-    "id": "hot-s1",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais dit le mauvais prénom au lit."
-  },
-  {
-    "id": "hot-s2",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais eu une crampe au mollet en pleine action."
-  },
-  {
-    "id": "hot-s3",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais simulé un orgasme pour en finir plus vite."
-  },
-  {
-    "id": "hot-s4",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais gardé mes chaussettes pendant l'acte."
-  },
-  {
-    "id": "hot-s5",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais rigolé de façon incontrôlable en plein milieu."
-  },
-  {
-    "id": "hot-s6",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais été interrompu(e) par mes parents ou colocataires."
-  },
-  {
-    "id": "hot-s7",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais fait semblant de savoir ce que je faisais au lit."
-  },
-  {
-    "id": "hot-s8",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais utilisé une playlist 'sexy' un peu trop cliché."
-  },
-  {
-    "id": "hot-s9",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais pété accidentellement pendant l'effort."
-  },
-  {
-    "id": "hot-s10",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n'ai jamais caché un suçon avec du maquillage ou une écharpe."
-  },
-  {
-    "id": "gen-nhie-1",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais mangé quelque chose par terre juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-2",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais mangé quelque chose par terre après une rupture."
-  },
-  {
-    "id": "gen-nhie-3",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-4",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre à une soirée."
-  },
-  {
-    "id": "gen-nhie-5",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre en étant ivre."
-  },
-  {
-    "id": "gen-nhie-6",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-7",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre au bureau."
-  },
-  {
-    "id": "gen-nhie-8",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre en vacances."
-  },
-  {
-    "id": "gen-nhie-9",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé quelque chose par terre pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-10",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais mangé quelque chose par terre par pure flemme."
-  },
-  {
-    "id": "gen-nhie-11",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais mangé quelque chose par terre quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-12",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-13",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade après une rupture."
-  },
-  {
-    "id": "gen-nhie-14",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-15",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade à une soirée."
-  },
-  {
-    "id": "gen-nhie-16",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade en étant ivre."
-  },
-  {
-    "id": "gen-nhie-17",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-18",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade au bureau."
-  },
-  {
-    "id": "gen-nhie-19",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade en vacances."
-  },
-  {
-    "id": "gen-nhie-20",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fait semblant d'être malade pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-21",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade par pure flemme."
-  },
-  {
-    "id": "gen-nhie-22",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fait semblant d'être malade quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-23",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-24",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc après une rupture."
-  },
-  {
-    "id": "gen-nhie-25",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-26",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc à une soirée."
-  },
-  {
-    "id": "gen-nhie-27",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc en étant ivre."
-  },
-  {
-    "id": "gen-nhie-28",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais volé un petit truc pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-29",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais volé un petit truc au bureau."
-  },
-  {
-    "id": "gen-nhie-30",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais volé un petit truc en vacances."
-  },
-  {
-    "id": "gen-nhie-31",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais volé un petit truc pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-32",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais volé un petit truc par pure flemme."
-  },
-  {
-    "id": "gen-nhie-33",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais volé un petit truc quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-34",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fouillé dans un téléphone juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-35",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone après une rupture."
-  },
-  {
-    "id": "gen-nhie-36",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-37",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais fouillé dans un téléphone à une soirée."
-  },
-  {
-    "id": "gen-nhie-38",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone en étant ivre."
-  },
-  {
-    "id": "gen-nhie-39",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-40",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone au bureau."
-  },
-  {
-    "id": "gen-nhie-41",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone en vacances."
-  },
-  {
-    "id": "gen-nhie-42",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-43",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone par pure flemme."
-  },
-  {
-    "id": "gen-nhie-44",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais fouillé dans un téléphone quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-45",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-46",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche après une rupture."
-  },
-  {
-    "id": "gen-nhie-47",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-48",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche à une soirée."
-  },
-  {
-    "id": "gen-nhie-49",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche en étant ivre."
-  },
-  {
-    "id": "gen-nhie-50",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-51",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche au bureau."
-  },
-  {
-    "id": "gen-nhie-52",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche en vacances."
-  },
-  {
-    "id": "gen-nhie-53",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-54",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche par pure flemme."
-  },
-  {
-    "id": "gen-nhie-55",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais menti lors d'un entretien d'embauche quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-56",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais pleuré dans un lieu public juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-57",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public après une rupture."
-  },
-  {
-    "id": "gen-nhie-58",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-59",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public à une soirée."
-  },
-  {
-    "id": "gen-nhie-60",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public en étant ivre."
-  },
-  {
-    "id": "gen-nhie-61",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-62",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public au bureau."
-  },
-  {
-    "id": "gen-nhie-63",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public en vacances."
-  },
-  {
-    "id": "gen-nhie-64",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-65",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public par pure flemme."
-  },
-  {
-    "id": "gen-nhie-66",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais pleuré dans un lieu public quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-67",
-    "category": "social",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-68",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément après une rupture."
-  },
-  {
-    "id": "gen-nhie-69",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-70",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément à une soirée."
-  },
-  {
-    "id": "gen-nhie-71",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément en étant ivre."
-  },
-  {
-    "id": "gen-nhie-72",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-73",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément au bureau."
-  },
-  {
-    "id": "gen-nhie-74",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément en vacances."
-  },
-  {
-    "id": "gen-nhie-75",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-76",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément par pure flemme."
-  },
-  {
-    "id": "gen-nhie-77",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais oublié le nom de quelqu'un instantanément quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-78",
-    "category": "social",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-79",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul après une rupture."
-  },
-  {
-    "id": "gen-nhie-80",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-81",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul à une soirée."
-  },
-  {
-    "id": "gen-nhie-82",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul en étant ivre."
-  },
-  {
-    "id": "gen-nhie-83",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-84",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul au bureau."
-  },
-  {
-    "id": "gen-nhie-85",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul en vacances."
-  },
-  {
-    "id": "gen-nhie-86",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-87",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul par pure flemme."
-  },
-  {
-    "id": "gen-nhie-88",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais trébuché tout seul quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-89",
-    "category": "social",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-90",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul après une rupture."
-  },
-  {
-    "id": "gen-nhie-91",
-    "category": "hot",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-92",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul à une soirée."
-  },
-  {
-    "id": "gen-nhie-93",
-    "category": "party",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul en étant ivre."
-  },
-  {
-    "id": "gen-nhie-94",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-95",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul au bureau."
-  },
-  {
-    "id": "gen-nhie-96",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul en vacances."
-  },
-  {
-    "id": "gen-nhie-97",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-98",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul par pure flemme."
-  },
-  {
-    "id": "gen-nhie-99",
-    "category": "habits",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais mangé une pizza entière seul quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-100",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-101",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne après une rupture."
-  },
-  {
-    "id": "gen-nhie-102",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-103",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne à une soirée."
-  },
-  {
-    "id": "gen-nhie-104",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne en étant ivre."
-  },
-  {
-    "id": "gen-nhie-105",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-106",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne au bureau."
-  },
-  {
-    "id": "gen-nhie-107",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne en vacances."
-  },
-  {
-    "id": "gen-nhie-108",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-109",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne par pure flemme."
-  },
-  {
-    "id": "gen-nhie-110",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais envoyé un message à la mauvaise personne quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-111",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-112",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail après une rupture."
-  },
-  {
-    "id": "gen-nhie-113",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-114",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail à une soirée."
-  },
-  {
-    "id": "gen-nhie-115",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail en étant ivre."
-  },
-  {
-    "id": "gen-nhie-116",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-117",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail au bureau."
-  },
-  {
-    "id": "gen-nhie-118",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail en vacances."
-  },
-  {
-    "id": "gen-nhie-119",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-120",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail par pure flemme."
-  },
-  {
-    "id": "gen-nhie-121",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais endormi au travail quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-122",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-123",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom après une rupture."
-  },
-  {
-    "id": "gen-nhie-124",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-125",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom à une soirée."
-  },
-  {
-    "id": "gen-nhie-126",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom en étant ivre."
-  },
-  {
-    "id": "gen-nhie-127",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-128",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom au bureau."
-  },
-  {
-    "id": "gen-nhie-129",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom en vacances."
-  },
-  {
-    "id": "gen-nhie-130",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-131",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom par pure flemme."
-  },
-  {
-    "id": "gen-nhie-132",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais utilisé un faux nom quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-133",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-134",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné après une rupture."
-  },
-  {
-    "id": "gen-nhie-135",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-136",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné à une soirée."
-  },
-  {
-    "id": "gen-nhie-137",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné en étant ivre."
-  },
-  {
-    "id": "gen-nhie-138",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-139",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné au bureau."
-  },
-  {
-    "id": "gen-nhie-140",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné en vacances."
-  },
-  {
-    "id": "gen-nhie-141",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-142",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné par pure flemme."
-  },
-  {
-    "id": "gen-nhie-143",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais offert un cadeau qu'on m'avait donné quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-144",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-145",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche après une rupture."
-  },
-  {
-    "id": "gen-nhie-146",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-147",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche à une soirée."
-  },
-  {
-    "id": "gen-nhie-148",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche en étant ivre."
-  },
-  {
-    "id": "gen-nhie-149",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-150",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche au bureau."
-  },
-  {
-    "id": "gen-nhie-151",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche en vacances."
-  },
-  {
-    "id": "gen-nhie-152",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-153",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche par pure flemme."
-  },
-  {
-    "id": "gen-nhie-154",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais sauté une douche quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-155",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-156",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville après une rupture."
-  },
-  {
-    "id": "gen-nhie-157",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-158",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville à une soirée."
-  },
-  {
-    "id": "gen-nhie-159",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville en étant ivre."
-  },
-  {
-    "id": "gen-nhie-160",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-161",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville au bureau."
-  },
-  {
-    "id": "gen-nhie-162",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville en vacances."
-  },
-  {
-    "id": "gen-nhie-163",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-164",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville par pure flemme."
-  },
-  {
-    "id": "gen-nhie-165",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais perdu dans ma propre ville quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-166",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-167",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié après une rupture."
-  },
-  {
-    "id": "gen-nhie-168",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-169",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié à une soirée."
-  },
-  {
-    "id": "gen-nhie-170",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié en étant ivre."
-  },
-  {
-    "id": "gen-nhie-171",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-172",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié au bureau."
-  },
-  {
-    "id": "gen-nhie-173",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié en vacances."
-  },
-  {
-    "id": "gen-nhie-174",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-175",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié par pure flemme."
-  },
-  {
-    "id": "gen-nhie-176",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais ri à un moment très inapproprié quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-177",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-178",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée après une rupture."
-  },
-  {
-    "id": "gen-nhie-179",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-180",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée à une soirée."
-  },
-  {
-    "id": "gen-nhie-181",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée en étant ivre."
-  },
-  {
-    "id": "gen-nhie-182",
-    "category": "career",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-183",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais éclipsé d'une soirée au bureau."
-  },
-  {
-    "id": "gen-nhie-184",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée en vacances."
-  },
-  {
-    "id": "gen-nhie-185",
-    "category": "adventure",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-186",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée par pure flemme."
-  },
-  {
-    "id": "gen-nhie-187",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais éclipsé d'une soirée quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-188",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-189",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google après une rupture."
-  },
-  {
-    "id": "gen-nhie-190",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-191",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google à une soirée."
-  },
-  {
-    "id": "gen-nhie-192",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google en étant ivre."
-  },
-  {
-    "id": "gen-nhie-193",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-194",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google au bureau."
-  },
-  {
-    "id": "gen-nhie-195",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google en vacances."
-  },
-  {
-    "id": "gen-nhie-196",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-197",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google par pure flemme."
-  },
-  {
-    "id": "gen-nhie-198",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais cherché mon propre nom sur Google quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-199",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-200",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen après une rupture."
-  },
-  {
-    "id": "gen-nhie-201",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-202",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen à une soirée."
-  },
-  {
-    "id": "gen-nhie-203",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen en étant ivre."
-  },
-  {
-    "id": "gen-nhie-204",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais triché à un examen pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-205",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais triché à un examen au bureau."
-  },
-  {
-    "id": "gen-nhie-206",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais triché à un examen en vacances."
-  },
-  {
-    "id": "gen-nhie-207",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais triché à un examen pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-208",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen par pure flemme."
-  },
-  {
-    "id": "gen-nhie-209",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais triché à un examen quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "gen-nhie-210",
-    "category": "social",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers juste pour éviter quelqu'un."
-  },
-  {
-    "id": "gen-nhie-211",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers après une rupture."
-  },
-  {
-    "id": "gen-nhie-212",
-    "category": "hot",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers pour impressionner un crush."
-  },
-  {
-    "id": "gen-nhie-213",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers à une soirée."
-  },
-  {
-    "id": "gen-nhie-214",
-    "category": "party",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers en étant ivre."
-  },
-  {
-    "id": "gen-nhie-215",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers pendant une réunion sérieuse."
-  },
-  {
-    "id": "gen-nhie-216",
-    "category": "career",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers au bureau."
-  },
-  {
-    "id": "gen-nhie-217",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers en vacances."
-  },
-  {
-    "id": "gen-nhie-218",
-    "category": "adventure",
-    "difficulty": "hard",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers pendant une randonnée."
-  },
-  {
-    "id": "gen-nhie-219",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers par pure flemme."
-  },
-  {
-    "id": "gen-nhie-220",
-    "category": "habits",
-    "difficulty": "soft",
-    "text": "Je n'ai jamais porté des sous-vêtements à l'envers quand je pensais que personne ne regardait."
-  },
-  {
-    "id": "new-nh-pty-1",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n`ai jamais dormi lors d`une soirée."
-  },
-  {
-    "id": "new-nh-pty-2",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n`ai jamais été viré d`une boîte de nuit."
-  },
-  {
-    "id": "new-nh-pty-3",
-    "difficulty": "hard",
-    "category": "party",
-    "text": "Je n`ai jamais chanté au karaoké devant des inconnus."
-  },
-  {
-    "id": "new-nh-hab-1",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n`ai jamais mangé de la nourriture tombée par terre."
-  },
-  {
-    "id": "new-nh-hab-2",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n`ai jamais porté les mêmes vêtements pendant trois jours."
-  },
-  {
-    "id": "new-nh-hab-3",
-    "difficulty": "hard",
-    "category": "habits",
-    "text": "Je n`ai jamais oublié de me brosser les dents toute une journée."
-  },
-  {
-    "id": "new-nh-soc-1",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n`ai jamais ghosté quelqu`un après un premier rendez-vous."
-  },
-  {
-    "id": "new-nh-soc-2",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n`ai jamais envoyé un message à la mauvaise personne."
-  },
-  {
-    "id": "new-nh-soc-3",
-    "difficulty": "hard",
-    "category": "social",
-    "text": "Je n`ai jamais posé un lapin à quelqu`un."
-  },
-  {
-    "id": "new-nh-adv-1",
-    "difficulty": "hard",
-    "category": "adventure",
-    "text": "Je n`ai jamais voyagé seul(e) dans un autre pays."
-  },
-  {
-    "id": "new-nh-adv-2",
-    "difficulty": "hard",
-    "category": "adventure",
-    "text": "Je n`ai jamais sauté d`un véhicule en mouvement."
-  },
-  {
-    "id": "new-nh-adv-3",
-    "difficulty": "hard",
-    "category": "adventure",
-    "text": "Je n`ai jamais fait de stop."
-  },
-  {
-    "id": "new-nh-hot-1",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n`ai jamais eu de romance au bureau."
-  },
-  {
-    "id": "new-nh-hot-2",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n`ai jamais envoyé de photo de moi nu(e)."
-  },
-  {
-    "id": "new-nh-hot-3",
-    "difficulty": "hard",
-    "category": "hot",
-    "text": "Je n`ai jamais flirté pour me sortir d`un problème."
-  },
-  {
-    "id": "new-nh-car-1",
-    "difficulty": "hard",
-    "category": "career",
-    "text": "Je n`ai jamais menti sur mon CV."
-  },
-  {
-    "id": "new-nh-car-2",
-    "difficulty": "hard",
-    "category": "career",
-    "text": "Je n`ai jamais dormi pendant une réunion."
-  },
-  {
-    "id": "new-nh-car-3",
-    "difficulty": "hard",
-    "category": "career",
-    "text": "Je n`ai jamais démissionné le premier jour."
-  }
+
+  // --- HABITS ---
+  { id: "hab-s1", difficulty: "hard", category: "habits", text: "Je n'ai jamais porté le même pyjama pendant une semaine entière." },
+  { id: "hab-s2", difficulty: "hard", category: "habits", text: "Je n'ai jamais mangé au-dessus de l'évier pour ne pas faire de vaisselle." },
+  { id: "hab-s3", difficulty: "hard", category: "habits", text: "Je n'ai jamais passé une journée entière sans me brosser les dents." },
+  { id: "hab-s4", difficulty: "hard", category: "habits", text: "Je n'ai jamais senti mes vêtements sales pour savoir s'ils pouvaient encore être portés." },
+  { id: "hab-s5", difficulty: "hard", category: "habits", text: "Je n'ai jamais nettoyé un couvert sale juste avec mon doigt ou ma salive." },
+  { id: "hab-s6", difficulty: "hard", category: "habits", text: "Je n'ai jamais utilisé du parfum pour cacher que je n'avais pas pris de douche." },
+  { id: "hab-s7", difficulty: "hard", category: "habits", text: "Je n'ai jamais laissé la vaisselle traîner jusqu'à ce qu'elle sente mauvais." },
+  { id: "hab-s8", difficulty: "hard", category: "habits", text: "Je n'ai jamais mangé quelque chose tombé par terre après plus de 5 secondes." },
+  { id: "hab-s9", difficulty: "hard", category: "habits", text: "Je n'ai jamais fait semblant de ne pas être chez moi pour ne pas ouvrir au livreur." },
+  { id: "hab-s10", difficulty: "hard", category: "habits", text: "Je n'ai jamais porté des chaussettes dépareillées par flemme d'en chercher deux pareilles." },
+  { id: "gen-nhie-10", difficulty: "soft", category: "habits", text: "Je n'ai jamais mangé quelque chose par terre par pure flemme." },
+  { id: "gen-nhie-11", difficulty: "soft", category: "habits", text: "Je n'ai jamais mangé quelque chose par terre quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-21", difficulty: "soft", category: "habits", text: "Je n'ai jamais fait semblant d'être malade par pure flemme." },
+  { id: "gen-nhie-22", difficulty: "soft", category: "habits", text: "Je n'ai jamais fait semblant d'être malade quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-32", difficulty: "soft", category: "habits", text: "Je n'ai jamais volé un petit truc par pure flemme." },
+  { id: "gen-nhie-33", difficulty: "hard", category: "habits", text: "Je n'ai jamais volé un petit truc quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-43", difficulty: "hard", category: "habits", text: "Je n'ai jamais fouillé dans un téléphone par pure flemme." },
+  { id: "gen-nhie-44", difficulty: "hard", category: "habits", text: "Je n'ai jamais fouillé dans un téléphone quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-54", difficulty: "hard", category: "habits", text: "Je n'ai jamais menti lors d'un entretien d'embauche par pure flemme." },
+  { id: "gen-nhie-55", difficulty: "hard", category: "habits", text: "Je n'ai jamais menti lors d'un entretien d'embauche quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-65", difficulty: "hard", category: "habits", text: "Je n'ai jamais pleuré dans un lieu public par pure flemme." },
+  { id: "gen-nhie-66", difficulty: "hard", category: "habits", text: "Je n'ai jamais pleuré dans un lieu public quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-76", difficulty: "hard", category: "habits", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément par pure flemme." },
+  { id: "gen-nhie-77", difficulty: "hard", category: "habits", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-87", difficulty: "hard", category: "habits", text: "Je n'ai jamais trébuché tout seul par pure flemme." },
+  { id: "gen-nhie-88", difficulty: "hard", category: "habits", text: "Je n'ai jamais trébuché tout seul quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-98", difficulty: "hard", category: "habits", text: "Je n'ai jamais mangé une pizza entière seul par pure flemme." },
+  { id: "gen-nhie-99", difficulty: "hard", category: "habits", text: "Je n'ai jamais mangé une pizza entière seul quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-109", difficulty: "soft", category: "habits", text: "Je n'ai jamais envoyé un message à la mauvaise personne par pure flemme." },
+  { id: "gen-nhie-110", difficulty: "soft", category: "habits", text: "Je n'ai jamais envoyé un message à la mauvaise personne quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-120", difficulty: "soft", category: "habits", text: "Je n'ai jamais endormi au travail par pure flemme." },
+  { id: "gen-nhie-121", difficulty: "soft", category: "habits", text: "Je n'ai jamais endormi au travail quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-131", difficulty: "soft", category: "habits", text: "Je n'ai jamais utilisé un faux nom par pure flemme." },
+  { id: "gen-nhie-132", difficulty: "soft", category: "habits", text: "Je n'ai jamais utilisé un faux nom quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-142", difficulty: "soft", category: "habits", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné par pure flemme." },
+  { id: "gen-nhie-143", difficulty: "soft", category: "habits", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-153", difficulty: "soft", category: "habits", text: "Je n'ai jamais sauté une douche par pure flemme." },
+  { id: "gen-nhie-154", difficulty: "soft", category: "habits", text: "Je n'ai jamais sauté une douche quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-164", difficulty: "soft", category: "habits", text: "Je n'ai jamais perdu dans ma propre ville par pure flemme." },
+  { id: "gen-nhie-165", difficulty: "soft", category: "habits", text: "Je n'ai jamais perdu dans ma propre ville quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-175", difficulty: "soft", category: "habits", text: "Je n'ai jamais ri à un moment très inapproprié par pure flemme." },
+  { id: "gen-nhie-176", difficulty: "soft", category: "habits", text: "Je n'ai jamais ri à un moment très inapproprié quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-186", difficulty: "soft", category: "habits", text: "Je n'ai jamais éclipsé d'une soirée par pure flemme." },
+  { id: "gen-nhie-187", difficulty: "soft", category: "habits", text: "Je n'ai jamais éclipsé d'une soirée quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-197", difficulty: "soft", category: "habits", text: "Je n'ai jamais cherché mon propre nom sur Google par pure flemme." },
+  { id: "gen-nhie-198", difficulty: "soft", category: "habits", text: "Je n'ai jamais cherché mon propre nom sur Google quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-208", difficulty: "soft", category: "habits", text: "Je n'ai jamais triché à un examen par pure flemme." },
+  { id: "gen-nhie-209", difficulty: "soft", category: "habits", text: "Je n'ai jamais triché à un examen quand je pensais que personne ne regardait." },
+  { id: "gen-nhie-219", difficulty: "soft", category: "habits", text: "Je n'ai jamais porté des sous-vêtements à l'envers par pure flemme." },
+  { id: "gen-nhie-220", difficulty: "soft", category: "habits", text: "Je n'ai jamais porté des sous-vêtements à l'envers quand je pensais que personne ne regardait." },
+  { id: "new-nh-hab-1", difficulty: "hard", category: "habits", text: "Je n`ai jamais mangé de la nourriture tombée par terre." },
+  { id: "new-nh-hab-2", difficulty: "hard", category: "habits", text: "Je n`ai jamais porté les mêmes vêtements pendant trois jours." },
+  { id: "new-nh-hab-3", difficulty: "hard", category: "habits", text: "Je n`ai jamais oublié de me brosser les dents toute une journée." },
+
+  // --- ADVENTURE ---
+  { id: "adv-s1", difficulty: "soft", category: "adventure", text: "Je n'ai jamais fait du camping sauvage sans autorisation." },
+  { id: "adv-s2", difficulty: "soft", category: "adventure", text: "Je n'ai jamais eu peur d'une araignée ou d'un insecte sous ma tente." },
+  { id: "adv-s3", difficulty: "soft", category: "adventure", text: "Je n'ai jamais fait une randonnée de plus de 5 heures." },
+  { id: "adv-s4", difficulty: "soft", category: "adventure", text: "Je n'ai jamais essayé de faire un feu de camp sans briquet ni allumettes." },
+  { id: "adv-s5", difficulty: "soft", category: "adventure", text: "Je n'ai jamais bu l'eau d'une rivière ou d'une source naturelle." },
+  { id: "adv-s6", difficulty: "soft", category: "adventure", text: "Je n'ai jamais mangé des baies sauvages sans être sûr qu'elles étaient comestibles." },
+  { id: "adv-s7", difficulty: "soft", category: "adventure", text: "Je n'ai jamais fait du stop (auto-stop) pour me déplacer." },
+  { id: "adv-s8", difficulty: "soft", category: "adventure", text: "Je n'ai jamais dormi à la belle étoile sans matelas ni duvet." },
+  { id: "adv-s9", difficulty: "soft", category: "adventure", text: "Je n'ai jamais fait une activité de sport extrême (saut à l'élastique, parachute...)." },
+  { id: "adv-s10", difficulty: "soft", category: "adventure", text: "Je n'ai jamais eu besoin d'une boussole ou d'un GPS pour retrouver mon chemin." },
+  { id: "gen-nhie-8", difficulty: "hard", category: "adventure", text: "Je n'ai jamais mangé quelque chose par terre en vacances." },
+  { id: "gen-nhie-9", difficulty: "hard", category: "adventure", text: "Je n'ai jamais mangé quelque chose par terre pendant une randonnée." },
+  { id: "gen-nhie-19", difficulty: "soft", category: "adventure", text: "Je n'ai jamais fait semblant d'être malade en vacances." },
+  { id: "gen-nhie-20", difficulty: "hard", category: "adventure", text: "Je n'ai jamais fait semblant d'être malade pendant une randonnée." },
+  { id: "gen-nhie-30", difficulty: "hard", category: "adventure", text: "Je n'ai jamais volé un petit truc en vacances." },
+  { id: "gen-nhie-31", difficulty: "hard", category: "adventure", text: "Je n'ai jamais volé un petit truc pendant une randonnée." },
+  { id: "gen-nhie-41", difficulty: "hard", category: "adventure", text: "Je n'ai jamais fouillé dans un téléphone en vacances." },
+  { id: "gen-nhie-42", difficulty: "hard", category: "adventure", text: "Je n'ai jamais fouillé dans un téléphone pendant une randonnée." },
+  { id: "gen-nhie-52", difficulty: "hard", category: "adventure", text: "Je n'ai jamais menti lors d'un entretien d'embauche en vacances." },
+  { id: "gen-nhie-53", difficulty: "hard", category: "adventure", text: "Je n'ai jamais menti lors d'un entretien d'embauche pendant une randonnée." },
+  { id: "gen-nhie-63", difficulty: "hard", category: "adventure", text: "Je n'ai jamais pleuré dans un lieu public en vacances." },
+  { id: "gen-nhie-64", difficulty: "hard", category: "adventure", text: "Je n'ai jamais pleuré dans un lieu public pendant une randonnée." },
+  { id: "gen-nhie-74", difficulty: "hard", category: "adventure", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément en vacances." },
+  { id: "gen-nhie-75", difficulty: "hard", category: "adventure", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément pendant une randonnée." },
+  { id: "gen-nhie-85", difficulty: "hard", category: "adventure", text: "Je n'ai jamais trébuché tout seul en vacances." },
+  { id: "gen-nhie-86", difficulty: "hard", category: "adventure", text: "Je n'ai jamais trébuché tout seul pendant une randonnée." },
+  { id: "gen-nhie-96", difficulty: "hard", category: "adventure", text: "Je n'ai jamais mangé une pizza entière seul en vacances." },
+  { id: "gen-nhie-97", difficulty: "hard", category: "adventure", text: "Je n'ai jamais mangé une pizza entière seul pendant une randonnée." },
+  { id: "gen-nhie-107", difficulty: "soft", category: "adventure", text: "Je n'ai jamais envoyé un message à la mauvaise personne en vacances." },
+  { id: "gen-nhie-108", difficulty: "soft", category: "adventure", text: "Je n'ai jamais envoyé un message à la mauvaise personne pendant une randonnée." },
+  { id: "gen-nhie-118", difficulty: "soft", category: "adventure", text: "Je n'ai jamais endormi au travail en vacances." },
+  { id: "gen-nhie-119", difficulty: "soft", category: "adventure", text: "Je n'ai jamais endormi au travail pendant une randonnée." },
+  { id: "gen-nhie-129", difficulty: "soft", category: "adventure", text: "Je n'ai jamais utilisé un faux nom en vacances." },
+  { id: "gen-nhie-130", difficulty: "soft", category: "adventure", text: "Je n'ai jamais utilisé un faux nom pendant une randonnée." },
+  { id: "gen-nhie-140", difficulty: "soft", category: "adventure", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné en vacances." },
+  { id: "gen-nhie-141", difficulty: "soft", category: "adventure", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné pendant une randonnée." },
+  { id: "gen-nhie-151", difficulty: "soft", category: "adventure", text: "Je n'ai jamais sauté une douche en vacances." },
+  { id: "gen-nhie-152", difficulty: "soft", category: "adventure", text: "Je n'ai jamais sauté une douche pendant une randonnée." },
+  { id: "gen-nhie-162", difficulty: "soft", category: "adventure", text: "Je n'ai jamais perdu dans ma propre ville en vacances." },
+  { id: "gen-nhie-163", difficulty: "soft", category: "adventure", text: "Je n'ai jamais perdu dans ma propre ville pendant une randonnée." },
+  { id: "gen-nhie-173", difficulty: "soft", category: "adventure", text: "Je n'ai jamais ri à un moment très inapproprié en vacances." },
+  { id: "gen-nhie-174", difficulty: "soft", category: "adventure", text: "Je n'ai jamais ri à un moment très inapproprié pendant une randonnée." },
+  { id: "gen-nhie-184", difficulty: "soft", category: "adventure", text: "Je n'ai jamais éclipsé d'une soirée en vacances." },
+  { id: "gen-nhie-185", difficulty: "soft", category: "adventure", text: "Je n'ai jamais éclipsé d'une soirée pendant une randonnée." },
+  { id: "gen-nhie-195", difficulty: "hard", category: "adventure", text: "Je n'ai jamais cherché mon propre nom sur Google en vacances." },
+  { id: "gen-nhie-196", difficulty: "hard", category: "adventure", text: "Je n'ai jamais cherché mon propre nom sur Google pendant une randonnée." },
+  { id: "gen-nhie-206", difficulty: "hard", category: "adventure", text: "Je n'ai jamais triché à un examen en vacances." },
+  { id: "gen-nhie-207", difficulty: "hard", category: "adventure", text: "Je n'ai jamais triché à un examen pendant une randonnée." },
+  { id: "gen-nhie-217", difficulty: "hard", category: "adventure", text: "Je n'ai jamais porté des sous-vêtements à l'envers en vacances." },
+  { id: "gen-nhie-218", difficulty: "hard", category: "adventure", text: "Je n'ai jamais porté des sous-vêtements à l'envers pendant une randonnée." },
+  { id: "new-nh-adv-1", difficulty: "hard", category: "adventure", text: "Je n`ai jamais voyagé seul(e) dans un autre pays." },
+  { id: "new-nh-adv-2", difficulty: "hard", category: "adventure", text: "Je n`ai jamais sauté d`un véhicule en mouvement." },
+  { id: "new-nh-adv-3", difficulty: "hard", category: "adventure", text: "Je n`ai jamais fait de stop." },
+
+  // --- CAREER ---
+  { id: "car-s1", difficulty: "soft", category: "career", text: "Je n'ai jamais fait semblant de travailler alors que je scrollais sur les réseaux sociaux." },
+  { id: "car-s2", difficulty: "soft", category: "career", text: "Je n'ai jamais envoyé un e-mail à la mauvaise personne par inattention." },
+  { id: "car-s3", difficulty: "soft", category: "career", text: "Je n'ai jamais oublié de mettre la pièce jointe dans un mail 'ci-joint'." },
+  { id: "car-s4", difficulty: "soft", category: "career", text: "Je n'ai jamais fait semblant d'être en réunion pour éviter une tâche ennuyeuse." },
+  { id: "car-s5", difficulty: "soft", category: "career", text: "Je n'ai jamais volé des fournitures de bureau (stylos, cahiers, agrafeuse...)." },
+  { id: "car-s6", difficulty: "soft", category: "career", text: "Je n'ai jamais travaillé en pyjama (bas du corps) lors d'une visioconférence." },
+  { id: "car-s7", difficulty: "soft", category: "career", text: "Je n'ai jamais mangé le déjeuner d'un collègue dans le frigo commun." },
+  { id: "car-s8", difficulty: "soft", category: "career", text: "Je n'ai jamais pris un jour de congé 'maladie' alors que j'étais en pleine forme." },
+  { id: "car-s9", difficulty: "soft", category: "career", text: "Je n'ai jamais critiqué un collègue par erreur sur le fil de discussion où il se trouvait." },
+  { id: "car-s10", difficulty: "soft", category: "career", text: "Je n'ai jamais fait une sieste pendant mes heures de télétravail." },
+  { id: "gen-nhie-6", difficulty: "hard", category: "career", text: "Je n'ai jamais mangé quelque chose par terre pendant une réunion sérieuse." },
+  { id: "gen-nhie-7", difficulty: "hard", category: "career", text: "Je n'ai jamais mangé quelque chose par terre au bureau." },
+  { id: "gen-nhie-17", difficulty: "soft", category: "career", text: "Je n'ai jamais fait semblant d'être malade pendant une réunion sérieuse." },
+  { id: "gen-nhie-18", difficulty: "soft", category: "career", text: "Je n'ai jamais fait semblant d'être malade au bureau." },
+  { id: "gen-nhie-28", difficulty: "hard", category: "career", text: "Je n'ai jamais volé un petit truc pendant une réunion sérieuse." },
+  { id: "gen-nhie-29", difficulty: "hard", category: "career", text: "Je n'ai jamais volé un petit truc au bureau." },
+  { id: "gen-nhie-39", difficulty: "hard", category: "career", text: "Je n'ai jamais fouillé dans un téléphone pendant une réunion sérieuse." },
+  { id: "gen-nhie-40", difficulty: "hard", category: "career", text: "Je n'ai jamais fouillé dans un téléphone au bureau." },
+  { id: "gen-nhie-50", difficulty: "hard", category: "career", text: "Je n'ai jamais menti lors d'un entretien d'embauche pendant une réunion sérieuse." },
+  { id: "gen-nhie-51", difficulty: "hard", category: "career", text: "Je n'ai jamais menti lors d'un entretien d'embauche au bureau." },
+  { id: "gen-nhie-61", difficulty: "hard", category: "career", text: "Je n'ai jamais pleuré dans un lieu public pendant une réunion sérieuse." },
+  { id: "gen-nhie-62", difficulty: "hard", category: "career", text: "Je n'ai jamais pleuré dans un lieu public au bureau." },
+  { id: "gen-nhie-72", difficulty: "hard", category: "career", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément pendant une réunion sérieuse." },
+  { id: "gen-nhie-73", difficulty: "hard", category: "career", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément au bureau." },
+  { id: "gen-nhie-83", difficulty: "hard", category: "career", text: "Je n'ai jamais trébuché tout seul pendant une réunion sérieuse." },
+  { id: "gen-nhie-84", difficulty: "hard", category: "career", text: "Je n'ai jamais trébuché tout seul au bureau." },
+  { id: "gen-nhie-94", difficulty: "hard", category: "career", text: "Je n'ai jamais mangé une pizza entière seul pendant une réunion sérieuse." },
+  { id: "gen-nhie-95", difficulty: "hard", category: "career", text: "Je n'ai jamais mangé une pizza entière seul au bureau." },
+  { id: "gen-nhie-105", difficulty: "soft", category: "career", text: "Je n'ai jamais envoyé un message à la mauvaise personne pendant une réunion sérieuse." },
+  { id: "gen-nhie-106", difficulty: "soft", category: "career", text: "Je n'ai jamais envoyé un message à la mauvaise personne au bureau." },
+  { id: "gen-nhie-116", difficulty: "soft", category: "career", text: "Je n'ai jamais endormi au travail pendant une réunion sérieuse." },
+  { id: "gen-nhie-117", difficulty: "soft", category: "career", text: "Je n'ai jamais endormi au travail au bureau." },
+  { id: "gen-nhie-127", difficulty: "soft", category: "career", text: "Je n'ai jamais utilisé un faux nom pendant une réunion sérieuse." },
+  { id: "gen-nhie-128", difficulty: "soft", category: "career", text: "Je n'ai jamais utilisé un faux nom au bureau." },
+  { id: "gen-nhie-138", difficulty: "soft", category: "career", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné pendant une réunion sérieuse." },
+  { id: "gen-nhie-139", difficulty: "soft", category: "career", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné au bureau." },
+  { id: "gen-nhie-149", difficulty: "soft", category: "career", text: "Je n'ai jamais sauté une douche pendant une réunion sérieuse." },
+  { id: "gen-nhie-150", difficulty: "soft", category: "career", text: "Je n'ai jamais sauté une douche au bureau." },
+  { id: "gen-nhie-160", difficulty: "soft", category: "career", text: "Je n'ai jamais perdu dans ma propre ville pendant une réunion sérieuse." },
+  { id: "gen-nhie-161", difficulty: "soft", category: "career", text: "Je n'ai jamais perdu dans ma propre ville au bureau." },
+  { id: "gen-nhie-171", difficulty: "soft", category: "career", text: "Je n'ai jamais ri à un moment très inapproprié pendant une réunion sérieuse." },
+  { id: "gen-nhie-172", difficulty: "soft", category: "career", text: "Je n'ai jamais ri à un moment très inapproprié au bureau." },
+  { id: "gen-nhie-182", difficulty: "soft", category: "career", text: "Je n'ai jamais éclipsé d'une soirée pendant une réunion sérieuse." },
+  { id: "gen-nhie-183", difficulty: "hard", category: "career", text: "Je n'ai jamais éclipsé d'une soirée au bureau." },
+  { id: "gen-nhie-193", difficulty: "hard", category: "career", text: "Je n'ai jamais cherché mon propre nom sur Google pendant une réunion sérieuse." },
+  { id: "gen-nhie-194", difficulty: "hard", category: "career", text: "Je n'ai jamais cherché mon propre nom sur Google au bureau." },
+  { id: "gen-nhie-204", difficulty: "hard", category: "career", text: "Je n'ai jamais triché à un examen pendant une réunion sérieuse." },
+  { id: "gen-nhie-205", difficulty: "hard", category: "career", text: "Je n'ai jamais triché à un examen au bureau." },
+  { id: "gen-nhie-215", difficulty: "hard", category: "career", text: "Je n'ai jamais porté des sous-vêtements à l'envers pendant une réunion sérieuse." },
+  { id: "gen-nhie-216", difficulty: "hard", category: "career", text: "Je n'ai jamais porté des sous-vêtements à l'envers au bureau." },
+  { id: "new-nh-car-1", difficulty: "hard", category: "career", text: "Je n`ai jamais menti sur mon CV." },
+  { id: "new-nh-car-2", difficulty: "hard", category: "career", text: "Je n`ai jamais dormi pendant une réunion." },
+  { id: "new-nh-car-3", difficulty: "hard", category: "career", text: "Je n`ai jamais démissionné le premier jour." },
+
+  // --- SOCIAL ---
+  { id: "soc-s1", difficulty: "hard", category: "social", text: "Je n'ai jamais stalké le profil d'un ex jusqu'à ses photos de 2015." },
+  { id: "soc-s2", difficulty: "hard", category: "social", text: "Je n'ai jamais fait semblant de ne pas voir quelqu'un dans la rue pour éviter de lui parler." },
+  { id: "soc-s3", difficulty: "hard", category: "social", text: "Je n'ai jamais menti pour annuler une soirée et rester seul devant une série." },
+  { id: "soc-s4", difficulty: "hard", category: "social", text: "Je n'ai jamais liké par erreur une très vieille photo en stalkant quelqu'un." },
+  { id: "soc-s5", difficulty: "hard", category: "social", text: "Je n'ai jamais créé un faux compte sur les réseaux sociaux pour espionner quelqu'un." },
+  { id: "soc-s6", difficulty: "hard", category: "social", text: "Je n'ai jamais fait semblant d'être au téléphone pour éviter une conversation gênante." },
+  { id: "soc-s7", difficulty: "hard", category: "social", text: "Je n'ai jamais oublié le prénom d'une personne à qui je parlais depuis 10 minutes." },
+  { id: "soc-s8", difficulty: "hard", category: "social", text: "Je n'ai jamais checké mon téléphone pendant un rendez-vous galant parce que je m'ennuyais." },
+  { id: "soc-s9", difficulty: "hard", category: "social", text: "Je n'ai jamais menti sur mon âge ou ma profession lors d'une soirée." },
+  { id: "soc-s10", difficulty: "hard", category: "social", text: "Je n'ai jamais quitté un groupe WhatsApp juste après avoir lu un message énervant." },
+  { id: "gen-nhie-1", difficulty: "soft", category: "social", text: "Je n'ai jamais mangé quelque chose par terre juste pour éviter quelqu'un." },
+  { id: "gen-nhie-12", difficulty: "soft", category: "social", text: "Je n'ai jamais fait semblant d'être malade juste pour éviter quelqu'un." },
+  { id: "gen-nhie-23", difficulty: "soft", category: "social", text: "Je n'ai jamais volé un petit truc juste pour éviter quelqu'un." },
+  { id: "gen-nhie-34", difficulty: "soft", category: "social", text: "Je n'ai jamais fouillé dans un téléphone juste pour éviter quelqu'un." },
+  { id: "gen-nhie-45", difficulty: "soft", category: "social", text: "Je n'ai jamais menti lors d'un entretien d'embauche juste pour éviter quelqu'un." },
+  { id: "gen-nhie-56", difficulty: "soft", category: "social", text: "Je n'ai jamais pleuré dans un lieu public juste pour éviter quelqu'un." },
+  { id: "gen-nhie-67", difficulty: "hard", category: "social", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément juste pour éviter quelqu'un." },
+  { id: "gen-nhie-78", difficulty: "hard", category: "social", text: "Je n'ai jamais trébuché tout seul juste pour éviter quelqu'un." },
+  { id: "gen-nhie-89", difficulty: "hard", category: "social", text: "Je n'ai jamais mangé une pizza entière seul juste pour éviter quelqu'un." },
+  { id: "gen-nhie-100", difficulty: "soft", category: "social", text: "Je n'ai jamais envoyé un message à la mauvaise personne juste pour éviter quelqu'un." },
+  { id: "gen-nhie-111", difficulty: "soft", category: "social", text: "Je n'ai jamais endormi au travail juste pour éviter quelqu'un." },
+  { id: "gen-nhie-122", difficulty: "soft", category: "social", text: "Je n'ai jamais utilisé un faux nom juste pour éviter quelqu'un." },
+  { id: "gen-nhie-133", difficulty: "soft", category: "social", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné juste pour éviter quelqu'un." },
+  { id: "gen-nhie-144", difficulty: "soft", category: "social", text: "Je n'ai jamais sauté une douche juste pour éviter quelqu'un." },
+  { id: "gen-nhie-155", difficulty: "soft", category: "social", text: "Je n'ai jamais perdu dans ma propre ville juste pour éviter quelqu'un." },
+  { id: "gen-nhie-166", difficulty: "soft", category: "social", text: "Je n'ai jamais ri à un moment très inapproprié juste pour éviter quelqu'un." },
+  { id: "gen-nhie-177", difficulty: "soft", category: "social", text: "Je n'ai jamais éclipsé d'une soirée juste pour éviter quelqu'un." },
+  { id: "gen-nhie-188", difficulty: "soft", category: "social", text: "Je n'ai jamais cherché mon propre nom sur Google juste pour éviter quelqu'un." },
+  { id: "gen-nhie-199", difficulty: "soft", category: "social", text: "Je n'ai jamais triché à un examen juste pour éviter quelqu'un." },
+  { id: "gen-nhie-210", difficulty: "soft", category: "social", text: "Je n'ai jamais porté des sous-vêtements à l'envers juste pour éviter quelqu'un." },
+  { id: "new-nh-soc-1", difficulty: "hard", category: "social", text: "Je n`ai jamais ghosté quelqu`un après un premier rendez-vous." },
+  { id: "new-nh-soc-2", difficulty: "hard", category: "social", text: "Je n`ai jamais envoyé un message à la mauvaise personne." },
+  { id: "new-nh-soc-3", difficulty: "hard", category: "social", text: "Je n`ai jamais posé un lapin à quelqu`un." },
+
+  // --- PARTY ---
+  { id: "pty-s1", difficulty: "hard", category: "party", text: "Je n'ai jamais fait un 'Irish Exit' (parti sans dire au revoir)." },
+  { id: "pty-s2", difficulty: "hard", category: "party", text: "Je n'ai jamais renversé mon verre sur quelqu'un par accident." },
+  { id: "pty-s3", difficulty: "hard", category: "party", text: "Je n'ai jamais volé un briquet en soirée sans m'en rendre compte." },
+  { id: "pty-s4", difficulty: "hard", category: "party", text: "Je n'ai jamais essayé de rentrer en boîte avec des chaussures sales." },
+  { id: "pty-s5", difficulty: "hard", category: "party", text: "Je n'ai jamais envoyé un message gênant à un ex en étant ivre." },
+  { id: "pty-s6", difficulty: "hard", category: "party", text: "Je n'ai jamais chanté à tue-tête sur une chanson dont je ne connaissais pas les paroles." },
+  { id: "pty-s7", difficulty: "hard", category: "party", text: "Je n'ai jamais dansé sur une table ou un bar." },
+  { id: "pty-s8", difficulty: "hard", category: "party", text: "Je n'ai jamais menti au videur pour rentrer dans un club." },
+  { id: "pty-s9", difficulty: "hard", category: "party", text: "Je n'ai jamais mangé de la junk food à 4h du matin assis sur le trottoir." },
+  { id: "pty-s10", difficulty: "hard", category: "party", text: "Je n'ai jamais perdu mon téléphone ou mes clés en soirée." },
+  { id: "gen-nhie-4", difficulty: "hard", category: "party", text: "Je n'ai jamais mangé quelque chose par terre à une soirée." },
+  { id: "gen-nhie-5", difficulty: "hard", category: "party", text: "Je n'ai jamais mangé quelque chose par terre en étant ivre." },
+  { id: "gen-nhie-15", difficulty: "soft", category: "party", text: "Je n'ai jamais fait semblant d'être malade à une soirée." },
+  { id: "gen-nhie-16", difficulty: "soft", category: "party", text: "Je n'ai jamais fait semblant d'être malade en étant ivre." },
+  { id: "gen-nhie-26", difficulty: "soft", category: "party", text: "Je n'ai jamais volé un petit truc à une soirée." },
+  { id: "gen-nhie-27", difficulty: "soft", category: "party", text: "Je n'ai jamais volé un petit truc en étant ivre." },
+  { id: "gen-nhie-37", difficulty: "soft", category: "party", text: "Je n'ai jamais fouillé dans un téléphone à une soirée." },
+  { id: "gen-nhie-38", difficulty: "hard", category: "party", text: "Je n'ai jamais fouillé dans un téléphone en étant ivre." },
+  { id: "gen-nhie-48", difficulty: "hard", category: "party", text: "Je n'ai jamais menti lors d'un entretien d'embauche à une soirée." },
+  { id: "gen-nhie-49", difficulty: "hard", category: "party", text: "Je n'ai jamais menti lors d'un entretien d'embauche en étant ivre." },
+  { id: "gen-nhie-59", difficulty: "hard", category: "party", text: "Je n'ai jamais pleuré dans un lieu public à une soirée." },
+  { id: "gen-nhie-60", difficulty: "hard", category: "party", text: "Je n'ai jamais pleuré dans un lieu public en étant ivre." },
+  { id: "gen-nhie-70", difficulty: "hard", category: "party", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément à une soirée." },
+  { id: "gen-nhie-71", difficulty: "hard", category: "party", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément en étant ivre." },
+  { id: "gen-nhie-81", difficulty: "hard", category: "party", text: "Je n'ai jamais trébuché tout seul à une soirée." },
+  { id: "gen-nhie-82", difficulty: "hard", category: "party", text: "Je n'ai jamais trébuché tout seul en étant ivre." },
+  { id: "gen-nhie-92", difficulty: "hard", category: "party", text: "Je n'ai jamais mangé une pizza entière seul à une soirée." },
+  { id: "gen-nhie-93", difficulty: "hard", category: "party", text: "Je n'ai jamais mangé une pizza entière seul en étant ivre." },
+  { id: "gen-nhie-103", difficulty: "soft", category: "party", text: "Je n'ai jamais envoyé un message à la mauvaise personne à une soirée." },
+  { id: "gen-nhie-104", difficulty: "soft", category: "party", text: "Je n'ai jamais envoyé un message à la mauvaise personne en étant ivre." },
+  { id: "gen-nhie-114", difficulty: "soft", category: "party", text: "Je n'ai jamais endormi au travail à une soirée." },
+  { id: "gen-nhie-115", difficulty: "soft", category: "party", text: "Je n'ai jamais endormi au travail en étant ivre." },
+  { id: "gen-nhie-125", difficulty: "soft", category: "party", text: "Je n'ai jamais utilisé un faux nom à une soirée." },
+  { id: "gen-nhie-126", difficulty: "soft", category: "party", text: "Je n'ai jamais utilisé un faux nom en étant ivre." },
+  { id: "gen-nhie-136", difficulty: "soft", category: "party", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné à une soirée." },
+  { id: "gen-nhie-137", difficulty: "soft", category: "party", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné en étant ivre." },
+  { id: "gen-nhie-147", difficulty: "soft", category: "party", text: "Je n'ai jamais sauté une douche à une soirée." },
+  { id: "gen-nhie-148", difficulty: "soft", category: "party", text: "Je n'ai jamais sauté une douche en étant ivre." },
+  { id: "gen-nhie-158", difficulty: "soft", category: "party", text: "Je n'ai jamais perdu dans ma propre ville à une soirée." },
+  { id: "gen-nhie-159", difficulty: "soft", category: "party", text: "Je n'ai jamais perdu dans ma propre ville en étant ivre." },
+  { id: "gen-nhie-169", difficulty: "soft", category: "party", text: "Je n'ai jamais ri à un moment très inapproprié à une soirée." },
+  { id: "gen-nhie-170", difficulty: "soft", category: "party", text: "Je n'ai jamais ri à un moment très inapproprié en étant ivre." },
+  { id: "gen-nhie-180", difficulty: "soft", category: "party", text: "Je n'ai jamais éclipsé d'une soirée à une soirée." },
+  { id: "gen-nhie-181", difficulty: "soft", category: "party", text: "Je n'ai jamais éclipsé d'une soirée en étant ivre." },
+  { id: "gen-nhie-191", difficulty: "soft", category: "party", text: "Je n'ai jamais cherché mon propre nom sur Google à une soirée." },
+  { id: "gen-nhie-192", difficulty: "soft", category: "party", text: "Je n'ai jamais cherché mon propre nom sur Google en étant ivre." },
+  { id: "gen-nhie-202", difficulty: "soft", category: "party", text: "Je n'ai jamais triché à un examen à une soirée." },
+  { id: "gen-nhie-203", difficulty: "soft", category: "party", text: "Je n'ai jamais triché à un examen en étant ivre." },
+  { id: "gen-nhie-213", difficulty: "soft", category: "party", text: "Je n'ai jamais porté des sous-vêtements à l'envers à une soirée." },
+  { id: "gen-nhie-214", difficulty: "soft", category: "party", text: "Je n'ai jamais porté des sous-vêtements à l'envers en étant ivre." },
+  { id: "new-nh-pty-1", difficulty: "hard", category: "party", text: "Je n`ai jamais dormi lors d`une soirée." },
+  { id: "new-nh-pty-2", difficulty: "hard", category: "party", text: "Je n`ai jamais été viré d`une boîte de nuit." },
+  { id: "new-nh-pty-3", difficulty: "hard", category: "party", text: "Je n`ai jamais chanté au karaoké devant des inconnus." },
+
+  // --- HOT ---
+  { id: "hot-s1", difficulty: "hard", category: "hot", text: "Je n'ai jamais dit le mauvais prénom au lit." },
+  { id: "hot-s2", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu une crampe au mollet en pleine action." },
+  { id: "hot-s3", difficulty: "hard", category: "hot", text: "Je n'ai jamais simulé un orgasme pour en finir plus vite." },
+  { id: "hot-s4", difficulty: "hard", category: "hot", text: "Je n'ai jamais gardé mes chaussettes pendant l'acte." },
+  { id: "hot-s5", difficulty: "hard", category: "hot", text: "Je n'ai jamais rigolé de façon incontrôlable en plein milieu." },
+  { id: "hot-s6", difficulty: "hard", category: "hot", text: "Je n'ai jamais été interrompu(e) par mes parents ou colocataires." },
+  { id: "hot-s7", difficulty: "hard", category: "hot", text: "Je n'ai jamais fait semblant de savoir ce que je faisais au lit." },
+  { id: "hot-s8", difficulty: "hard", category: "hot", text: "Je n'ai jamais utilisé une playlist 'sexy' un peu trop cliché." },
+  { id: "hot-s9", difficulty: "hard", category: "hot", text: "Je n'ai jamais pété accidentellement pendant l'effort." },
+  { id: "hot-s10", difficulty: "hard", category: "hot", text: "Je n'ai jamais caché un suçon avec du maquillage ou une écharpe." },
+  { id: "gen-nhie-2", difficulty: "soft", category: "hot", text: "Je n'ai jamais mangé quelque chose par terre après une rupture." },
+  { id: "gen-nhie-3", difficulty: "hard", category: "hot", text: "Je n'ai jamais mangé quelque chose par terre pour impressionner un crush." },
+  { id: "gen-nhie-13", difficulty: "soft", category: "hot", text: "Je n'ai jamais fait semblant d'être malade après une rupture." },
+  { id: "gen-nhie-14", difficulty: "soft", category: "hot", text: "Je n'ai jamais fait semblant d'être malade pour impressionner un crush." },
+  { id: "gen-nhie-24", difficulty: "soft", category: "hot", text: "Je n'ai jamais volé un petit truc après une rupture." },
+  { id: "gen-nhie-25", difficulty: "soft", category: "hot", text: "Je n'ai jamais volé un petit truc pour impressionner un crush." },
+  { id: "gen-nhie-35", difficulty: "hard", category: "hot", text: "Je n'ai jamais fouillé dans un téléphone après une rupture." },
+  { id: "gen-nhie-36", difficulty: "hard", category: "hot", text: "Je n'ai jamais fouillé dans un téléphone pour impressionner un crush." },
+  { id: "gen-nhie-46", difficulty: "hard", category: "hot", text: "Je n'ai jamais menti lors d'un entretien d'embauche après une rupture." },
+  { id: "gen-nhie-47", difficulty: "hard", category: "hot", text: "Je n'ai jamais menti lors d'un entretien d'embauche pour impressionner un crush." },
+  { id: "gen-nhie-57", difficulty: "hard", category: "hot", text: "Je n'ai jamais pleuré dans un lieu public après une rupture." },
+  { id: "gen-nhie-58", difficulty: "hard", category: "hot", text: "Je n'ai jamais pleuré dans un lieu public pour impressionner un crush." },
+  { id: "gen-nhie-68", difficulty: "hard", category: "hot", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément après une rupture." },
+  { id: "gen-nhie-69", difficulty: "hard", category: "hot", text: "Je n'ai jamais oublié le nom de quelqu'un instantanément pour impressionner un crush." },
+  { id: "gen-nhie-79", difficulty: "hard", category: "hot", text: "Je n'ai jamais trébuché tout seul après une rupture." },
+  { id: "gen-nhie-80", difficulty: "hard", category: "hot", text: "Je n'ai jamais trébuché tout seul pour impressionner un crush." },
+  { id: "gen-nhie-90", difficulty: "hard", category: "hot", text: "Je n'ai jamais mangé une pizza entière seul après une rupture." },
+  { id: "gen-nhie-91", difficulty: "hard", category: "hot", text: "Je n'ai jamais mangé une pizza entière seul pour impressionner un crush." },
+  { id: "gen-nhie-101", difficulty: "soft", category: "hot", text: "Je n'ai jamais envoyé un message à la mauvaise personne après une rupture." },
+  { id: "gen-nhie-102", difficulty: "soft", category: "hot", text: "Je n'ai jamais envoyé un message à la mauvaise personne pour impressionner un crush." },
+  { id: "gen-nhie-112", difficulty: "soft", category: "hot", text: "Je n'ai jamais endormi au travail après une rupture." },
+  { id: "gen-nhie-113", difficulty: "soft", category: "hot", text: "Je n'ai jamais endormi au travail pour impressionner un crush." },
+  { id: "gen-nhie-123", difficulty: "soft", category: "hot", text: "Je n'ai jamais utilisé un faux nom après une rupture." },
+  { id: "gen-nhie-124", difficulty: "soft", category: "hot", text: "Je n'ai jamais utilisé un faux nom pour impressionner un crush." },
+  { id: "gen-nhie-134", difficulty: "soft", category: "hot", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné après une rupture." },
+  { id: "gen-nhie-135", difficulty: "soft", category: "hot", text: "Je n'ai jamais offert un cadeau qu'on m'avait donné pour impressionner un crush." },
+  { id: "gen-nhie-145", difficulty: "soft", category: "hot", text: "Je n'ai jamais sauté une douche après une rupture." },
+  { id: "gen-nhie-146", difficulty: "soft", category: "hot", text: "Je n'ai jamais sauté une douche pour impressionner un crush." },
+  { id: "gen-nhie-156", difficulty: "soft", category: "hot", text: "Je n'ai jamais perdu dans ma propre ville après une rupture." },
+  { id: "gen-nhie-157", difficulty: "soft", category: "hot", text: "Je n'ai jamais perdu dans ma propre ville pour impressionner un crush." },
+  { id: "gen-nhie-167", difficulty: "soft", category: "hot", text: "Je n'ai jamais ri à un moment très inapproprié après une rupture." },
+  { id: "gen-nhie-168", difficulty: "soft", category: "hot", text: "Je n'ai jamais ri à un moment très inapproprié pour impressionner un crush." },
+  { id: "gen-nhie-178", difficulty: "soft", category: "hot", text: "Je n'ai jamais éclipsé d'une soirée après une rupture." },
+  { id: "gen-nhie-179", difficulty: "soft", category: "hot", text: "Je n'ai jamais éclipsé d'une soirée pour impressionner un crush." },
+  { id: "gen-nhie-189", difficulty: "soft", category: "hot", text: "Je n'ai jamais cherché mon propre nom sur Google après une rupture." },
+  { id: "gen-nhie-190", difficulty: "soft", category: "hot", text: "Je n'ai jamais cherché mon propre nom sur Google pour impressionner un crush." },
+  { id: "gen-nhie-200", difficulty: "soft", category: "hot", text: "Je n'ai jamais triché à un examen après une rupture." },
+  { id: "gen-nhie-201", difficulty: "soft", category: "hot", text: "Je n'ai jamais triché à un examen pour impressionner un crush." },
+  { id: "gen-nhie-211", difficulty: "soft", category: "hot", text: "Je n'ai jamais porté des sous-vêtements à l'envers après une rupture." },
+  { id: "gen-nhie-212", difficulty: "soft", category: "hot", text: "Je n'ai jamais porté des sous-vêtements à l'envers pour impressionner un crush." },
+  { id: "new-nh-hot-1", difficulty: "hard", category: "hot", text: "Je n`ai jamais eu de romance au bureau." },
+  { id: "new-nh-hot-2", difficulty: "hard", category: "hot", text: "Je n`ai jamais envoyé de photo de moi nu(e)." },
+  { id: "new-nh-hot-3", difficulty: "hard", category: "hot", text: "Je n`ai jamais flirté pour me sortir d`un problème." },
+  { id: "new-nh-hot-4", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un dans un ascenseur." },
+  { id: "new-nh-hot-5", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu une aventure d'un soir." },
+  { id: "new-nh-hot-6", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu des rendez-vous avec deux personnes différentes dans la même semaine." },
+  { id: "new-nh-hot-7", difficulty: "hard", category: "hot", text: "Je n'ai jamais matché avec quelqu'un sur une appli de rencontre et reculé au dernier moment." },
+  { id: "new-nh-hot-8", difficulty: "hard", category: "hot", text: "Je n'ai jamais glissé dans les DM de quelqu'un." },
+  { id: "new-nh-hot-9", difficulty: "hard", category: "hot", text: "Je n'ai jamais flirté avec le ou la partenaire d'un ami ou d'une amie." },
+  { id: "new-nh-hot-10", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu un crush secret sur quelqu'un dans cette pièce." },
+  { id: "new-nh-hot-11", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un dans une voiture." },
+  { id: "new-nh-hot-12", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un sans connaître son nom de famille." },
+  { id: "new-nh-hot-13", difficulty: "hard", category: "hot", text: "Je n'ai jamais utilisé une technique de drague qui a vraiment marché." },
+  { id: "new-nh-hot-14", difficulty: "hard", category: "hot", text: "Je n'ai jamais donné un faux numéro de téléphone à quelqu'un." },
+  { id: "new-nh-hot-15", difficulty: "hard", category: "hot", text: "Je n'ai jamais ghosté quelqu'un après un rendez-vous." },
+  { id: "new-nh-hot-16", difficulty: "hard", category: "hot", text: "Je n'ai jamais liké accidentellement une vieille photo en consultant le profil de quelqu'un." },
+  { id: "new-nh-hot-17", difficulty: "hard", category: "hot", text: "Je n'ai jamais été surpris ou surprise à fixer quelqu'un d'attirant." },
+  { id: "new-nh-hot-18", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un avec plus de 10 ans d'écart." },
+  { id: "new-nh-hot-19", difficulty: "hard", category: "hot", text: "Je n'ai jamais envoyé un message flirteur à la mauvaise personne." },
+  { id: "new-nh-hot-20", difficulty: "hard", category: "hot", text: "Je n'ai jamais sorti avec quelqu'un uniquement pour son physique." },
+  { id: "new-nh-hot-21", difficulty: "hard", category: "hot", text: "Je n'ai jamais envoyé un message à un ex ou une ex tard le soir." },
+  { id: "new-nh-hot-22", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu des sentiments pour mon ou ma meilleur ami ou meilleure amie." },
+  { id: "new-nh-hot-23", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un dès le premier rendez-vous." },
+  { id: "new-nh-hot-24", difficulty: "hard", category: "hot", text: "Je n'ai jamais prétendu être en couple pour éviter les avances de quelqu'un." },
+  { id: "new-nh-hot-25", difficulty: "hard", category: "hot", text: "Je n'ai jamais été dans une relation amis avec avantages." },
+  { id: "new-nh-hot-26", difficulty: "hard", category: "hot", text: "Je n'ai jamais trompé un partenaire ou une partenaire." },
+  { id: "new-nh-hot-27", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un que je venais de rencontrer à une soirée." },
+  { id: "new-nh-hot-28", difficulty: "hard", category: "hot", text: "Je n'ai jamais fait du jeu de rôles avec un partenaire." },
+  { id: "new-nh-hot-29", difficulty: "hard", category: "hot", text: "Je n'ai jamais été à un rendez-vous arrangé." },
+  { id: "new-nh-hot-30", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu le béguin pour un prof ou un patron." },
+  { id: "new-nh-hot-31", difficulty: "hard", category: "hot", text: "Je n'ai jamais été rejeté ou rejetée quand j'ai fait le premier pas." },
+  { id: "new-nh-hot-32", difficulty: "hard", category: "hot", text: "Je n'ai jamais quitté une soirée exprès pour me retrouver seul ou seule avec quelqu'un." },
+  { id: "new-nh-hot-33", difficulty: "hard", category: "hot", text: "Je n'ai jamais inventé une raison de toucher quelqu'un qui me plaisait." },
+  { id: "new-nh-hot-34", difficulty: "hard", category: "hot", text: "Je n'ai jamais été surpris ou surprise en train d'embrasser quelqu'un par une connaissance." },
+  { id: "new-nh-hot-35", difficulty: "hard", category: "hot", text: "Je n'ai jamais rêvé de quelqu'un que je n'aurais pas dû." },
+  { id: "new-nh-hot-36", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un du même sexe." },
+  { id: "new-nh-hot-37", difficulty: "hard", category: "hot", text: "Je n'ai jamais été dans une relation ouverte." },
+  { id: "new-nh-hot-38", difficulty: "hard", category: "hot", text: "Je n'ai jamais menti sur mon âge pour impressionner quelqu'un." },
+  { id: "new-nh-hot-39", difficulty: "hard", category: "hot", text: "Je n'ai jamais été attiré ou attirée par le frère ou la soeur d'un ami ou d'une amie." },
+  { id: "new-nh-hot-40", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un à la plage ou dans une piscine." },
+  { id: "new-nh-hot-41", difficulty: "hard", category: "hot", text: "Je n'ai jamais dit juste amis en voulant réellement plus." },
+  { id: "new-nh-hot-42", difficulty: "hard", category: "hot", text: "Je n'ai jamais envoyé un message risqué et regretté instantanément." },
+  { id: "new-nh-hot-43", difficulty: "hard", category: "hot", text: "Je n'ai jamais gardé contact avec un ex ou une ex." },
+  { id: "new-nh-hot-44", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu le béguin pour quelqu'un que je n'aurais vraiment pas dû." },
+  { id: "new-nh-hot-45", difficulty: "hard", category: "hot", text: "Je n'ai jamais inventé un prétexte pour obtenir le numéro de quelqu'un." },
+  { id: "new-nh-hot-46", difficulty: "hard", category: "hot", text: "Je n'ai jamais embrassé quelqu'un pour rendre jaloux quelqu'un d'autre." },
+  { id: "new-nh-hot-47", difficulty: "hard", category: "hot", text: "Je n'ai jamais craqué pour quelqu'un qui était déjà en couple." },
+  { id: "new-nh-hot-48", difficulty: "hard", category: "hot", text: "Je n'ai jamais utilisé mon physique pour obtenir quelque chose que je voulais." },
+  { id: "new-nh-hot-49", difficulty: "hard", category: "hot", text: "Je n'ai jamais eu des sentiments pour deux personnes en même temps." },
+  { id: "new-nh-hot-50", difficulty: "hard", category: "hot", text: "Je n'ai jamais resté dans une relation plus longtemps que je n'aurais dû." },
+  { id: "new-nh-hot-51", difficulty: "hard", category: "hot", text: "Je n'ai jamais recherché le ou la nouveau partenaire d'un ex ou d'une ex en ligne." },
+  { id: "new-nh-hot-52", difficulty: "hard", category: "hot", text: "Je n'ai jamais envoyé un message à quelqu'un qui m'attirait en faisant semblant que c'était une erreur." },
+  { id: "new-nh-hot-53", difficulty: "hard", category: "hot", text: "Je n'ai jamais dansé avec quelqu'un en espérant que ça mène à quelque chose de plus." },
 ];
