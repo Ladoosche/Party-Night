@@ -71,6 +71,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
   const [mrWhiteGuessingId, setMrWhiteGuessingId] = useState<string | null>(
     null,
   );
+  const [reverseOrder, setReverseOrder] = useState(false);
+  const [eliminatedRevealPlayer, setEliminatedRevealPlayer] = useState<GamePlayer | null>(null);
   const [quitConfirm, setQuitConfirm] = useState(false);
   const [allUsedOpen, setAllUsedOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -218,36 +220,8 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
 
       setGamePlayers(gp);
 
-      // Weighted random start: civilians have 3x chance vs undercovers
-      let startIdxWeights: number[] = [];
-      gp.forEach((p, i) => {
-        if (p.role === "civilian") {
-          startIdxWeights.push(i, i, i); // 3x
-        } else if (p.role === "undercover") {
-          startIdxWeights.push(i);       // 1x
-        }
-        // Mr white cannot start in usual rules, but let's let him start with 1x chance
-        else if (p.role === "mrwhite") {
-          startIdxWeights.push(i);
-        }
-      });
-      const startIdx = startIdxWeights[Math.floor(Math.random() * startIdxWeights.length)];
-      const mwIdx = gp.findIndex((p) => p.role === "mrwhite");
-
-      let orderExcludeMW: number[] = [];
-      for (let i = 0; i < gp.length; i++) {
-        const idx = (startIdx + i) % gp.length;
-        if (idx !== mwIdx) orderExcludeMW.push(idx);
-      }
-
-      let finalOrder = [...orderExcludeMW];
-      if (mwIdx !== -1) {
-        const minPos = Math.max(1, Math.floor(gp.length * 0.6));
-        const randomPos =
-          minPos + Math.floor(Math.random() * (gp.length - minPos));
-        finalOrder.splice(randomPos, 0, mwIdx);
-      }
-
+      const indices = gp.map((_, i) => i);
+      const finalOrder = reverseOrder ? [...indices].reverse() : indices;
       setPassOrder(finalOrder);
       setPassIndex(0);
       setRound(1);
@@ -289,12 +263,17 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
       setMrWhiteGuessingId(id);
       return;
     }
+    setEliminatedRevealPlayer(player || null);
+  };
 
+  const confirmElimination = () => {
+    if (!eliminatedRevealPlayer) return;
     const newPlayers = gamePlayers.map((p) =>
-      p.id === id ? { ...p, isEliminated: true, eliminatedAtRound: round } : p,
+      p.id === eliminatedRevealPlayer.id ? { ...p, isEliminated: true, eliminatedAtRound: round } : p,
     );
     setGamePlayers(newPlayers);
     setRound(round + 1);
+    setEliminatedRevealPlayer(null);
     checkWinner(newPlayers);
   };
 
@@ -652,6 +631,25 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
                     className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all shadow-sm ${wordsHidden ? "left-6" : "left-1"}`}
                   />
                 </button>
+              </div>
+              <div className="flex justify-between items-center py-3 border-t border-slate-100 dark:border-slate-800 px-1">
+                <span className="font-bold text-[10px] uppercase tracking-widest text-slate-600 dark:text-slate-400">
+                  {t("play-order-label")}
+                </span>
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => setReverseOrder(false)}
+                    className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${!reverseOrder ? "bg-slate-900 dark:bg-slate-700 text-white shadow-sm" : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500"}`}
+                  >
+                    {t("play-order-normal")}
+                  </button>
+                  <button
+                    onClick={() => setReverseOrder(true)}
+                    className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all ${reverseOrder ? "bg-slate-900 dark:bg-slate-700 text-white shadow-sm" : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500"}`}
+                  >
+                    {t("play-order-reverse")}
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -1023,8 +1021,29 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
         </div>
       )}
 
+      {eliminatedRevealPlayer && (
+        <div className="fixed inset-0 z-50 bg-slate-900/90 dark:bg-black/90 backdrop-blur-sm flex items-center justify-center p-8 animate-in fade-in">
+          <div className="bg-white dark:bg-slate-800 rounded-3xl w-full max-w-xs p-10 text-center shadow-2xl relative overflow-hidden">
+            <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500 mb-6">
+              {t("role-of").replace("{0}", eliminatedRevealPlayer.name)}
+            </div>
+            <span className={`text-sm font-bold tracking-widest px-5 py-2.5 rounded-xl uppercase ${eliminatedRevealPlayer.role === "civilian" ? "bg-[#e0f4f8] dark:bg-[#0077b6]/20 text-[#0077b6] dark:text-[#00b4d8]" : eliminatedRevealPlayer.role === "undercover" ? "bg-red-50 dark:bg-red-900/20 text-red-500 dark:text-red-400" : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400"}`}>
+              {t("role-" + eliminatedRevealPlayer.role)}
+            </span>
+            <div className="mt-10">
+              <button
+                onClick={confirmElimination}
+                className="w-full py-4 bg-red-500 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+              >
+                {t("eliminate-confirm")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {mrWhiteGuessingId && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-slate-900/90 dark:bg-black/90 backdrop-blur-sm flex items-center justify-center p-8"
           onClick={() => setMrWhiteGuessingId(null)}
         >
