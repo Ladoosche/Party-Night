@@ -496,7 +496,7 @@ export const fr = [
   [
     "Ketchup",
     "Moutarde",
-    "Mayonnaisse"
+    "Mayonnaise"
   ],
   [
     "France",

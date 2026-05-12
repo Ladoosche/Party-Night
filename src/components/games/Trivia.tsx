@@ -29,6 +29,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   const players = allPlayers.filter((p) => p.isActive !== false);
   
   const [screen, setScreen] = useState<Screen>("rules");
+  const [quizMode, setQuizMode] = useState<"standard" | "miss-france">("standard");
   const [difficulties, setDifficulties] = useState<TriviaQuestion["difficulty"][]>(["soft"]);
   const [selectedCategories, setSelectedCategories] = useState<TriviaQuestion["category"][]>(["geo", "science", "history", "pop"]);
   const [gameStyle, setGameStyle] = useState<GameStyle>("points");
@@ -80,34 +81,56 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
   const startGame = async (clearUsed = false, overrideAsker?: string | null) => {
     setIsLoading(true);
     try {
-      const getQuestionsResult = await getTriviaQuestions(language);
-      
+      let allQuestions: TriviaQuestion[];
+      if (quizMode === "miss-france") {
+        const { missFrance } = await import('../../data/trivia/miss-france');
+        allQuestions = missFrance;
+      } else {
+        allQuestions = await getTriviaQuestions(language);
+      }
+
       let usedIds = clearUsed ? [] : (usedItems.trivia || []);
       if (clearUsed) {
         setUsedItems(prev => ({ ...prev, trivia: [] }));
       }
 
-      let filtered = getQuestionsResult.filter(
-        (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
-      );
-      
-      if (filtered.length === 0) {
-        let totalMatching = getQuestionsResult.filter(
-          (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+      let filtered: TriviaQuestion[];
+      if (quizMode === "miss-france") {
+        filtered = allQuestions.filter(q => !usedIds.includes(q.id));
+      } else {
+        filtered = allQuestions.filter(
+          (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category) && !usedIds.includes(q.id)
         );
-        if (totalMatching.length > 0) {
-          setAllUsedOpen(true);
-          return;
+        if (filtered.length === 0) {
+          const totalMatching = allQuestions.filter(
+            (q) => difficulties.includes(q.difficulty) && selectedCategories.includes(q.category)
+          );
+          if (totalMatching.length > 0) {
+            setAllUsedOpen(true);
+            return;
+          }
+          const backup = allQuestions.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
+          if (backup.length === 0) {
+            setAllUsedOpen(true);
+            return;
+          }
+          filtered = backup;
         }
-        const backup = getQuestionsResult.filter((q) => selectedCategories.includes(q.category) && !usedIds.includes(q.id));
-        if (backup.length === 0) {
-          setAllUsedOpen(true);
-          return;
-        }
-        filtered = backup;
       }
-      
+
+      if (filtered.length === 0) {
+        setAllUsedOpen(true);
+        return;
+      }
+
       const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+
+      // Mark all loaded questions as used upfront to prevent any duplicate
+      setUsedItems(prev => ({
+        ...prev,
+        trivia: [...new Set([...(prev.trivia || []), ...shuffled.map(q => q.id)])]
+      }));
+
       setCurrentQuestions(shuffled);
       setCurrentIndex(0);
       if (overrideAsker !== undefined) {
@@ -118,22 +141,6 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
       setIsLoading(false);
     }
   };
-
-  const recordQuestionUsed = (id: string) => {
-    setUsedItems(prev => {
-      const list = prev.trivia || [];
-      if (!list.includes(id)) {
-        return { ...prev, trivia: [...list, id] };
-      }
-      return prev;
-    });
-  };
-
-  useEffect(() => {
-    if (screen === 'game' && currentQuestions[currentIndex]) {
-       recordQuestionUsed(currentQuestions[currentIndex].id);
-    }
-  }, [currentIndex, currentQuestions, screen]);
 
   const nextQuestion = (winnerId?: string) => {
     setShowHint(false);
@@ -150,7 +157,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
     if (currentIndex < currentQuestions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      startGame(false, askerId === "everyone" ? "everyone" : (winnerId || askerId));
+      setAllUsedOpen(true);
     }
   };
 
@@ -237,6 +244,36 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
             <div className="px-5 flex-1 space-y-6">
                 <div>
                   <label className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase block mb-3">
+                    {t("trivia-set-label")}
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setQuizMode("standard")}
+                      className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 transition-all ${
+                        quizMode === "standard"
+                          ? "bg-emerald-500 border-emerald-500 text-white shadow-lg"
+                          : "bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500 dark:text-slate-400"
+                      }`}
+                    >
+                      <Target size={16} />
+                      <span className="font-bold text-[10px] uppercase tracking-wide">{t("trivia-set-standard")}</span>
+                    </button>
+                    <button
+                      onClick={() => setQuizMode("miss-france")}
+                      className={`flex-1 flex items-center justify-center gap-2 p-3 rounded-xl border-2 transition-all ${
+                        quizMode === "miss-france"
+                          ? "bg-pink-500 border-pink-500 text-white shadow-lg"
+                          : "bg-slate-50 dark:bg-slate-800 border-transparent text-slate-500 dark:text-slate-400"
+                      }`}
+                    >
+                      <span>👑</span>
+                      <span className="font-bold text-[10px] uppercase tracking-wide">{t("trivia-set-miss-france")}</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase block mb-3">
                     {t("trivia-game-mode")}
                   </label>
                   <div className="flex flex-col gap-2">
@@ -265,7 +302,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                   </div>
                 </div>
 
-                <div>
+                {quizMode === "standard" && <div>
                   <label className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase block mb-3">
                     {t("trivia-difficulty")}
                   </label>
@@ -317,7 +354,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                       {t("trivia-no-category")}
                     </p>
                   )}
-                </div>
+                </div>}
             </div>
 
             <div className="mt-8 px-5 pb-5">
@@ -380,12 +417,20 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
              <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
                 <div className="flex items-center justify-between mt-4 mb-8">
                   <div className="flex gap-2">
-                     <span className="px-3 py-1 bg-white/50 dark:bg-white/10 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                         {t(`trivia-cat-${currentQuestion.category}`)}
-                     </span>
-                     <span className="px-3 py-1 bg-black/5 dark:bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                         {t(`trivia-diff-${currentQuestion.difficulty}`)}
-                     </span>
+                    {quizMode === "miss-france" ? (
+                      <span className="px-3 py-1 bg-pink-500/20 text-pink-700 dark:text-pink-300 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                        👑 {t("trivia-set-miss-france")}
+                      </span>
+                    ) : (
+                      <>
+                        <span className="px-3 py-1 bg-white/50 dark:bg-white/10 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                          {t(`trivia-cat-${currentQuestion.category}`)}
+                        </span>
+                        <span className="px-3 py-1 bg-black/5 dark:bg-white/5 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                          {t(`trivia-diff-${currentQuestion.difficulty}`)}
+                        </span>
+                      </>
+                    )}
                   </div>
                   <button
                     onClick={() => setScreen("score")}
@@ -406,7 +451,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                     </h2>
 
                     <div className="flex flex-col gap-3 w-full max-w-xs mx-auto">
-                        {!showHint ? (
+                        {quizMode !== "miss-france" && (!showHint ? (
                             <button
                                 onClick={() => setShowHint(true)}
                                 className="w-full min-h-[52px] px-4 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors flex justify-center items-center"
@@ -417,7 +462,7 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                             <div className="w-full min-h-[52px] px-4 py-3 bg-slate-100 dark:bg-slate-800/50 rounded-xl text-sm text-slate-700 dark:text-slate-300 font-medium flex justify-center items-center text-center">
                                 💡 {currentQuestion.hint}
                             </div>
-                        )}
+                        ))}
                         
                         {!showAnswer ? (
                             <button
