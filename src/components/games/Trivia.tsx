@@ -270,6 +270,11 @@ export const Trivia: React.FC<TriviaProps> = ({ onBack, onShowPlayers }) => {
                       <span className="font-bold text-[10px] uppercase tracking-wide">{t("trivia-set-miss-france")}</span>
                     </button>
                   </div>
+                  {quizMode === "miss-france" && (
+                    <p className="text-[10px] text-pink-500 dark:text-pink-400 font-bold mt-2 px-1">
+                      🇫🇷 Questions disponibles en français uniquement
+                    </p>
+                  )}
                 </div>
 
                 <div>
