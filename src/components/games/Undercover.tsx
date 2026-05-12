@@ -221,7 +221,9 @@ export const Undercover: React.FC<UndercoverProps> = ({ onBack, onShowPlayers })
       setGamePlayers(gp);
 
       const indices = gp.map((_, i) => i);
-      const finalOrder = reverseOrder ? [...indices].reverse() : indices;
+      const ordered = reverseOrder ? [...indices].reverse() : indices;
+      const startPos = Math.floor(Math.random() * ordered.length);
+      const finalOrder = [...ordered.slice(startPos), ...ordered.slice(0, startPos)];
       setPassOrder(finalOrder);
       setPassIndex(0);
       setRound(1);
