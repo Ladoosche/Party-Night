@@ -55,6 +55,11 @@ export const en: TypeDef[] = [
   { id: "new-hab-1", difficulty: "soft", category: "habits", text: "Who is most likely to sleep through their morning alarm?" },
   { id: "new-hab-2", difficulty: "soft", category: "habits", text: "Who is most likely to eat breakfast food for dinner?" },
   { id: "new-hab-3", difficulty: "soft", category: "habits", text: "Who is most likely to forget their own age?" },
+  { id: "new-hab-4", difficulty: "hard", category: "habits", text: "Who is most likely to give away all their stuff and start completely from scratch?" },
+  { id: "new-hab-5", difficulty: "hard", category: "habits", text: "Who is most likely to quit social media for an entire year?" },
+  { id: "new-hab-6", difficulty: "hard", category: "habits", text: "Who is most likely to spend a full week without their phone?" },
+  { id: "new-hab-7", difficulty: "hard", category: "habits", text: "Who is most likely to go vegan overnight and never look back?" },
+  { id: "new-hab-8", difficulty: "hard", category: "habits", text: "Who is most likely to sell everything and move to the countryside to live off the land?" },
 
   // --- ADVENTURE ---
   { id: "advs1", difficulty: "soft", category: "adventure", text: "Who is most likely to get lost in a city they actually know well?" },
@@ -110,6 +115,9 @@ export const en: TypeDef[] = [
   { id: "new-adv-1", difficulty: "hard", category: "adventure", text: "Who is most likely to go skydiving completely spontaneously?" },
   { id: "new-adv-2", difficulty: "hard", category: "adventure", text: "Who is most likely to survive alone in the wild for a month?" },
   { id: "new-adv-3", difficulty: "soft", category: "adventure", text: "Who is most likely to plan a trip and forget to book the hotel?" },
+  { id: "new-adv-4", difficulty: "hard", category: "adventure", text: "Who is most likely to quit their job and backpack the world alone?" },
+  { id: "new-adv-5", difficulty: "hard", category: "adventure", text: "Who is most likely to swim with sharks on purpose?" },
+  { id: "new-adv-6", difficulty: "hard", category: "adventure", text: "Who is most likely to bungee jump off a bridge on a dare?" },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "Send a 'Best regards' email without the attachment?" },
@@ -165,6 +173,9 @@ export const en: TypeDef[] = [
   { id: "new-car-1", difficulty: "soft", category: "career", text: "Who is most likely to accidentally call their boss 'Mom' or 'Dad'?" },
   { id: "new-car-2", difficulty: "hard", category: "career", text: "Who is most likely to quit their job to become a full-time influencer?" },
   { id: "new-car-3", difficulty: "hard", category: "career", text: "Who is most likely to become the CEO of a Fortune 500 company?" },
+  { id: "new-car-4", difficulty: "hard", category: "career", text: "Who is most likely to drop everything and launch their own company?" },
+  { id: "new-car-5", difficulty: "hard", category: "career", text: "Who is most likely to negotiate a massive raise with a completely straight face?" },
+  { id: "new-car-6", difficulty: "hard", category: "career", text: "Who is most likely to hold three jobs at the same time and still be fine?" },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "soft", category: "social", text: "Wave at someone who didn't see them?" },
@@ -200,6 +211,10 @@ export const en: TypeDef[] = [
   { id: "new-soc-1", difficulty: "soft", category: "social", text: "Who is most likely to talk their way out of a speeding ticket?" },
   { id: "new-soc-2", difficulty: "hard", category: "social", text: "Who is most likely to be recognized on the street by a stranger?" },
   { id: "new-soc-3", difficulty: "soft", category: "social", text: "Who is most likely to laugh at a serious moment?" },
+  { id: "new-soc-4", difficulty: "hard", category: "social", text: "Who is most likely to call someone out publicly and not regret it?" },
+  { id: "new-soc-5", difficulty: "hard", category: "social", text: "Who is most likely to ghost someone they had been dating for months?" },
+  { id: "new-soc-6", difficulty: "hard", category: "social", text: "Who is most likely to start a vlog and actually keep it going for a year?" },
+  { id: "new-soc-7", difficulty: "hard", category: "social", text: "Who is most likely to go on a blind date with a complete stranger?" },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "soft", category: "party", text: "Dance alone while waiting for someone to join the dance floor?" },
@@ -255,6 +270,8 @@ export const en: TypeDef[] = [
   { id: "new-pty-1", difficulty: "soft", category: "party", text: "Who is most likely to be the last one on the dance floor?" },
   { id: "new-pty-2", difficulty: "hard", category: "party", text: "Who is most likely to crash a wedding and blend right in?" },
   { id: "new-pty-3", difficulty: "hard", category: "party", text: "Who is most likely to organise the best surprise party ever?" },
+  { id: "new-pty-4", difficulty: "hard", category: "party", text: "Who is most likely to start dancing on the tables?" },
+  { id: "new-pty-5", difficulty: "hard", category: "party", text: "Who is most likely to do karaoke in front of 200 strangers and absolutely nail it?" },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "soft", category: "hot", text: "Say 'thank you' at the end of hot?" },
@@ -310,4 +327,6 @@ export const en: TypeDef[] = [
   { id: "new-hot-1", difficulty: "hard", category: "hot", text: "Who is most likely to have a secret admirer right now?" },
   { id: "new-hot-2", difficulty: "hard", category: "hot", text: "Who is most likely to flirt their way into getting free drinks?" },
   { id: "new-hot-3", difficulty: "soft", category: "hot", text: "Who is most likely to send a risky text entirely by mistake?" },
+  { id: "new-hot-4", difficulty: "hard", category: "hot", text: "Who is most likely to slide into their celebrity crush's DMs?" },
+  { id: "new-hot-5", difficulty: "hard", category: "hot", text: "Who is most likely to go on a date with someone they have never met in person?" },
 ];

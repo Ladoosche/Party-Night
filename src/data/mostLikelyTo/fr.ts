@@ -55,6 +55,11 @@ export const fr: TypeDef[] = [
   { id: "new-hab-1", difficulty: "soft", category: "habits", text: "Qui est le plus susceptible de ne pas entendre son réveil ?" },
   { id: "new-hab-2", difficulty: "soft", category: "habits", text: "Qui est le plus susceptible de manger un petit-déjeuner au dîner ?" },
   { id: "new-hab-3", difficulty: "soft", category: "habits", text: "Qui est le plus susceptible d`oublier son propre âge ?" },
+  { id: "new-hab-4", difficulty: "hard", category: "habits", text: "Qui est le plus susceptible de donner toutes ses affaires et de repartir de zéro ?" },
+  { id: "new-hab-5", difficulty: "hard", category: "habits", text: "Qui est le plus susceptible d'arrêter les réseaux sociaux pendant un an entier ?" },
+  { id: "new-hab-6", difficulty: "hard", category: "habits", text: "Qui est le plus susceptible de passer une semaine complète sans son téléphone ?" },
+  { id: "new-hab-7", difficulty: "hard", category: "habits", text: "Qui est le plus susceptible de devenir vegan du jour au lendemain sans jamais revenir en arrière ?" },
+  { id: "new-hab-8", difficulty: "hard", category: "habits", text: "Qui est le plus susceptible de tout vendre et de partir vivre à la campagne ?" },
 
   // --- ADVENTURE ---
   { id: "advs1", difficulty: "soft", category: "adventure", text: "Qui est le plus susceptible de se perdre dans une ville qu'il/elle connaît pourtant bien ?" },
@@ -110,6 +115,9 @@ export const fr: TypeDef[] = [
   { id: "new-adv-1", difficulty: "hard", category: "adventure", text: "Qui est le plus susceptible de faire du saut en parachute de façon complètement spontanée ?" },
   { id: "new-adv-2", difficulty: "hard", category: "adventure", text: "Qui est le plus susceptible de survivre seul dans la nature pendant un mois ?" },
   { id: "new-adv-3", difficulty: "soft", category: "adventure", text: "Qui est le plus susceptible d`organiser un voyage et d`oublier de réserver l`hôtel ?" },
+  { id: "new-adv-4", difficulty: "hard", category: "adventure", text: "Qui est le plus susceptible de tout lâcher pour faire le tour du monde en sac à dos ?" },
+  { id: "new-adv-5", difficulty: "hard", category: "adventure", text: "Qui est le plus susceptible de nager avec des requins exprès ?" },
+  { id: "new-adv-6", difficulty: "hard", category: "adventure", text: "Qui est le plus susceptible de faire du saut à l'élastique d'un pont sur un pari ?" },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "Envoyer un e-mail 'Cordialement' sans la pièce jointe ?" },
@@ -165,6 +173,9 @@ export const fr: TypeDef[] = [
   { id: "new-car-1", difficulty: "soft", category: "career", text: "Qui est le plus susceptible d`appeler son patron 'maman' ou 'papa' par erreur ?" },
   { id: "new-car-2", difficulty: "hard", category: "career", text: "Qui est le plus susceptible de quitter son travail pour devenir influenceur à temps plein ?" },
   { id: "new-car-3", difficulty: "hard", category: "career", text: "Qui est le plus susceptible de devenir le PDG d`une entreprise du Fortune 500 ?" },
+  { id: "new-car-4", difficulty: "hard", category: "career", text: "Qui est le plus susceptible de tout plaquer pour lancer sa propre entreprise ?" },
+  { id: "new-car-5", difficulty: "hard", category: "career", text: "Qui est le plus susceptible de demander une énorme augmentation avec un sang-froid total ?" },
+  { id: "new-car-6", difficulty: "hard", category: "career", text: "Qui est le plus susceptible d'avoir trois emplois en même temps et de s'en sortir ?" },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "soft", category: "social", text: "Saluer quelqu'un qui ne nous a pas vu ?" },
@@ -200,6 +211,10 @@ export const fr: TypeDef[] = [
   { id: "new-soc-1", difficulty: "soft", category: "social", text: "Qui est le plus susceptible d`éviter une amende pour excès de vitesse en parlant ?" },
   { id: "new-soc-2", difficulty: "hard", category: "social", text: "Qui est le plus susceptible d`être reconnu dans la rue par un inconnu ?" },
   { id: "new-soc-3", difficulty: "soft", category: "social", text: "Qui est le plus susceptible de rire pendant un moment sérieux ?" },
+  { id: "new-soc-4", difficulty: "hard", category: "social", text: "Qui est le plus susceptible de recadrer quelqu'un publiquement sans le regretter ?" },
+  { id: "new-soc-5", difficulty: "hard", category: "social", text: "Qui est le plus susceptible de ghoster quelqu'un avec qui il/elle sortait depuis des mois ?" },
+  { id: "new-soc-6", difficulty: "hard", category: "social", text: "Qui est le plus susceptible de lancer un vlog et de le tenir vraiment pendant un an ?" },
+  { id: "new-soc-7", difficulty: "hard", category: "social", text: "Qui est le plus susceptible de partir à un rendez-vous à l'aveugle avec un(e) parfait(e) inconnu(e) ?" },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "soft", category: "party", text: "Danser tout seul en attendant que quelqu'un rejoigne la piste ?" },
@@ -255,6 +270,8 @@ export const fr: TypeDef[] = [
   { id: "new-pty-1", difficulty: "soft", category: "party", text: "Qui est le plus susceptible d`être le dernier sur la piste de danse ?" },
   { id: "new-pty-2", difficulty: "hard", category: "party", text: "Qui est le plus susceptible de s`incruster à un mariage et de passer inaperçu ?" },
   { id: "new-pty-3", difficulty: "hard", category: "party", text: "Qui est le plus susceptible d`organiser la meilleure fête surprise de tous les temps ?" },
+  { id: "new-pty-4", difficulty: "hard", category: "party", text: "Qui est le plus susceptible de monter danser sur les tables ?" },
+  { id: "new-pty-5", difficulty: "hard", category: "party", text: "Qui est le plus susceptible de faire du karaoké devant 200 inconnus et d'assurer totalement ?" },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "soft", category: "hot", text: "Dire 'merci' à la fin d'un rapport ?" },
@@ -310,4 +327,6 @@ export const fr: TypeDef[] = [
   { id: "new-hot-1", difficulty: "hard", category: "hot", text: "Qui est le plus susceptible d`avoir un admirateur secret en ce moment ?" },
   { id: "new-hot-2", difficulty: "hard", category: "hot", text: "Qui est le plus susceptible de flirter pour obtenir des verres gratuits ?" },
   { id: "new-hot-3", difficulty: "soft", category: "hot", text: "Qui est le plus susceptible d`envoyer un message compromettant complètement par erreur ?" },
+  { id: "new-hot-4", difficulty: "hard", category: "hot", text: "Qui est le plus susceptible d'envoyer un message à son crush célébrité ?" },
+  { id: "new-hot-5", difficulty: "hard", category: "hot", text: "Qui est le plus susceptible de partir en rendez-vous avec quelqu'un qu'il/elle n'a jamais rencontré en vrai ?" },
 ];

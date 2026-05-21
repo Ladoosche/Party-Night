@@ -56,6 +56,14 @@ export const en: TypeDef[] = [
   { id: "new-nh-hab-1", difficulty: "hard", category: "habits", text: "Never have I ever eaten food that fell on the floor." },
   { id: "new-nh-hab-2", difficulty: "hard", category: "habits", text: "Never have I ever worn the same clothes for three days." },
   { id: "new-nh-hab-3", difficulty: "hard", category: "habits", text: "Never have I ever forgotten to brush my teeth for a whole day." },
+  { id: "new-nh-hab-4", difficulty: "hard", category: "habits", text: "Never have I ever stayed in bed all day for absolutely no reason." },
+  { id: "new-nh-hab-5", difficulty: "hard", category: "habits", text: "Never have I ever eaten an entire bag of chips in one sitting." },
+  { id: "new-nh-hab-6", difficulty: "hard", category: "habits", text: "Never have I ever gone to bed without washing my face for more than a week." },
+  { id: "new-nh-hab-7", difficulty: "hard", category: "habits", text: "Never have I ever checked my phone more than 100 times in a single day." },
+  { id: "new-nh-hab-8", difficulty: "hard", category: "habits", text: "Never have I ever cried for absolutely no reason." },
+  { id: "new-nh-hab-9", difficulty: "hard", category: "habits", text: "Never have I ever forgotten to pay a bill and only found out when they called me." },
+  { id: "new-nh-hab-10", difficulty: "hard", category: "habits", text: "Never have I ever binge-watched an entire TV season in a single day." },
+  { id: "new-nh-hab-11", difficulty: "hard", category: "habits", text: "Never have I ever bought something I didn't need just because it was on sale." },
 
   // --- ADVENTURE ---
   { id: "adv-s1", difficulty: "soft", category: "adventure", text: "Never have I ever gone wild camping without permission." },
@@ -111,6 +119,14 @@ export const en: TypeDef[] = [
   { id: "new-nh-adv-1", difficulty: "hard", category: "adventure", text: "Never have I ever traveled to another country alone." },
   { id: "new-nh-adv-2", difficulty: "hard", category: "adventure", text: "Never have I ever jumped from a moving vehicle." },
   { id: "new-nh-adv-3", difficulty: "hard", category: "adventure", text: "Never have I ever hitchhiked." },
+  { id: "new-nh-adv-4", difficulty: "hard", category: "adventure", text: "Never have I ever got lost in a foreign country with a dead phone." },
+  { id: "new-nh-adv-5", difficulty: "hard", category: "adventure", text: "Never have I ever spent a night in a place I wasn't supposed to sleep in." },
+  { id: "new-nh-adv-6", difficulty: "hard", category: "adventure", text: "Never have I ever been stopped by police or border control while travelling." },
+  { id: "new-nh-adv-7", difficulty: "hard", category: "adventure", text: "Never have I ever swum in the sea or a lake at night." },
+  { id: "new-nh-adv-8", difficulty: "hard", category: "adventure", text: "Never have I ever broken into an abandoned place out of curiosity." },
+  { id: "new-nh-adv-9", difficulty: "hard", category: "adventure", text: "Never have I ever gone on a road trip with absolutely no plan." },
+  { id: "new-nh-adv-10", difficulty: "hard", category: "adventure", text: "Never have I ever almost missed a flight because of my own mistake." },
+  { id: "new-nh-adv-11", difficulty: "hard", category: "adventure", text: "Never have I ever done something illegal while travelling abroad." },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "Never have I ever pretended to work while scrolling on social media." },
@@ -166,6 +182,14 @@ export const en: TypeDef[] = [
   { id: "new-nh-car-1", difficulty: "hard", category: "career", text: "Never have I ever lied on my resume." },
   { id: "new-nh-car-2", difficulty: "hard", category: "career", text: "Never have I ever fallen asleep during a meeting." },
   { id: "new-nh-car-3", difficulty: "hard", category: "career", text: "Never have I ever quit a job on the first day." },
+  { id: "new-nh-car-4", difficulty: "hard", category: "career", text: "Never have I ever been fired from a job." },
+  { id: "new-nh-car-5", difficulty: "hard", category: "career", text: "Never have I ever quit a job without giving any notice." },
+  { id: "new-nh-car-6", difficulty: "hard", category: "career", text: "Never have I ever taken credit for someone else's work." },
+  { id: "new-nh-car-7", difficulty: "hard", category: "career", text: "Never have I ever cried at work." },
+  { id: "new-nh-car-8", difficulty: "hard", category: "career", text: "Never have I ever flirted with a colleague." },
+  { id: "new-nh-car-9", difficulty: "hard", category: "career", text: "Never have I ever talked badly about my boss behind their back at work." },
+  { id: "new-nh-car-10", difficulty: "hard", category: "career", text: "Never have I ever applied for a job I was completely unqualified for." },
+  { id: "new-nh-car-11", difficulty: "hard", category: "career", text: "Never have I ever had a romantic relationship with someone from work." },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "hard", category: "social", text: "Never have I ever stalked an ex's profile all the way back to their 2015 photos." },
@@ -201,6 +225,18 @@ export const en: TypeDef[] = [
   { id: "new-nh-soc-1", difficulty: "hard", category: "social", text: "Never have I ever ghosted someone after a first date." },
   { id: "new-nh-soc-2", difficulty: "hard", category: "social", text: "Never have I ever sent a text to the wrong person." },
   { id: "new-nh-soc-3", difficulty: "hard", category: "social", text: "Never have I ever stood someone up." },
+  { id: "new-nh-soc-4", difficulty: "hard", category: "social", text: "Never have I ever blocked someone on all their social media after an argument." },
+  { id: "new-nh-soc-5", difficulty: "hard", category: "social", text: "Never have I ever deleted someone's contact after a fight." },
+  { id: "new-nh-soc-6", difficulty: "hard", category: "social", text: "Never have I ever started a rumor about someone." },
+  { id: "new-nh-soc-7", difficulty: "hard", category: "social", text: "Never have I ever talked about someone behind their back and been caught." },
+  { id: "new-nh-soc-8", difficulty: "hard", category: "social", text: "Never have I ever ended a friendship suddenly without any explanation." },
+  { id: "new-nh-soc-9", difficulty: "hard", category: "social", text: "Never have I ever posted something online and deleted it immediately out of regret." },
+  { id: "new-nh-soc-10", difficulty: "hard", category: "social", text: "Never have I ever cried while reading someone else's story on social media." },
+  { id: "new-nh-soc-11", difficulty: "hard", category: "social", text: "Never have I ever said something hurtful to a friend and pretended it was a joke." },
+  { id: "new-nh-soc-12", difficulty: "hard", category: "social", text: "Never have I ever given someone a fake number when they asked for mine." },
+  { id: "new-nh-soc-13", difficulty: "hard", category: "social", text: "Never have I ever been in a group chat where people talked about someone who was also in it." },
+  { id: "new-nh-soc-14", difficulty: "hard", category: "social", text: "Never have I ever unfollowed an ex right after a breakup." },
+  { id: "new-nh-soc-15", difficulty: "hard", category: "social", text: "Never have I ever cancelled plans at the last minute with a fake excuse." },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "hard", category: "party", text: "Never have I ever pulled an Irish Exit (left without saying goodbye)." },
@@ -256,6 +292,14 @@ export const en: TypeDef[] = [
   { id: "new-nh-pty-1", difficulty: "hard", category: "party", text: "Never have I ever fallen asleep at a party." },
   { id: "new-nh-pty-2", difficulty: "hard", category: "party", text: "Never have I ever been kicked out of a club." },
   { id: "new-nh-pty-3", difficulty: "hard", category: "party", text: "Never have I ever sung karaoke in front of strangers." },
+  { id: "new-nh-pty-4", difficulty: "hard", category: "party", text: "Never have I ever woken up somewhere and not known how I got there." },
+  { id: "new-nh-pty-5", difficulty: "hard", category: "party", text: "Never have I ever called in sick to work after a heavy night out." },
+  { id: "new-nh-pty-6", difficulty: "hard", category: "party", text: "Never have I ever lost a friend in a crowd and panicked." },
+  { id: "new-nh-pty-7", difficulty: "hard", category: "party", text: "Never have I ever cried at a party or in a club." },
+  { id: "new-nh-pty-8", difficulty: "hard", category: "party", text: "Never have I ever broken something at a party and tried to hide it." },
+  { id: "new-nh-pty-9", difficulty: "hard", category: "party", text: "Never have I ever said something while drunk that I deeply regretted the next day." },
+  { id: "new-nh-pty-10", difficulty: "hard", category: "party", text: "Never have I ever bought a round for everyone and immediately regretted it." },
+  { id: "new-nh-pty-11", difficulty: "hard", category: "party", text: "Never have I ever kissed someone I had just met that same night." },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "hard", category: "hot", text: "Never have I ever said the wrong name in bed." },

@@ -56,6 +56,14 @@ export const es: TypeDef[] = [
   { id: "new-nh-hab-1", difficulty: "hard", category: "habits", text: "Yo nunca he comido comida que se cayó al piso." },
   { id: "new-nh-hab-2", difficulty: "hard", category: "habits", text: "Yo nunca he usado la misma ropa durante tres días." },
   { id: "new-nh-hab-3", difficulty: "hard", category: "habits", text: "Yo nunca he olvidado lavarme los dientes en todo un día." },
+  { id: "new-nh-hab-4", difficulty: "hard", category: "habits", text: "Yo nunca me he quedado en cama todo un día sin ninguna razón." },
+  { id: "new-nh-hab-5", difficulty: "hard", category: "habits", text: "Yo nunca me he comido una bolsa entera de papas de una sentada." },
+  { id: "new-nh-hab-6", difficulty: "hard", category: "habits", text: "Yo nunca me he ido a dormir sin lavarme la cara durante más de una semana seguida." },
+  { id: "new-nh-hab-7", difficulty: "hard", category: "habits", text: "Yo nunca he revisado el celular más de 100 veces en un solo día." },
+  { id: "new-nh-hab-8", difficulty: "hard", category: "habits", text: "Yo nunca he llorado sin ninguna razón válida." },
+  { id: "new-nh-hab-9", difficulty: "hard", category: "habits", text: "Yo nunca me he olvidado de pagar una factura y me di cuenta solo cuando me llamaron." },
+  { id: "new-nh-hab-10", difficulty: "hard", category: "habits", text: "Yo nunca he visto una temporada entera de una serie en un solo día." },
+  { id: "new-nh-hab-11", difficulty: "hard", category: "habits", text: "Yo nunca he comprado algo que no necesitaba solo porque estaba en oferta." },
 
   // --- ADVENTURE ---
   { id: "adv-s1", difficulty: "soft", category: "adventure", text: "Yo nunca he ido a acampar en lugar salvaje sin permiso." },
@@ -111,6 +119,14 @@ export const es: TypeDef[] = [
   { id: "new-nh-adv-1", difficulty: "hard", category: "adventure", text: "Yo nunca he viajado a otro país solo." },
   { id: "new-nh-adv-2", difficulty: "hard", category: "adventure", text: "Yo nunca he saltado de un vehículo en movimiento." },
   { id: "new-nh-adv-3", difficulty: "hard", category: "adventure", text: "Yo nunca he hecho autostop." },
+  { id: "new-nh-adv-4", difficulty: "hard", category: "adventure", text: "Yo nunca me he perdido en un país extranjero con el celular sin batería." },
+  { id: "new-nh-adv-5", difficulty: "hard", category: "adventure", text: "Yo nunca he pasado la noche en un lugar donde se supone que no debía dormir." },
+  { id: "new-nh-adv-6", difficulty: "hard", category: "adventure", text: "Yo nunca me han detenido la policía o los agentes de aduana durante un viaje." },
+  { id: "new-nh-adv-7", difficulty: "hard", category: "adventure", text: "Yo nunca he nadado en el mar o en un lago de noche." },
+  { id: "new-nh-adv-8", difficulty: "hard", category: "adventure", text: "Yo nunca me he colado en un lugar abandonado por curiosidad." },
+  { id: "new-nh-adv-9", difficulty: "hard", category: "adventure", text: "Yo nunca me he ido de viaje en carretera sin ningún plan." },
+  { id: "new-nh-adv-10", difficulty: "hard", category: "adventure", text: "Yo nunca he estado a punto de perder un vuelo por mi propia culpa." },
+  { id: "new-nh-adv-11", difficulty: "hard", category: "adventure", text: "Yo nunca he hecho algo ilegal durante un viaje al extranjero." },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "Yo nunca he fingido trabajar mientras veo redes sociales." },
@@ -166,6 +182,14 @@ export const es: TypeDef[] = [
   { id: "new-nh-car-1", difficulty: "hard", category: "career", text: "Yo nunca he mentido en mi currículum." },
   { id: "new-nh-car-2", difficulty: "hard", category: "career", text: "Yo nunca he me he quedado dormido en una reunión." },
   { id: "new-nh-car-3", difficulty: "hard", category: "career", text: "Yo nunca he renunciado en mi primer día de trabajo." },
+  { id: "new-nh-car-4", difficulty: "hard", category: "career", text: "Yo nunca me han despedido de un trabajo." },
+  { id: "new-nh-car-5", difficulty: "hard", category: "career", text: "Yo nunca he renunciado a un trabajo sin dar aviso previo." },
+  { id: "new-nh-car-6", difficulty: "hard", category: "career", text: "Yo nunca me he atribuido el mérito del trabajo de otra persona." },
+  { id: "new-nh-car-7", difficulty: "hard", category: "career", text: "Yo nunca he llorado en el trabajo." },
+  { id: "new-nh-car-8", difficulty: "hard", category: "career", text: "Yo nunca he coqueteado con un compañero o compañera de trabajo." },
+  { id: "new-nh-car-9", difficulty: "hard", category: "career", text: "Yo nunca he hablado mal de mi jefe a sus espaldas en el trabajo." },
+  { id: "new-nh-car-10", difficulty: "hard", category: "career", text: "Yo nunca he aplicado a un trabajo para el que no tenía ninguna calificación." },
+  { id: "new-nh-car-11", difficulty: "hard", category: "career", text: "Yo nunca he tenido una relación romántica con alguien del trabajo." },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "hard", category: "social", text: "Yo nunca he stalkeado a un ex hasta sus fotos de 2015." },
@@ -201,6 +225,18 @@ export const es: TypeDef[] = [
   { id: "new-nh-soc-1", difficulty: "hard", category: "social", text: "Yo nunca he ignorado a alguien después de una primera cita." },
   { id: "new-nh-soc-2", difficulty: "hard", category: "social", text: "Yo nunca he enviado un mensaje a la persona equivocada." },
   { id: "new-nh-soc-3", difficulty: "hard", category: "social", text: "Yo nunca he dejado plantado a alguien." },
+  { id: "new-nh-soc-4", difficulty: "hard", category: "social", text: "Yo nunca he bloqueado a alguien en todas sus redes sociales después de una pelea." },
+  { id: "new-nh-soc-5", difficulty: "hard", category: "social", text: "Yo nunca he borrado el contacto de alguien después de una pelea." },
+  { id: "new-nh-soc-6", difficulty: "hard", category: "social", text: "Yo nunca he empezado un rumor sobre alguien." },
+  { id: "new-nh-soc-7", difficulty: "hard", category: "social", text: "Yo nunca he hablado mal de alguien a sus espaldas y me han descubierto." },
+  { id: "new-nh-soc-8", difficulty: "hard", category: "social", text: "Yo nunca he terminado una amistad de repente sin ninguna explicación." },
+  { id: "new-nh-soc-9", difficulty: "hard", category: "social", text: "Yo nunca he publicado algo en redes y lo he borrado al instante arrepentido." },
+  { id: "new-nh-soc-10", difficulty: "hard", category: "social", text: "Yo nunca he llorado viendo la historia de alguien en redes sociales." },
+  { id: "new-nh-soc-11", difficulty: "hard", category: "social", text: "Yo nunca le he dicho algo hiriente a un amigo y luego fingido que era broma." },
+  { id: "new-nh-soc-12", difficulty: "hard", category: "social", text: "Yo nunca le he dado un número falso a alguien que me lo pidió." },
+  { id: "new-nh-soc-13", difficulty: "hard", category: "social", text: "Yo nunca he estado en un grupo de chat donde hablaban de alguien que también estaba en él." },
+  { id: "new-nh-soc-14", difficulty: "hard", category: "social", text: "Yo nunca he dejado de seguir a un ex o una ex justo después de la ruptura." },
+  { id: "new-nh-soc-15", difficulty: "hard", category: "social", text: "Yo nunca he cancelado planes a última hora con una excusa falsa." },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "hard", category: "party", text: "Yo nunca me he ido a la francesa de una fiesta." },
@@ -256,6 +292,14 @@ export const es: TypeDef[] = [
   { id: "new-nh-pty-1", difficulty: "hard", category: "party", text: "Yo nunca he me he quedado dormido en una fiesta." },
   { id: "new-nh-pty-2", difficulty: "hard", category: "party", text: "Yo nunca he sido expulsado de una discoteca." },
   { id: "new-nh-pty-3", difficulty: "hard", category: "party", text: "Yo nunca he cantado karaoke frente a extraños." },
+  { id: "new-nh-pty-4", difficulty: "hard", category: "party", text: "Yo nunca me he despertado en algún lugar sin saber cómo llegué allí." },
+  { id: "new-nh-pty-5", difficulty: "hard", category: "party", text: "Yo nunca me he reportado enfermo al trabajo después de una noche de fiesta." },
+  { id: "new-nh-pty-6", difficulty: "hard", category: "party", text: "Yo nunca he perdido a un amigo entre la multitud y entrado en pánico." },
+  { id: "new-nh-pty-7", difficulty: "hard", category: "party", text: "Yo nunca he llorado en una fiesta o en una discoteca." },
+  { id: "new-nh-pty-8", difficulty: "hard", category: "party", text: "Yo nunca he roto algo en una fiesta y tratado de ocultarlo." },
+  { id: "new-nh-pty-9", difficulty: "hard", category: "party", text: "Yo nunca he dicho algo borracho que lamenté profundamente al día siguiente." },
+  { id: "new-nh-pty-10", difficulty: "hard", category: "party", text: "Yo nunca he pagado una ronda para todos y arrepentido al instante." },
+  { id: "new-nh-pty-11", difficulty: "hard", category: "party", text: "Yo nunca he besado a alguien que acababa de conocer esa misma noche." },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "hard", category: "hot", text: "Yo nunca he dicho el nombre equivocado en la cama." },

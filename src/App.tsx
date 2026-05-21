@@ -3,6 +3,7 @@ import { AppProvider } from './context/AppContext';
 import { BackgroundCanvas } from './components/shared/BackgroundCanvas';
 import { Home } from './components/views/Home';
 import { Header } from './components/shared/Header';
+import { AdBanner } from './components/shared/AdBanner';
 
 // Lazy loaded components to reduce initial bundle size
 const Undercover = React.lazy(() => import('./components/games/Undercover').then(m => ({ default: m.Undercover })));
@@ -97,6 +98,7 @@ function MainApp() {
             )}
           </Suspense>
         </div>
+        <AdBanner />
       </div>
     </div>
   );

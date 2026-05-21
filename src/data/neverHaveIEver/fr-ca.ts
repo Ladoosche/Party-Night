@@ -56,6 +56,14 @@ export const frca: TypeDef[] = [
   { id: "new-nh-hab-1", difficulty: "hard", category: "habits", text: "J`ai jamais mangé de quoi qui était tombé à terre." },
   { id: "new-nh-hab-2", difficulty: "hard", category: "habits", text: "J`ai jamais porté le même linge pendant trois jours de suite." },
   { id: "new-nh-hab-3", difficulty: "hard", category: "habits", text: "J`ai jamais oublié de me brosser les dents pendant toute une journée." },
+  { id: "new-nh-hab-4", difficulty: "hard", category: "habits", text: "J'ai jamais passé une journée complète dans le lit sans aucune raison." },
+  { id: "new-nh-hab-5", difficulty: "hard", category: "habits", text: "J'ai jamais fini un sac entier de chips d'une shot." },
+  { id: "new-nh-hab-6", difficulty: "hard", category: "habits", text: "J'ai jamais passé plus d'une semaine sans me laver le visage avant de me coucher." },
+  { id: "new-nh-hab-7", difficulty: "hard", category: "habits", text: "J'ai jamais checkté mon cell plus de 100 fois dans une même journée." },
+  { id: "new-nh-hab-8", difficulty: "hard", category: "habits", text: "J'ai jamais braillé sans aucune raison valable." },
+  { id: "new-nh-hab-9", difficulty: "hard", category: "habits", text: "J'ai jamais oublié de payer une facture pis m'en suis rendu compte juste quand ils ont appelé." },
+  { id: "new-nh-hab-10", difficulty: "hard", category: "habits", text: "J'ai jamais écouté une saison entière d'une série dans la même journée." },
+  { id: "new-nh-hab-11", difficulty: "hard", category: "habits", text: "J'ai jamais acheté de quoi dont j'avais pas besoin juste parce que c'était en spécial." },
 
   // --- ADVENTURE ---
   { id: "adv-s1", difficulty: "soft", category: "adventure", text: "J'ai jamais fait de camping sauvage pas permis." },
@@ -111,6 +119,14 @@ export const frca: TypeDef[] = [
   { id: "new-nh-adv-1", difficulty: "hard", category: "adventure", text: "J`ai jamais voyagé tout seul dans un autre pays." },
   { id: "new-nh-adv-2", difficulty: "hard", category: "adventure", text: "J`ai jamais sauté en bas d`un véhicule qui roulait." },
   { id: "new-nh-adv-3", difficulty: "hard", category: "adventure", text: "J`ai jamais fait de pouce." },
+  { id: "new-nh-adv-4", difficulty: "hard", category: "adventure", text: "J'ai jamais été perdu(e) dans un pays étranger avec mon cell mort." },
+  { id: "new-nh-adv-5", difficulty: "hard", category: "adventure", text: "J'ai jamais passé la nuit dans un endroit où j'étais pas supposé(e) dormir." },
+  { id: "new-nh-adv-6", difficulty: "hard", category: "adventure", text: "J'ai jamais été arrêté(e) par la police ou les douanes lors d'un voyage." },
+  { id: "new-nh-adv-7", difficulty: "hard", category: "adventure", text: "J'ai jamais nagé dans la mer ou dans un lac la nuit." },
+  { id: "new-nh-adv-8", difficulty: "hard", category: "adventure", text: "J'ai jamais rentré par curiosité dans un endroit abandonné." },
+  { id: "new-nh-adv-9", difficulty: "hard", category: "adventure", text: "J'ai jamais pris la route pour un voyage sans aucun plan." },
+  { id: "new-nh-adv-10", difficulty: "hard", category: "adventure", text: "J'ai jamais failli manquer mon avion par ma propre faute." },
+  { id: "new-nh-adv-11", difficulty: "hard", category: "adventure", text: "J'ai jamais fait de quoi d'illégal lors d'un voyage à l'étranger." },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "J'ai jamais fait semblant de travailler pendant que je checkais mes réseaux sociaux." },
@@ -166,6 +182,14 @@ export const frca: TypeDef[] = [
   { id: "new-nh-car-1", difficulty: "hard", category: "career", text: "J`ai jamais compté de menteries sur mon CV." },
   { id: "new-nh-car-2", difficulty: "hard", category: "career", text: "J`ai jamais cogné des clous pendant une réunion." },
   { id: "new-nh-car-3", difficulty: "hard", category: "career", text: "J`ai jamais démissionné direct la première journée." },
+  { id: "new-nh-car-4", difficulty: "hard", category: "career", text: "J'ai jamais été congédié(e) ou renvoyé(e) d'une job." },
+  { id: "new-nh-car-5", difficulty: "hard", category: "career", text: "J'ai jamais quitté une job sans avis." },
+  { id: "new-nh-car-6", difficulty: "hard", category: "career", text: "J'ai jamais volé le mérite du travail de quelqu'un d'autre." },
+  { id: "new-nh-car-7", difficulty: "hard", category: "career", text: "J'ai jamais braillé à la job." },
+  { id: "new-nh-car-8", difficulty: "hard", category: "career", text: "J'ai jamais flirté avec un(e) collègue." },
+  { id: "new-nh-car-9", difficulty: "hard", category: "career", text: "J'ai jamais dit du mal de mon boss dans son dos à la job." },
+  { id: "new-nh-car-10", difficulty: "hard", category: "career", text: "J'ai jamais appliqué pour une job pour laquelle j'étais pas du tout qualifié(e)." },
+  { id: "new-nh-car-11", difficulty: "hard", category: "career", text: "J'ai jamais eu une relation amoureuse avec quelqu'un de la job." },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "hard", category: "social", text: "J'ai jamais stalké mon ex jusqu'à ses photos de 2015." },
@@ -201,6 +225,18 @@ export const frca: TypeDef[] = [
   { id: "new-nh-soc-1", difficulty: "hard", category: "social", text: "J`ai jamais ghosté quelqu`un après une première date." },
   { id: "new-nh-soc-2", difficulty: "hard", category: "social", text: "J`ai jamais envoyé un texte à la mauvaise personne dans mes contacts." },
   { id: "new-nh-soc-3", difficulty: "hard", category: "social", text: "J`ai jamais posé un lapin à quelqu`un." },
+  { id: "new-nh-soc-4", difficulty: "hard", category: "social", text: "J'ai jamais bloqué quelqu'un sur tous ses réseaux sociaux après une chicane." },
+  { id: "new-nh-soc-5", difficulty: "hard", category: "social", text: "J'ai jamais effacé le numéro de quelqu'un après une chicane." },
+  { id: "new-nh-soc-6", difficulty: "hard", category: "social", text: "J'ai jamais commencé une rumeur sur quelqu'un." },
+  { id: "new-nh-soc-7", difficulty: "hard", category: "social", text: "J'ai jamais parlé de quelqu'un dans son dos pis été pogné à le faire." },
+  { id: "new-nh-soc-8", difficulty: "hard", category: "social", text: "J'ai jamais mis fin à une amitié sans aucune explication." },
+  { id: "new-nh-soc-9", difficulty: "hard", category: "social", text: "J'ai jamais posté de quoi en ligne pis l'ai effacé aussitôt par regret." },
+  { id: "new-nh-soc-10", difficulty: "hard", category: "social", text: "J'ai jamais braillé en lisant la story de quelqu'un d'autre sur les réseaux." },
+  { id: "new-nh-soc-11", difficulty: "hard", category: "social", text: "J'ai jamais dit de quoi de blessant à un chum/une chum pis fait semblant que c'était une joke." },
+  { id: "new-nh-soc-12", difficulty: "hard", category: "social", text: "J'ai jamais donné un faux numéro quand quelqu'un me le demandait." },
+  { id: "new-nh-soc-13", difficulty: "hard", category: "social", text: "J'ai jamais été dans un groupe de texte où on jasait d'une personne qui était aussi dedans." },
+  { id: "new-nh-soc-14", difficulty: "hard", category: "social", text: "J'ai jamais unfollowé un(e) ex aussitôt après la rupture." },
+  { id: "new-nh-soc-15", difficulty: "hard", category: "social", text: "J'ai jamais annulé des plans à la dernière minute avec une fausse raison." },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "hard", category: "party", text: "J'ai jamais fait une sortie en douce d'un party sans dire bye." },
@@ -256,6 +292,14 @@ export const frca: TypeDef[] = [
   { id: "new-nh-pty-1", difficulty: "hard", category: "party", text: "J`ai jamais dormi direct dans un party." },
   { id: "new-nh-pty-2", difficulty: "hard", category: "party", text: "J`ai jamais été sacré dehors d`un club." },
   { id: "new-nh-pty-3", difficulty: "hard", category: "party", text: "J`ai jamais chanté au karaoké devant du monde que j`connais pas." },
+  { id: "new-nh-pty-4", difficulty: "hard", category: "party", text: "J'ai jamais me réveillé(e) quelque part sans savoir comment j'étais arrivé(e) là." },
+  { id: "new-nh-pty-5", difficulty: "hard", category: "party", text: "J'ai jamais appelé en malade après un gros party." },
+  { id: "new-nh-pty-6", difficulty: "hard", category: "party", text: "J'ai jamais perdu un chum dans la foule pis paniqué." },
+  { id: "new-nh-pty-7", difficulty: "hard", category: "party", text: "J'ai jamais braillé dans un party ou dans un bar." },
+  { id: "new-nh-pty-8", difficulty: "hard", category: "party", text: "J'ai jamais cassé de quoi dans un party pis essayé de le cacher." },
+  { id: "new-nh-pty-9", difficulty: "hard", category: "party", text: "J'ai jamais dit de quoi en étant chaud que j'ai profondément regretté le lendemain matin." },
+  { id: "new-nh-pty-10", difficulty: "hard", category: "party", text: "J'ai jamais payé une ronde pour tout le monde pis regretté ça aussitôt." },
+  { id: "new-nh-pty-11", difficulty: "hard", category: "party", text: "J'ai jamais embrassé quelqu'un que je venais de rencontrer le soir même." },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "hard", category: "hot", text: "J'ai jamais dit le mauvais prénom dans l'lit." },

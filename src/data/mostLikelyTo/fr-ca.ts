@@ -55,6 +55,11 @@ export const frca: TypeDef[] = [
   { id: "new-hab-1", difficulty: "soft", category: "habits", text: "Qui a le plus de chances de pas entendre son cadran le matin ?" },
   { id: "new-hab-2", difficulty: "soft", category: "habits", text: "Qui a le plus de chances de manger un petit-déjeuner pour souper ?" },
   { id: "new-hab-3", difficulty: "soft", category: "habits", text: "Qui a le plus de chances d`oublier quel âge il a ?" },
+  { id: "new-hab-4", difficulty: "hard", category: "habits", text: "Qui a le plus de chances de donner toutes ses affaires pis de repartir à zéro ?" },
+  { id: "new-hab-5", difficulty: "hard", category: "habits", text: "Qui a le plus de chances de décrocher des réseaux sociaux pour un an entier ?" },
+  { id: "new-hab-6", difficulty: "hard", category: "habits", text: "Qui a le plus de chances de passer une semaine complète sans son cell ?" },
+  { id: "new-hab-7", difficulty: "hard", category: "habits", text: "Qui a le plus de chances de devenir vegan du jour au lendemain pis de jamais revirer de bord ?" },
+  { id: "new-hab-8", difficulty: "hard", category: "habits", text: "Qui a le plus de chances de tout vendre pis d'aller vivre à la campagne ?" },
 
   // --- ADVENTURE ---
   { id: "advs1", difficulty: "soft", category: "adventure", text: "Qui a le plus de chances de se perdre dans une ville qu'il connaît déjà ?" },
@@ -110,6 +115,9 @@ export const frca: TypeDef[] = [
   { id: "new-adv-1", difficulty: "hard", category: "adventure", text: "Qui a le plus de chances de sauter en parachute sur un coup de tête ?" },
   { id: "new-adv-2", difficulty: "hard", category: "adventure", text: "Qui a le plus de chances de survivre tout seul dans l`bois pendant un mois ?" },
   { id: "new-adv-3", difficulty: "soft", category: "adventure", text: "Qui a le plus de chances d`organiser un voyage pis d`oublier de réserver l`hôtel ?" },
+  { id: "new-adv-4", difficulty: "hard", category: "adventure", text: "Qui a le plus de chances de tout lâcher pis de partir faire le tour du monde en sac à dos ?" },
+  { id: "new-adv-5", difficulty: "hard", category: "adventure", text: "Qui a le plus de chances de nager avec des requins exprès ?" },
+  { id: "new-adv-6", difficulty: "hard", category: "adventure", text: "Qui a le plus de chances de faire du saut à l'élastique d'un pont su'un défi ?" },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "Envoyer un courriel 'Cordialement' sans la pièce jointe ?" },
@@ -165,6 +173,9 @@ export const frca: TypeDef[] = [
   { id: "new-car-1", difficulty: "soft", category: "career", text: "Qui a le plus de chances d`appeler son boss 'maman' ou 'papa' par accident ?" },
   { id: "new-car-2", difficulty: "hard", category: "career", text: "Qui a le plus de chances de lâcher sa job pour devenir influenceur à temps plein ?" },
   { id: "new-car-3", difficulty: "hard", category: "career", text: "Qui a le plus de chances de devenir le boss d`une méga grosse compagnie ?" },
+  { id: "new-car-4", difficulty: "hard", category: "career", text: "Qui a le plus de chances de tout pitcher pis de monter son propre business ?" },
+  { id: "new-car-5", difficulty: "hard", category: "career", text: "Qui a le plus de chances de demander une grosse augmentation avec un sang-froid total ?" },
+  { id: "new-car-6", difficulty: "hard", category: "career", text: "Qui a le plus de chances d'avoir trois jobs en même temps pis de s'en sortir ?" },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "soft", category: "social", text: "Envoyer la main à quelqu'un qui nous a pas vu ?" },
@@ -200,6 +211,10 @@ export const frca: TypeDef[] = [
   { id: "new-soc-1", difficulty: "soft", category: "social", text: "Qui a le plus de chances de s`en sortir avec un ticket de vitesse juste en parlant au policier ?" },
   { id: "new-soc-2", difficulty: "hard", category: "social", text: "Qui a le plus de chances d`être reconnu dans la rue par un inconnu ?" },
   { id: "new-soc-3", difficulty: "soft", category: "social", text: "Qui a le plus de chances de rire à un moment où tout le monde est sérieux ?" },
+  { id: "new-soc-4", difficulty: "hard", category: "social", text: "Qui a le plus de chances de recadrer quelqu'un en public pis de pas le regretter ?" },
+  { id: "new-soc-5", difficulty: "hard", category: "social", text: "Qui a le plus de chances de ghoster quelqu'un qu'il fréquentait depuis des mois ?" },
+  { id: "new-soc-6", difficulty: "hard", category: "social", text: "Qui a le plus de chances de partir un vlog pis de le tenir vraiment pendant un an ?" },
+  { id: "new-soc-7", difficulty: "hard", category: "social", text: "Qui a le plus de chances de partir à un blind date avec quelqu'un qu'il connaît pas pantoute ?" },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "soft", category: "party", text: "Danser tu seul en espérant que quelqu'un d'autre embarque ?" },
@@ -255,6 +270,8 @@ export const frca: TypeDef[] = [
   { id: "new-pty-1", difficulty: "soft", category: "party", text: "Qui a le plus de chances d`être le dernier sur le plancher de danse ?" },
   { id: "new-pty-2", difficulty: "hard", category: "party", text: "Qui a le plus de chances de s`incruster dans un mariage pis de passer totalement inaperçu ?" },
   { id: "new-pty-3", difficulty: "hard", category: "party", text: "Qui a le plus de chances d`organiser le meilleur party surprise de la vie ?" },
+  { id: "new-pty-4", difficulty: "hard", category: "party", text: "Qui a le plus de chances de monter danser su'les tables ?" },
+  { id: "new-pty-5", difficulty: "hard", category: "party", text: "Qui a le plus de chances de faire du karaoké devant 200 inconnus pis de tout déchirer ?" },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "soft", category: "hot", text: "Dire 'merci' après avoir fait l'amour ?" },
@@ -310,4 +327,6 @@ export const frca: TypeDef[] = [
   { id: "new-hot-1", difficulty: "hard", category: "hot", text: "Qui a le plus de chances d`avoir un admirateur secret en ce moment ?" },
   { id: "new-hot-2", difficulty: "hard", category: "hot", text: "Qui a le plus de chances de flirter pour se faire payer des verres ?" },
   { id: "new-hot-3", difficulty: "soft", category: "hot", text: "Qui a le plus de chances d`envoyer un texte risqué carrément par erreur ?" },
+  { id: "new-hot-4", difficulty: "hard", category: "hot", text: "Qui a le plus de chances d'envoyer un message à son crush vedette ?" },
+  { id: "new-hot-5", difficulty: "hard", category: "hot", text: "Qui a le plus de chances de partir en rendez-vous avec quelqu'un qu'il a jamais rencontré en vrai ?" },
 ];

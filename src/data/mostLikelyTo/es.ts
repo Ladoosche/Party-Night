@@ -55,6 +55,11 @@ export const es: TypeDef[] = [
   { id: "new-hab-1", difficulty: "soft", category: "habits", text: "¿Quién es más probable que se quede dormido sin escuchar su alarma?" },
   { id: "new-hab-2", difficulty: "soft", category: "habits", text: "¿Quién es más probable que coma algo de desayuno en la cena?" },
   { id: "new-hab-3", difficulty: "soft", category: "habits", text: "¿Quién es más probable que olvide su propia edad?" },
+  { id: "new-hab-4", difficulty: "hard", category: "habits", text: "¿Quién es más probable que regale todo lo que tiene y empiece completamente de cero?" },
+  { id: "new-hab-5", difficulty: "hard", category: "habits", text: "¿Quién es más probable que abandone las redes sociales durante todo un año?" },
+  { id: "new-hab-6", difficulty: "hard", category: "habits", text: "¿Quién es más probable que pase una semana entera sin su teléfono?" },
+  { id: "new-hab-7", difficulty: "hard", category: "habits", text: "¿Quién es más probable que se vuelva vegano de la noche a la mañana y no vuelva atrás?" },
+  { id: "new-hab-8", difficulty: "hard", category: "habits", text: "¿Quién es más probable que venda todo y se vaya a vivir al campo?" },
 
   // --- ADVENTURE ---
   { id: "advs1", difficulty: "soft", category: "adventure", text: "¿Quién es más probable que se pierda en una ciudad que conoce bien?" },
@@ -110,6 +115,9 @@ export const es: TypeDef[] = [
   { id: "new-adv-1", difficulty: "hard", category: "adventure", text: "¿Quién es más probable que se tire en paracaídas espontáneamente?" },
   { id: "new-adv-2", difficulty: "hard", category: "adventure", text: "¿Quién es más probable que sobreviva solo en la naturaleza por un mes?" },
   { id: "new-adv-3", difficulty: "soft", category: "adventure", text: "¿Quién es más probable que planee un viaje y olvide reservar el hotel?" },
+  { id: "new-adv-4", difficulty: "hard", category: "adventure", text: "¿Quién es más probable que lo deje todo y se vaya a recorrer el mundo con una mochila?" },
+  { id: "new-adv-5", difficulty: "hard", category: "adventure", text: "¿Quién es más probable que nade con tiburones a propósito?" },
+  { id: "new-adv-6", difficulty: "hard", category: "adventure", text: "¿Quién es más probable que haga bungee desde un puente por una apuesta?" },
 
   // --- CAREER ---
   { id: "car-s1", difficulty: "soft", category: "career", text: "¿Enviar un correo con 'Saludos cordiales' pero sin adjuntar el archivo?" },
@@ -165,6 +173,9 @@ export const es: TypeDef[] = [
   { id: "new-car-1", difficulty: "soft", category: "career", text: "¿Quién es más probable que llame accidentalmente 'mamá' o 'papá' a su jefe?" },
   { id: "new-car-2", difficulty: "hard", category: "career", text: "¿Quién es más probable que deje su trabajo para ser influencer a tiempo completo?" },
   { id: "new-car-3", difficulty: "hard", category: "career", text: "¿Quién es más probable que se convierta en el director de una gran empresa?" },
+  { id: "new-car-4", difficulty: "hard", category: "career", text: "¿Quién es más probable que lo deje todo y monte su propia empresa?" },
+  { id: "new-car-5", difficulty: "hard", category: "career", text: "¿Quién es más probable que pida un aumento enorme con cara de póker total?" },
+  { id: "new-car-6", difficulty: "hard", category: "career", text: "¿Quién es más probable que tenga tres trabajos a la vez y lo lleve bien?" },
 
   // --- SOCIAL ---
   { id: "soc-s1", difficulty: "soft", category: "social", text: "¿Saludar a alguien que ni los vio?" },
@@ -200,6 +211,10 @@ export const es: TypeDef[] = [
   { id: "new-soc-1", difficulty: "soft", category: "social", text: "¿Quién es más probable que logre librarse de una multa de tránsito hablando?" },
   { id: "new-soc-2", difficulty: "hard", category: "social", text: "¿Quién es más probable que sea reconocido en la calle por un desconocido?" },
   { id: "new-soc-3", difficulty: "soft", category: "social", text: "¿Quién es más probable que se ría en un momento serio?" },
+  { id: "new-soc-4", difficulty: "hard", category: "social", text: "¿Quién es más probable que confronte a alguien públicamente y no se arrepienta?" },
+  { id: "new-soc-5", difficulty: "hard", category: "social", text: "¿Quién es más probable que le haga ghosting a alguien con quien llevaba meses saliendo?" },
+  { id: "new-soc-6", difficulty: "hard", category: "social", text: "¿Quién es más probable que empiece un vlog y lo mantenga de verdad durante un año?" },
+  { id: "new-soc-7", difficulty: "hard", category: "social", text: "¿Quién es más probable que vaya a una cita a ciegas con un completo desconocido?" },
 
   // --- PARTY ---
   { id: "pty-s1", difficulty: "soft", category: "party", text: "¿Bailar solo mientras espera a que alguien más se una en la pista?" },
@@ -255,6 +270,8 @@ export const es: TypeDef[] = [
   { id: "new-pty-1", difficulty: "soft", category: "party", text: "¿Quién es más probable que sea el último en la pista de baile?" },
   { id: "new-pty-2", difficulty: "hard", category: "party", text: "¿Quién es más probable que se cuele en una boda y se integre perfectamente?" },
   { id: "new-pty-3", difficulty: "hard", category: "party", text: "¿Quién es más probable que organice la mejor fiesta sorpresa de la historia?" },
+  { id: "new-pty-4", difficulty: "hard", category: "party", text: "¿Quién es más probable que empiece a bailar encima de las mesas?" },
+  { id: "new-pty-5", difficulty: "hard", category: "party", text: "¿Quién es más probable que haga karaoke delante de 200 desconocidos y lo rompa?" },
 
   // --- HOT ---
   { id: "hot-s1", difficulty: "soft", category: "hot", text: "¿Decir 'gracias' al final de hacer el amor?" },
@@ -310,4 +327,6 @@ export const es: TypeDef[] = [
   { id: "new-hot-1", difficulty: "hard", category: "hot", text: "¿Quién es más probable que tenga un admirador secreto ahora mismo?" },
   { id: "new-hot-2", difficulty: "hard", category: "hot", text: "¿Quién es más probable que coquetee para conseguir bebidas gratis?" },
   { id: "new-hot-3", difficulty: "soft", category: "hot", text: "¿Quién es más probable que envíe un mensaje arriesgado completamente por error?" },
+  { id: "new-hot-4", difficulty: "hard", category: "hot", text: "¿Quién es más probable que le mande un mensaje a su crush famoso?" },
+  { id: "new-hot-5", difficulty: "hard", category: "hot", text: "¿Quién es más probable que vaya a una cita con alguien a quien nunca ha conocido en persona?" },
 ];
